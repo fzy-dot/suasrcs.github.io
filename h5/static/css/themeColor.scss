@@ -1,0 +1,25 @@
+$page-bg-color: #ffffff;
+$chunk-bg-color: #ffffff;
+
+.content {
+	background-color: $page-bg-color;
+	min-height: 100vh;
+	overflow-x: hidden;
+	// padding-bottom: 110rpx;
+}
+
+.chunk {
+	background-color: $chunk-bg-color;
+	width: 726rpx;
+	border-radius: 10rpx;
+	margin: 0 auto 20rpx;
+}
+
+.chunk:first-child {
+	background-color: unset;
+	padding-top: 20rpx;
+	.c {
+		background-color: $chunk-bg-color;
+		border-radius: 10rpx;
+	}
+}
