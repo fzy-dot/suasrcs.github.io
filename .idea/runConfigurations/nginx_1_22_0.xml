@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="nginx-1.22.0" type="nginx.configuration.type" factoryName="nginx server">
+    <option name="serverDescriptorId" value="nginx.descriptor.1654936894587" />
+    <option name="showHttpLog" value="false" />
+    <option name="showErrorLog" value="false" />
+    <option name="httpLogPath" value="$PROJECT_DIR$/../../../Tools/nginx-1.22.0/logs/access.log" />
+    <option name="errorLogPath" value="$PROJECT_DIR$/../../../Tools/nginx-1.22.0/logs/error.log" />
+    <method v="2">
+      <option name="LaunchBrowser.Before.Run" browser="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" url="http://127.0.0.1/" />
+    </method>
+  </configuration>
+</component>

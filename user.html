@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./framework/element-plus/dist/index.css" />
+    <style>
+
+        #top-box{
+            width: 90%;
+            height: 40px;
+            margin: 110px 30px 30px 50px;
+        }
+
+        #top-box > .tool-box{
+            width: 566px;
+            height: 40px;
+            background: #FFFFFF;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        #top-box > .tool-box > .add-user-button {
+            width: 200px;
+            height: 40px;
+            border-radius: 15px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border: #ebeef5 1px solid;
+            float: left;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        #top-box > .tool-box > .add-user-button:hover{
+            border: rgb(64 158 255) 1px solid;
+        }
+
+        #top-box > .tool-box > .search-box{
+            width: 300px;
+            height: 38px;
+            background: white;
+            border-radius: 15px;
+            margin-left: 10px;
+            border: #ebeef5 1px solid;
+            float: left;
+        }
+
+        #top-box > .tool-box > .search-box > input{
+            width: 240px;
+            height: 18px;
+            margin: 10px 30px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            float: left;
+            outline: none;
+            border: none;
+        }
+
+        #top-box > .tool-box > .search-button{
+            width: 28px;
+            height: 28px;
+            padding: 5px;
+            border-radius: 15px;
+            margin-left: 10px;
+            float: left;
+            background: #FFFFFF;
+            cursor: pointer;
+            border: #ebeef5 1px solid;
+        }
+
+        #top-box > .tool-box > .search-button:hover{
+            border: rgb(64 158 255) 1px solid;
+        }
+
+        #top-box > .tool-box > .search-button > .search-svg{
+            width: 30px;
+            height: 30px;
+            background: url("svg/search.svg") center no-repeat;
+            background-size: 70%;
+        }
+
+        #top-box > .search-box ::-webkit-input-placeholder{ color: #aaaaaa; }
+        #top-box > .search-box :-moz-placeholder{ color: #aaaaaa; }
+        #top-box > .search-box ::-moz-placeholder{ color: #aaaaaa; }
+        #top-box > .search-box :-ms-input-placeholder{ color: #aaaaaa; }
+
+        .table-box{
+            width: 85%;
+            position: relative;
+            float: left;
+            margin: 20px 50px;
+            padding: 10px 30px 30px 30px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        .person-box{
+            width: 85%;
+            position: relative;
+            float: left;
+            margin: 100px 30px 30px 50px;
+            padding: 10px 30px 30px 30px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        .el-table__header > thead{
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 50px;
+            letter-spacing: 2px;
+        }
+
+        .el-table__body > tbody > .el-table__row{
+            font-size: 15px;
+            height: 80px;
+        }
+
+        .el-table__cell > .cell > .el-tag{
+            font-size: 15px;
+            padding: 5px 10px;
+        }
+
+        .el-table__cell > .cell > .el-button{
+            font-size: 15px;
+            padding: 5px 20px;
+        }
+
+        .el-pagination{
+            position: relative;
+            float: right;
+            top: 20px;
+        }
+
+        .userInfo-card{
+            position: relative;
+        }
+
+        .el-page-header{
+            font-size: 16px;
+            border-bottom: 1px solid #edf1f4;
+            padding: 20px;
+        }
+
+        .el-page-header__icon, .el-page-header__title{
+            font-size: 16px;
+        }
+
+        .el-page-header__content{
+            font-size: 16px;
+        }
+
+        .main-box{
+            width: 100%;
+        }
+
+        .info-box{
+            width: 50%;
+            margin-top: 30px;
+            float: left;
+        }
+
+        .info-box > .header-picture > img{
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto 20px auto;
+        }
+
+        .el-form-item__label{
+            line-height: 38px;
+            font-size: 14px;
+        }
+
+        .el-input__inner{
+            height: 38px;
+            font-size: 14px;
+        }
+
+        .face-box{
+            width: 50%;
+            float: right;
+        }
+
+        .demo-image__placeholder{
+            list-style: none;
+        }
+
+        .face-top{
+            width: 80%;
+            height: 100px;
+            letter-spacing: 1px;
+            line-height: 100px;
+            margin: 25px auto;
+            text-align: center;
+        }
+
+        .el-carousel{
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .el-table__cell > .cell{
+            text-align: center;
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+
+    <div id="top-box"  v-show="tableVisible">
+        <div class="tool-box">
+            <el-button class="add-user-button" plain @click="toAdd()">添加用户</el-button>
+            <div class="search-box">
+                <input type="text" placeholder="搜索账号" v-model="searchParam.account"/>
+            </div>
+            <div class="search-button" @click="accountSearch"><div class="search-svg"></div></div>
+        </div>
+    </div>
+
+    <div :class="tableVisible ? 'table-box' : 'person-box'">
+        <div class="table-card" v-show="tableVisible" v-cloak>
+            <el-table
+                    ref="filterTable"
+                    :data="tableData.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
+                    style="width: 100%">
+                <el-table-column prop="userInfo.name" label="名称"></el-table-column>
+                <el-table-column prop="account" label="账号"></el-table-column>
+                <el-table-column prop="createTime" label="注册时间"></el-table-column>
+                <el-table-column label="操作">
+                    <template #default="scope">
+                        <el-button @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                        <el-popconfirm
+                                confirm-button-text="确定"
+                                cancel-button-text="不用了"
+                                @confirm="handleDelete(scope.$index, scope.row)"
+                                icon-color="red"
+                                title="你确定删除此用户吗?">
+                            <template #reference>
+                                <el-button type="danger" plain>删除</el-button>
+                            </template>
+                        </el-popconfirm>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div style="width: 100%;height: 50px">
+                <el-pagination
+                        layout=" prev, pager, next"
+                        :hide-on-single-page="true"
+                        :page-size="parseInt(pageSize)"
+                        @current-change="currentChange"
+                        :total="parseInt(total)"
+                        background>
+                </el-pagination>
+            </div>
+        </div>
+        <div class="userInfo-card" v-show="!tableVisible" v-cloak>
+            <el-page-header content="个人信息" @click="tableVisible = true"></el-page-header>
+            <div class="main-box">
+                <div class="info-box">
+                    <div class="header-picture">
+                        <img v-if="userInfoForm.userInfo.fileDocumentId" :src="userInfoForm.imageUrl" class="avatar">
+                        <img v-if="!userInfoForm.userInfo.fileDocumentId" :src="defaultHeaderPicture" class="avatar">
+                    </div>
+                    <el-form :model="userInfoForm" status-icon :rules="rules" ref="userInfoForm" class="demo-ruleForm" hide-required-asterisk="true">
+                        <el-form-item label="账号" prop="account">
+                            <el-input v-model="userInfoForm.account"></el-input>
+                        </el-form-item>
+                        <el-form-item label="密码" prop="password">
+                            <el-input v-model="userInfoForm.password" type="password"></el-input>
+                        </el-form-item>
+                        <el-form-item label="名称" prop="userInfo.name">
+                            <el-input v-model="userInfoForm.userInfo.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="性别" prop="userInfo.gender">
+                            <el-select v-model="userInfoForm.userInfo.gender" placeholder="请选择性别">
+                                <el-option label="男" value="true"></el-option>
+                                <el-option label="女" value="false"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="手机" prop="userInfo.phone">
+                            <el-input v-model="userInfoForm.userInfo.phone" onkeyup="this.value = this.value.replace(/\D|^0/g, '')"></el-input>
+                        </el-form-item>
+                        <el-form-item label="邮箱" prop="userInfo.email">
+                            <el-input v-model="userInfoForm.userInfo.email" @blur="emailValidation"></el-input>
+                        </el-form-item>
+                        <el-form-item label="住址" prop="userInfo.address">
+                            <el-input v-model="userInfoForm.userInfo.address"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" style="margin: 0 auto" @click="saveUserInfo">保存信息</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
+                <div class="face-box">
+                    <div class="face-top"></div>
+                    <el-carousel :autoplay="true" trigger="click" v-loading="loading">
+                        <el-carousel-item v-for="item in userFaceList" :key="item">
+                            <el-image :src="item" fit="fill"></el-image>
+                        </el-carousel-item>
+                        <el-image v-if="userFaceList.length === 0" src="./img/default-face2.jpeg"></el-image>
+                    </el-carousel>
+                    <el-divider content-position="center" style="width: 80%; margin: 50px auto;letter-spacing: 1px">面部信息</el-divider>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="./js/axios.js"></script>
+<script src="js/global-config.js"></script>
+<script src="./framework/vue/dist/vue.global.js"></script>
+<script src="./framework/element-plus/dist/index.full.js"></script>
+<script src="./framework/element-plus/dist/locale/zh-cn.js"></script>
+<script>
+
+    let App = {
+        data() {
+            return {
+                activeIndex: '1',
+                tableData: [],
+                total: '',
+                pageSize: '6',
+                currentPage: '1',
+                searchParam: {
+                    account: ''
+                },
+                drawer_userInfo: false,
+                tableVisible: true,
+                isAddUser: false,
+                defaultHeaderPicture: './svg/default-head.svg',
+                userInfoForm: {
+                    imageUrl: '',
+                    account: '',
+                    password: '',
+                    userInfo: {
+                        fileDocumentId: '',
+                        name: '',
+                        gender: '',
+                        phone: '',
+                        email: '',
+                        address: ''
+                    }
+                },
+                rules: {
+                    account: [
+                        { required: true, message: '请输入账号', trigger: 'change' },
+                        { min: 4, max: 64, message: '长度在 4 到 64 个字符', trigger: 'change' }
+                    ],
+                    password: [
+                        { required: true, message: '请输入密码', trigger: 'change' },
+                        { min: 6, max: 256, message: '长度在 6 到 256 个字符', trigger: 'change' }
+                    ],
+                    'userInfo.name': [
+                        { required: true, message: '请输入昵称', trigger: 'change' },
+                        { max: 16, message: '长度不超过 16 个字符', trigger: 'change' }
+                    ],
+                    'userInfo.gender': [
+                        { required: true, message: '请选择性别', trigger: 'blur' }
+                    ],
+                    'userInfo.phone': [
+                        { required: true, message: '请填写手机号', trigger: 'change' },
+                        { min: 11, max: 11, message: '长度为 11 个字符', trigger: 'change' }
+                    ],
+                    'userInfo.email': [
+                        { required: true, message: '请填写电子邮箱', trigger: 'change' },
+                        { max: 256, message: '长度不超过 256 个字符', trigger: 'change' }
+                    ],
+                    'userInfo.address': [
+                        { required: true, message: '请填写家庭住址', trigger: 'change' },
+                        { max: 512, message: '长度不超过 512 个字符', trigger: 'change' }
+                    ]
+                },
+                userFaceList: [],
+                loading: true
+            }
+        },
+        methods: {
+            handleEdit(index, row) {
+                let that = this;
+                that.loading = true;
+                that.userInfoForm = { ...row};
+                that.userInfoForm.userInfo = { ...row.userInfo};
+                that.userInfoForm.userInfo.gender = row.userInfo.gender ? 'true' : 'false';
+                that.userInfoForm.imageUrl = url_file_view + row.userInfo.fileDocumentId;
+                that.tableVisible = false;
+                that.isAddUser = false;
+                that.userFaceList = [];
+
+                axios({
+                    method: 'GET',
+                    url: url_face,
+                    params:  {
+                        userId : row.userInfo.userId
+                    }
+                }).then(function (res) {
+                    if (res.data.count > 0){
+                        let data = res.data.data;
+                        setTimeout(function () {
+                            that.loading = false;
+                        }, 3000);
+                        data.forEach(item => {
+                            that.userFaceList.push(url_face_view + item.id);
+                        });
+                    }else {
+                        setTimeout(function () {
+                            that.loading = false;
+                        }, 1000);
+                    }
+                })
+            },
+            handleDelete(index, row){
+                let that = this;
+                axios.delete(url_user + `/` + row.userInfo.id, {
+                    params: {
+                        force: 'true'
+                    }
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.tableData.splice(index, 1);
+                        that.success('删除成功！');
+                    }else {
+                        that.$message({
+                            type: 'warning',
+                            message: res.data.msg,
+                            offset: 110
+                        });
+                    }
+                }).catch(function (res) {
+                    that.openWarn(res);
+                })
+            },
+            emailValidation(){
+                let regEmail = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+                if (this.userInfoForm.userInfo.email !== '' && !regEmail.test(this.userInfoForm.userInfo.email)) {
+                    this.warn('请输入正确的邮箱格式');
+                    return true;
+                }
+                return false;
+            },
+            warn(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'warning',
+                    offset: 110
+                });
+            },
+            success(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'success',
+                    offset: 110
+                });
+            },
+            saveUserInfo(){
+                let that = this;
+                this.$refs['userInfoForm'].validate((valid) => {
+                    if (valid) {
+                        if (that.emailValidation()) return;
+                        let tip = this;
+                        axios({
+                            method: that.isAddUser ? 'POST' : 'PUT',
+                            url: url_user,
+                            data: that.userInfoForm
+                        }).then(function (res) {
+                            if (res.data.code === 0){
+                                that.success('保存成功！');
+                                that.getUserTable();
+                                that.tableVisible = true;
+                            }else {
+                                that.warn(res.data.msg);
+                            }
+                        })
+                    } else {
+                        that.warn('请正确完成表单！');
+                        return false;
+                    }
+                })
+            },
+            currentChange(newPage){
+                this.currentPage = newPage;
+            },
+            toAdd(){
+                let that = this;
+                that.tableVisible = false;
+                that.isAddUser = true;
+                that.$refs['userInfoForm'].resetFields();
+                that.userFaceList = [];
+                setTimeout(function () {
+                    that.loading = false;
+                }, 1000);
+            },
+            accountSearch(){
+                let that = this;
+                axios({
+                    method: 'GET',
+                    url: url_user,
+                    params: that.searchParam
+                }).then(function (res) {
+                    that.tableData = res.data.data;
+                    that.total = res.data.count;
+                })
+            },
+            getUserTable(){
+                let that = this;
+                axios({
+                    method: 'GET',
+                    url: url_user
+                }).then(function (res) {
+                    that.tableData = res.data.data;
+                    that.total = res.data.count;
+                }).catch(function () {
+                    // window.location.href = './login.html';
+                })
+            }
+        },
+        mounted: function () {
+            let that = this;
+            if (localStorage.getItem('CMS_TOKEN') === null || localStorage.getItem('CMS_TOKEN').toString().length <= 0){
+                setTimeout(function () {
+                    // window.location.href = './login.html';
+                }, 1500)
+                that.warn('请先登录');
+            }
+            that.getUserTable();
+        }
+    }
+
+    let app = Vue.createApp(App);
+    app.use(ElementPlus, {
+        locale: ElementPlusLocaleZhCn,
+    });
+    app.mount("#app");
+</script>
+</html>

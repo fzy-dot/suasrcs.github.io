@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./framework/element-plus/dist/index.css" />
+    <style>
+
+        #top-box{
+            width: 90%;
+            height: 60px;
+            margin: 110px 30px 30px 50px;
+        }
+
+        #top-box > .title{
+            font-size: 20px;
+            line-height: 60px;
+            letter-spacing: 2px;
+            padding: 0 100px;
+            color: #2f80ec;
+            font-weight: bold;
+            float: left;
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #top-box > .new-button{
+            width: 70px;
+            height: 70px;
+            float: left;
+            margin-left: 30px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            border-radius: 50%;
+            background: #FFFFFF;
+            margin-top: -5px;
+            transition: .3s all ease-in-out;
+        }
+
+        #top-box > .new-button:hover{
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #top-box > .new-button > img{
+            width: 60px;
+            height: 60px;
+            margin: 5px;
+        }
+
+        .notice-box{
+            width: 90%;
+            margin: 30px 50px;
+        }
+
+        .notice-box > .notice-block{
+            width: 47%;
+            margin-right: 30px;
+            margin-bottom: 30px;
+            height: 300px;
+            border-radius: 15px;
+            background: #FFFFFF;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            float: left;
+        }
+
+        .notice-box > .notice-block > .notice-title{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            color: #666666;
+            font-weight: bold;
+            text-indent: 20px;
+            font-size: 18px;
+        }
+
+        .notice-box > .notice-block > .notice-content{
+            max-width: 100%;
+            height: 150px;
+            padding: 20px;
+            color: #666666;
+            text-indent: 20px;
+            font-size: 16px;
+            line-height: 25px;
+            border-top: #f4f4f5 1px solid;
+            border-bottom: #f4f4f5 1px solid;
+        }
+
+        .notice-box > .notice-block > .notice-foot{
+            width: 100%;
+            height: 60px;
+        }
+
+        .notice-box > .notice-block > .notice-foot > .notice-time{
+            line-height: 60px;
+            text-indent: 20px;
+            font-size: 16px;
+            color: #999999;
+            float: left;
+        }
+
+        .notice-box > .notice-block > .notice-foot > .edit-button{
+            width: 150px;
+            height: 40px;
+            border-radius: 15px;
+            margin: 10px;
+            float: right;
+            background: #1362FC;
+            text-align: center;
+            line-height: 40px;
+            color: #FFFFFF;
+            cursor: pointer;
+            letter-spacing: 3px;
+        }
+
+        #conference-info-box{
+            width: 90%;
+            height: 630px;
+            margin: 100px 30px 30px 50px;
+            padding: 15px;
+            background: #FFFFFF;
+            border-radius: 15px;
+            float: left;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .el-table__cell > .cell > img{
+            width: 70px;
+            height: 70px;
+            border-radius: 25px;
+            margin-left: 25px;
+            float: left;
+        }
+
+        .el-page-header{
+            font-size: 16px;
+            border-bottom: 1px solid #edf1f4;
+            padding: 20px;
+        }
+
+        .el-page-header__icon, .el-page-header__title{
+            font-size: 16px;
+        }
+
+        .el-page-header__content{
+            font-size: 16px;
+        }
+
+        .el-form-item__label{
+            line-height: 38px;
+            font-size: 14px;
+        }
+
+        .el-input__inner{
+            height: 38px;
+            font-size: 14px;
+        }
+
+        .conference-head-picture{
+            width: 60px;
+            height: 60px;
+            float: left;
+        }
+
+        .conference-head-picture > img{
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+        }
+
+        .conference-user-info{
+            font-size: 16px;
+            line-height: 60px;
+            float: left;
+            margin-left: 15px;
+        }
+
+        .el-table__header > thead{
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 50px;
+            letter-spacing: 2px;
+        }
+
+        .el-table__body > tbody > .el-table__row{
+            font-size: 15px;
+            height: 100px;
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+
+    <div v-show="noticeTableVisible">
+        <div id="top-box">
+            <div class="title">公告列表</div>
+            <div class="new-button" @click="createNotice"><img src="svg/new-notice.svg"></div>
+        </div>
+
+        <div class="notice-box">
+            <div class="notice-block" v-for="item in noticeTable">
+                <div class="notice-title" v-text="item.title"></div>
+                <div class="notice-content" v-text="item.content"></div>
+                <div class="notice-foot">
+                    <div class="notice-time" v-text="item.updateTime"></div>
+                    <div class="edit-button" @click="editNotice(item)">详情</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="conference-info-box" v-show="!noticeTableVisible">
+        <el-page-header :content="isEdit ? '公告详情' : '新建公告'" @click="backConferenceTable"></el-page-header>
+        <el-form :model="noticeInfo" status-icon :rules="rules" ref="noticeInfo" class="demo-ruleForm" hide-required-asterisk="true"
+                 style="margin: 20px;width: 60%;float: left">
+            <el-form-item label="公告标题" prop="title">
+                <el-input v-model="noticeInfo.title" :disabled="isEdit"></el-input>
+            </el-form-item>
+            <el-form-item label="公告内容" prop="content">
+                <el-input type="textarea" maxlength="2048" v-model="noticeInfo.content" :rows="6" :disabled="isEdit"></el-input>
+            </el-form-item>
+            <el-form-item label="公告时间">
+                <el-date-picker :disabled="isEdit"
+                        v-model="noticeInfo.time"
+                        type="datetimerange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期"
+                        format="YYYY/MM/DD hh:mm:ss">
+                </el-date-picker>
+            </el-form-item>
+            <el-form-item label="公告类型" prop="state">
+                <el-select v-model="noticeInfo.type" placeholder="请选择公告类型" :disabled="isEdit">
+                    <el-option label="企业" value="enterprise"></el-option>
+                    <el-option label="会议" value="conference"></el-option>
+                    <el-option label="个人" value="person"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="saveNoticeInfo" style="margin-left: 66px" v-show="!isEdit">保存公告</el-button>
+                <el-popconfirm
+                        confirm-button-text="确定"
+                        cancel-button-text="不用了"
+                        @confirm="deleteNotice(noticeInfo.id)"
+                        icon-color="red"
+                        title="你确定删除公告吗?">
+                    <template #reference>
+                        <el-button type="danger" style="margin-left: 66px" v-show="isEdit">删除公告</el-button>
+                    </template>
+                </el-popconfirm>
+            </el-form-item>
+        </el-form>
+        <el-table
+                ref="multipleTable"
+                :data="permissionTable"
+                height="470"
+                @row-click="selectRow"
+                tooltip-effect="dark"
+                style="width: 35%; float: left;border: 1px solid #f0f0f0;margin-top: 20px;border-radius: 8px">
+            <el-table-column type="selection" width="50"></el-table-column>
+            <el-table-column label="公告接收人员">
+                <template #default="scope">
+                    <div class="conference-head-picture"><img :src="scope.row.imageUrl"/></div>
+                    <div class="conference-user-info" v-text="scope.row.userInfo.name"></div>
+                    <div class="conference-user-info" v-text="scope.row.job"></div>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+
+</div>
+</body>
+<script src="./js/axios.js"></script>
+<script src="js/global-config.js"></script>
+<script src="./framework/vue/dist/vue.global.js"></script>
+<script src="./framework/element-plus/dist/index.full.js"></script>
+<script src="./framework/element-plus/dist/locale/zh-cn.js"></script>
+<script>
+
+    let App = {
+        data() {
+            return {
+                currentUser: {},
+                noticeTable: [],
+                noticeTableVisible: true,
+                isEdit: false,
+                noticeInfo: {},
+                rules: {
+                    title: [
+                        { required: true, message: '请输入公告标题', trigger: 'change' },
+                        { max: 64, message: '长度不超过 64 个字符', trigger: 'change' }
+                    ],
+                    content: [
+                        { required: true, message: '请输入公告内容', trigger: 'change' },
+                        { max: 2048, message: '长度不超过 2048 个字符', trigger: 'change' }
+                    ]
+                },
+                permissionTable: [],
+                defaultHeaderPicture: './svg/default-head.svg'
+            }
+        },
+        methods: {
+            warn(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'warning',
+                    offset: 100
+                });
+            },
+            success(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'success',
+                    offset: 100
+                });
+            },
+            getNoticeTable(){
+                let that = this;
+                axios({
+                    method: 'GET',
+                    url: url_user_me
+                }).then(function (res) {
+                    that.currentUser = res.data.data;
+                    axios({
+                        method: 'GET',
+                        url: url_message_notice,
+                        params: {
+                            userId: that.currentUser.id
+                        }
+                    }).then(function (res) {
+                        that.noticeTable = res.data.data;
+                        console.log(that.noticeTable);
+                    })
+                }).catch(function () {
+                    // window.location.href = './login.html';
+                })
+            },
+            backConferenceTable(){
+                let that = this;
+                that.isEdit = false;
+                that.noticeTableVisible = true;
+                that.getNoticeTable();
+            },
+            editNotice(notice){
+                let that = this;
+                that.isEdit = true;
+                that.noticeTableVisible = false;
+                notice.time = [new Date(notice.startTime), new Date(notice.endTime)];
+
+                that.noticeInfo = notice;
+                that.getPermissionTable();
+            },
+            createNotice(){
+                let that = this;
+                that.isEdit = false;
+                that.noticeTableVisible = false;
+                that.$refs['noticeInfo'].resetFields();
+                that.noticeInfo = {};
+                that.getPermissionTable();
+            },
+            getPermissionTable(){
+                let that = this;
+                that.permissionTable = [];
+                if (that.isEdit){
+                    axios({
+                        method: 'GET',
+                        url: url_message_notice_user,
+                        params: {
+                            noticeId: that.noticeInfo.id
+                        }
+                    }).then(function (res) {
+                        res.data.data.forEach(item => {
+                            axios({
+                                method: 'GET',
+                                url: url_user + `/${item.userId}`,
+                            }).then(function (res) {
+                                let data = res.data.data;
+                                data.enterpriseId = item.id;
+                                data.job = item.job;
+                                data.imageUrl = data.userInfo.fileDocumentId ? url_file_view + data.userInfo.fileDocumentId : that.defaultHeaderPicture;
+                                that.permissionTable.push(data);
+                            })
+                        })
+
+                        setTimeout(function () {
+                            that.$refs.multipleTable.toggleAllSelection();
+                        }, 200)
+                    });
+                }else {
+                    axios({
+                        method: 'GET',
+                        url: url_enterprise_me
+                    }).then(function (res) {
+                        let enterprise = res.data.data;
+                        axios({
+                            method: 'GET',
+                            url: url_enterprise_user,
+                            params: {
+                                enterpriseId: enterprise.id,
+                                state: 'permission'
+                            }
+                        }).then(function (res) {
+                            res.data.data.forEach(item => {
+                                axios({
+                                    method: 'GET',
+                                    url: url_user + `/${item.userId}`,
+                                }).then(function (res) {
+                                    let data = res.data.data;
+                                    data.enterpriseId = item.id;
+                                    data.job = item.job;
+                                    data.imageUrl = data.userInfo.fileDocumentId ? url_file_view + data.userInfo.fileDocumentId : that.defaultHeaderPicture;
+                                    that.permissionTable.push(data);
+                                })
+                            })
+
+                            setTimeout(function () {
+                                that.$refs.multipleTable.toggleAllSelection();
+                            }, 200)
+                        });
+                    })
+                }
+
+            },
+            selectRow(row){
+                this.$refs.multipleTable.toggleRowSelection(row);
+            },
+            saveNoticeInfo(){
+                let that = this;
+                let startTime = new Date(that.noticeInfo.time[0]);
+                let Y = startTime.getFullYear() + '-';
+                let M = (startTime.getMonth() + 1 < 10 ? '0' + (startTime.getMonth() + 1) : startTime.getMonth() + 1) + '-';
+                let D = (startTime.getDate() < 10 ? '0' + startTime.getDate() : startTime.getDate()) + ' ';
+                let h = startTime.getHours() + ':';
+                let m = (startTime.getMinutes() < 10 ? '0' + startTime.getMinutes() : startTime.getMinutes()) + ':';
+                let s = startTime.getSeconds();
+                that.noticeInfo.startTime = Y + M + D + h + m + s;
+                let endTime = new Date(that.noticeInfo.time[1]);
+                Y = endTime.getFullYear() + '-';
+                M = (endTime.getMonth() + 1 < 10 ? '0' + (endTime.getMonth() + 1) : endTime.getMonth() + 1) + '-';
+                D = (endTime.getDate() < 10 ? '0' + endTime.getDate() : endTime.getDate()) + ' ';
+                h = endTime.getHours() + ':';
+                m = (endTime.getMinutes() < 10 ? '0' + endTime.getMinutes() : endTime.getMinutes()) + ':';
+                s = endTime.getSeconds();
+                that.noticeInfo.endTime = Y + M + D + h + m + s;
+                this.$refs['noticeInfo'].validate((valid) => {
+                    if (valid) {
+                        let selectionRows = that.$refs.multipleTable.getSelectionRows();
+                        if (selectionRows.length === 0){
+                            that.warn('请至少选择一位公告接收人员！');
+                            return ;
+                        }
+                        axios({
+                            method: 'POST',
+                            url: url_message_notice,
+                            data: that.noticeInfo
+                        }).then(function (res) {
+                            if (res.data.code === 0) {
+                                selectionRows.forEach(item => {
+                                    axios({
+                                        method: 'POST',
+                                        url: url_message_notice_user,
+                                        data: {
+                                            noticeId: res.data.data,
+                                            userId: item.id
+                                        }
+                                    });
+                                })
+                                that.success('保存成功！');
+                                setTimeout(function () {
+                                    that.noticeTableVisible = true;
+                                    that.getNoticeTable();
+                                }, 1000);
+                            } else {
+                                that.warn(res.data.msg);
+                            }
+                        })
+                    } else {
+                        that.warn('请正确完成表单！');
+                        return false;
+                    }
+                })
+            },
+            deleteNotice(id){
+                let that = this;
+                axios({
+                    method: 'DELETE',
+                    url: url_message_notice + `/${id}`,
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.success('删除公告成功');
+                        setTimeout(function () {
+                            that.noticeTableVisible = true;
+                            that.getNoticeTable();
+                        }, 2000);
+                    }else {
+                        that.warn(res.data.msg);
+                    }
+                })
+            }
+        },
+        mounted: function () {
+            let that = this;
+            if (localStorage.getItem('CMS_TOKEN') === null || localStorage.getItem('CMS_TOKEN').toString().length <= 0){
+                setTimeout(function () {
+                    // window.location.href = './login.html';
+                }, 1000)
+                that.warn('请先登录');
+            }
+            that.getNoticeTable();
+        }
+    }
+
+    let app = Vue.createApp(App);
+    app.use(ElementPlus, {
+        locale: ElementPlusLocaleZhCn,
+    });
+    app.mount("#app");
+</script>
+</html>

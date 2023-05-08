@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>会议管理系统·登录</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./framework/element-plus/dist/index.css" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #app{
+            width: 100%;
+            height: 100vh;
+            background: #edf1f4;
+        }
+
+        #card{
+            width: 330px;
+            height: 560px;
+            position: relative;
+            top: 50%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+            border-radius: 8px;
+            box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.1), -17px -17px 15px rgba(255, 255, 255, 1);
+            padding: 20px 50px;
+            float: left;
+        }
+
+        #card > .head-picture-box{
+            height: 170px;
+        }
+
+        #card > .head-picture-box > .head-picture{
+            width: 150px;
+            height: 150px;
+            margin: 10px auto;
+            border-radius: 50%;
+            background: url("img/hua.jpg") center no-repeat;
+            background-size: 80%;
+            box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.1), -10px -10px 15px rgba(255, 255, 255, 1);
+            cursor: pointer;
+            opacity: .8;
+            transition: .3s all ease-in-out;
+        }
+
+        #card > .head-picture-box > .head-picture:hover{
+            background: url("svg/camera.svg") center no-repeat;
+            background-size: 70%;
+            opacity: .8;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1), -5px -5px 5px rgba(255, 255, 255, 1);
+        }
+
+        #card > .logo-text{
+            height: 50px;
+            text-align: center;
+            font-size: 30px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            font-weight: bold;
+            color: #92b9cc;
+            letter-spacing: 3px;
+        }
+
+        #card > .input-box{
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            font-size: 18px;
+        }
+
+        #card > .input-box > .input-block{
+            margin-bottom: 20px;
+        }
+
+        #card > .input-box > .input-block > .input-title{
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        #card > .input-box > .input-block > .input-content > input{
+            width: 100%;
+            height: 50px;
+            border-radius: 50px;
+            outline: none;
+            border: none;
+            background: #edf1f4;
+            box-shadow: inset 10px 10px 10px rgba(0, 0, 0, 0.1),inset -10px -10px 10px rgba(255, 255, 255, 0.8);
+            line-height: 50px;
+            letter-spacing: 1px;
+            font-size: 15px;
+            color: #333333;
+            text-indent: 30px;
+        }
+
+        #card > .input-box > .input-block > .submit-button{
+            width: 100%;
+            height: 50px;
+            border-radius: 50px;
+            outline: none;
+            border: none;
+            background: #92b9cc;
+            line-height: 50px;
+            letter-spacing: 1px;
+            font-size: 18px;
+            color: #FFFFFF;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1), -10px -10px 20px rgba(255, 255, 255, 1);
+            cursor: pointer;
+            transition: .3s all ease-in-out;
+        }
+
+        #card > .input-box > .input-block > .submit-button:hover{
+            /*box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.1);*/
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1), -5px -5px 5px rgba(255, 255, 255, 0.5);
+        }
+
+        #card > .input-box > .input-block > .input-content > input::-webkit-input-placeholder{ color: #c1c5c8; }
+        #card > .input-box > .input-block > .input-content > input:-moz-placeholder{ color: #c1c5c8; }
+        #card > .input-box > .input-block > .input-content > input::-moz-placeholder{ color: #c1c5c8; }
+        #card > .input-box > .input-block > .input-content > input:-ms-input-placeholder{ color: #c1c5c8; }
+
+        #tool-box{
+            width: 330px;
+            height: 560px;
+            position: relative;
+            top: 50%;
+            left: 42%;
+            transform: translate(-50%, -50%);
+            float: left;
+        }
+
+        #tool-box > .scan-face, #tool-box > .register, #tool-box > .forget{
+            width: 250px;
+            height: 60px;
+            border-radius: 8px;
+            background: #edf1f4;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 1);
+            cursor: pointer;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            line-height: 50px;
+        }
+
+        #tool-box > .register{
+            margin-top: 50px;
+            margin-bottom: 50px;
+            width: 250px;
+            height: 60px;
+            font-size: 22px;
+            line-height: 60px;
+            color: #666666;
+            font-weight: bold;
+            font-family: "楷体";
+            border-radius: 50px;
+            transition: .3s all ease-in-out;
+            z-index: 1;
+        }
+
+        #tool-box > .register > .register-copy{
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            font-size: 22px;
+            line-height: 60px;
+            color: #92b9cc;
+            background: #92b9cc;
+            font-weight: bold;
+            font-family: "楷体";
+            text-align: center;
+            overflow: hidden;
+            border-radius: 50px;
+            z-index: 1;
+            transition: .3s all ease-in-out;
+        }
+
+        #tool-box > .register:hover{
+            box-shadow: 3px 3px 10px #92b9cc, -5px -5px 15px rgba(255, 255, 255, 1);
+        }
+
+        #tool-box > .register:hover .register-copy{
+            width: 250px;
+            color: white;
+        }
+
+        #tool-box > .register > .plane-svg{
+            width: 60px;
+            height: 60px;
+            background: url("svg/plane.svg") center no-repeat;
+            background-size: 100%;
+            position: relative;
+            left: -5px;
+            float: left;
+            margin-right: 18px;
+            z-index: 3;
+        }
+
+        #tool-box > .scan-face{
+            margin-top: 80px;
+            margin-bottom: 30px;
+            margin-left: 50px;
+            color: #666666;
+            font-size: 20px;
+            line-height: 60px;
+            font-weight: bold;
+            font-family: "楷体";
+            text-align: center;
+            z-index: 3;
+            transition: .3s all ease-in-out;
+        }
+
+        #tool-box > .scan-face > .scan-svg{
+            width: 60px;
+            height: 60px;
+            background: url("svg/scan.svg") center no-repeat;
+            background-size: 80%;
+            float: left;
+            transition: .3s all ease-in-out;
+            z-index: 3;
+        }
+
+        #tool-box > .scan-face:hover{
+            box-shadow: 3px 3px 10px #92b9cc, -5px -5px 15px rgba(255, 255, 255, 1);
+            transform: translate(-1%, -1%);
+        }
+
+        #tool-box > .forget{
+            margin-top: 80px;
+            margin-left: 100px;
+            width: 250px;
+            height: 60px;
+            font-size: 22px;
+            line-height: 60px;
+            color: #666666;
+            font-weight: bold;
+            font-family: "楷体";
+            border-radius: 50px;
+            transition: .3s all cubic-bezier(0, 0, 0.7, 1);
+            z-index: 1;
+            text-align: center;
+        }
+
+        #tool-box > .forget:hover{
+            box-shadow: 3px 3px 10px #92b9cc, -5px -5px 15px rgba(255, 255, 255, 1);
+        }
+
+        #tool-box > .forget > .forget-svg{
+            width: 60px;
+            height: 60px;
+            margin-top: -60px;
+            background: #92b9cc;
+            border-radius: 50%;
+            position: relative;
+            right: -5px;
+            float: right;
+            margin-left: 18px;
+            z-index: 3;
+            transition: .3s all cubic-bezier(0.4, 0.95, 0.99, 1);
+        }
+
+        #tool-box > .forget > .forget-svg-1{
+            width: 60px;
+            height: 60px;
+            margin-top: -60px;
+            background: #92b9cc;
+            border-radius: 50%;
+            position: relative;
+            right: 200px;
+            float: right;
+            margin-left: 18px;
+            z-index: 3;
+            transition: .3s all cubic-bezier(0.4, 0.95, 0.99, 1);
+        }
+
+        #tool-box > .forget > .forget-svg > .forget-svg-under{
+            width: 60px;
+            height: 60px;
+            background: url("svg/forget.svg") center no-repeat;
+            background-size: 60%;
+        }
+
+        #tool-box > .forget > .forget-svg-1 > .forget-svg-under{
+            width: 60px;
+            height: 60px;
+            background: url("svg/forget.svg") center no-repeat;
+            background-size: 60%;
+        }
+
+        #face-video-box{
+            border: none;
+        }
+
+        .video-box{
+            width: 1140px;
+            height: 680px;
+            margin: 0 auto;
+        }
+
+        .video{
+            position: relative;
+            width: 1140px;
+            height: 630px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 1);
+            border-radius: 10px;
+        }
+
+        .el-dialog .el-dialog--center{
+            border-radius: 20px;
+        }
+
+        .el-dialog__header{
+            font-size: 18px;
+            margin-bottom: -20px;
+        }
+
+        .el-dialog__close{
+            background: url("svg/dialog-close.svg") center no-repeat;
+            background-size: 100%;
+        }
+
+        .alive-tip{
+            display: block;
+            text-align: center;
+            font-size: 20px;
+            line-height: 60px;
+            margin: 0 auto;
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div id="card">
+        <div class="head-picture-box" @click="openMedia()">
+            <div class="head-picture"></div>
+        </div>
+        <div class="logo-text">MIQI</div>
+        <div class="input-box">
+            <div class="input-block">
+                <div class="input-title">账号</div>
+                <div class="input-content">
+                    <input v-model="user.account" placeholder="输入你的账号">
+                </div>
+            </div>
+            <div class="input-block">
+                <div class="input-title">密码</div>
+                <div class="input-content">
+                    <input v-model="user.password" type="password" placeholder="大于6个字符">
+                </div>
+            </div>
+            <div class="input-block">
+                <div class="submit-button" @click="accountLogin">登录</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tool-box">
+        <div class="register" @click="toRegister()">
+            <div class="register-copy">&nbsp;&nbsp;注册账户</div>
+            <div class="plane-svg"></div>
+            <div>&nbsp;注册账户</div>
+        </div>
+        <div class="scan-face" @click="openMedia()">
+            <div style="float: left;width: 100px">扫脸</div>
+            <div class="scan-svg"></div>
+            <div>登录</div>
+        </div>
+        <div class="forget" @click="alive_check = !alive_check">
+            <div v-text="alive_check ? '关闭活检' : '开启活检'"></div>
+            <div :class="alive_check ? 'forget-svg' : 'forget-svg-1'"><div class="forget-svg-under"></div></div>
+        </div>
+    </div>
+
+    <el-dialog v-cloak
+               v-model="visible"
+               :show-close="true"
+               :title="mediaTitle"
+               width="1190px"
+               top="10vh"
+               center>
+        <div class="video-box" v-cloak>
+            <fieldset id="face-video-box">
+                <video id="video" class="video" width="1140" height="630"></video>
+            </fieldset>
+            <span class="alive-tip" v-text="alive_tip"></span>
+
+        </div>
+    </el-dialog>
+
+    <el-dialog v-cloak
+            v-model="successVisible"
+            title="确认登录"
+            width="30%"
+            :before-close="handleClose"
+            top="25vh">
+        <span>人脸识别成功！！！</span>
+        <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="pageReload">返回</el-button>
+        <el-button type="primary" @click="toIndex">登录</el-button>
+      </span>
+        </template>
+    </el-dialog>
+</div>
+<script src="./js/axios.js"></script>
+<script src="./js/global-config.js"></script>
+<script src="./framework/vue/dist/vue.global.js"></script>
+<script src="./framework/element-plus/dist/index.full.js"></script>
+<script src="./js/html2canvas.js"></script>
+<script src="./framework/element-plus/dist/locale/zh-cn.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/numeric.js"></script>
+<script src="./js/ccv.js"></script>
+<script src="./js/clmtrackr.js"></script>
+<script src="./js/model_pca_20_svm.js"></script>
+<script src="./js/mui.min.js"></script>
+</body>
+</html>
+<script>
+    const App = {
+        data() {
+            return {
+                visible: false,
+                successVisible: false,
+                mediaTitle: '人脸识别中，请面向屏幕',
+                alive_tip: '将头部对准摄像头',
+                video: null,
+                videoTimeout: null,
+                CMS_TOKEN: null,
+                user: {
+                    account: '',
+                    password: ''
+                },
+                alive_check: true,
+                last_time: 0,
+                last_nose_left: 0,
+                last_nose_top: 0,
+                last_dis_eye_norse: 0,
+                ctracker: null,
+                rafID: null
+            };
+        },
+        methods: {
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        done();
+                    })
+                    .catch(_ => {
+                    });
+            },
+            toRegister() {
+                window.location.href = './register.html';
+            },
+            getUserMedia(constraints, success, error) {
+                if (navigator.mediaDevices.getUserMedia) {
+                    //最新的标准API
+                    navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
+                } else if (navigator.webkitGetUserMedia) {
+                    //webkit核心浏览器
+                    navigator.webkitGetUserMedia(constraints, success, error)
+                } else if (navigator.mozGetUserMedia) {
+                    //firfox浏览器
+                    navigator.mozGetUserMedia(constraints, success, error);
+                } else if (navigator.getUserMedia) {
+                    //旧版API
+                    navigator.getUserMedia(constraints, success, error);
+                }
+            },
+            success(stream) {
+                let that = this;
+                that.video = document.getElementById('video');
+                that.video.srcObject = stream;
+                that.video.play();
+                if (that.alive_check){
+                    that.videoTimeout = setTimeout(that.getCurrentCanvas, 500);
+                }else {
+                    that.startTrack();
+                    that.checkPositions();
+                }
+            },
+            error(error) {
+                console.log(`访问用户媒体设备失败${error.name}, ${error.message}`);
+            },
+            getCurrentCanvas() {
+                let that = this;
+                that.alive_check ? that.start() : that.checkLoginFace();
+            },
+            checkLoginFace(){
+                let that = this;
+                window.cancelAnimationFrame(that.rafID);
+                html2canvas(document.getElementById('face-video-box'), {
+                    allowTaint: true,
+                    taintTest: false,
+                    useCORS: true,
+                }).then(canvas => {
+                    let that = this;
+                    let imageBase64 = canvas.toDataURL("image/png");
+                    let blob = this.dataURLtoBlob(imageBase64);
+                    let formData = new FormData(document.forms[0]);
+                    formData.append('image', blob, Date.now() + '.png');
+
+                    axios({
+                        method: 'POST',
+                        url: url_login_face,
+                        data: formData
+                    }).then(function (res) {
+                        if (res.data.code === 0){
+                            that.successVisible = true;
+                            localStorage.setItem('CMS_TOKEN', res.data.data.toString());
+                        }else {
+                            that.openWarn(res.data.msg);
+                            that.visible = false;
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000)
+                        }
+                    }).catch(function (res) {
+                        that.openWarn('识别失败，请确保屏幕中有且仅有一个人脸');
+                        that.rafID = requestAnimationFrame(that.checkPositions);
+                    });
+                })
+            },
+            start() {
+                let that = this;
+                setTimeout(() => {
+                    let audio = document.createElement('audio');
+                    let source = document.createElement('source');
+                    source.type = "audio/mp3";
+                    source.src = "mp3/alive_eye.mp3";
+                    source.autoplay = "autoplay";
+                    source.controls = "controls";
+                    audio.appendChild(source);
+                    audio.play();
+                    that.alive_eye();
+                    that.startTrack();
+                }, 100)
+            },
+            alive_eye() {
+                let that = this;
+                that.alive_tip = "请眨眼睛";
+                that.is_mouse_ok = false;
+                that.last_dis_mouse = 0;
+                that.last_time = 0;
+                that.is_alive_mouse = true;
+                that.is_alive_header = false
+            },
+            startTrack() {
+                let that = this;
+                // 初始化 ctracker
+                that.ctracker = new clm.tracker();
+                that.ctracker.init(pModel);
+                that.ctracker.start(document.getElementById('video'));
+                that.drawLoop();
+            },
+            checkPositions(){
+                let that = this;
+                // 无限循环检测人脸
+                that.rafID = requestAnimationFrame(that.checkPositions);
+                let positions = that.ctracker.getCurrentPosition();
+
+                // 发现人脸进行识别
+                if (positions) {
+                    that.checkLoginFace();
+                    that.alive_tip = '正在验证...';
+                }
+            },
+            drawLoop() {
+                let that = this;
+                that.rafID = requestAnimationFrame(that.drawLoop);           // 无限循环监测
+                let positions = that.ctracker.getCurrentPosition();
+                // 在摄像头中捕获人脸位置
+                if (positions) {
+                    if (that.last_time === 0 || (new Date().getTime() - that.last_time > 500
+                        && new Date().getTime() - that.last_time < 10000)) {
+                        let xdiff1 = positions[62][0] - positions[24][0];
+                        let ydiff1 = positions[62][1] - positions[24][1];
+
+                        // 计算出做左眼睛上眼皮中间点距离鼻尖的距离
+                        let dis_eye_norse1 = Math.pow((xdiff1 * xdiff1 + ydiff1 * ydiff1), 0.5);
+                        let xdiff2 = positions[62][0] - positions[29][0];
+                        let ydiff2 = positions[62][1] - positions[29][1];
+
+                        // 计算出做左眼睛上眼皮中间点距离鼻尖的距离
+                        let dis_eye_norse2 = Math.pow((xdiff2 * xdiff2 + ydiff2 * ydiff2), 0.5);
+
+                        // 计算出左右两个眼睛距离同一处鼻尖的距离之和
+                        let dis_eye_norse = (dis_eye_norse1 + dis_eye_norse2);
+                        if (that.last_nose_left > 0 && that.last_nose_top > 0 &&
+                            Math.abs(positions[62][0] - that.last_nose_left) < 0.5 &&
+                            Math.abs(positions[62][1] - that.last_nose_top) < 0.5) {
+
+                            // 已完成活体检测眨眼动作
+                            if (that.last_dis_eye_norse > 1 &&
+                                (Math.abs(dis_eye_norse - that.last_dis_eye_norse) > dis_eye_norse / 60)) {
+                                that.alive_tip = '正在验证...';
+                                that.checkLoginFace();
+                            }
+                        }
+                        // 将这次的距离记录为 last最近的数据
+                        that.last_nose_left = positions[62][0];
+                        that.last_nose_top = positions[62][1];
+                        that.last_dis_eye_norse = dis_eye_norse;
+                        that.lastTime = new Date().getTime();
+                    }
+                }
+            },
+            dataURLtoBlob(base64Data) {
+                let byteString;
+                if (base64Data.split(',')[0].indexOf('base64') >= 0)
+                    byteString = atob(base64Data.split(',')[1]);
+                else
+                    byteString = unescape(base64Data.split(',')[1]);
+                let mimeString = base64Data.split(',')[0].split(':')[1].split('.')[0];
+                let ia = new Uint8Array(byteString.length);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                return new Blob([ia], {type: mimeString});
+            },
+            accountLogin() {
+                let that = this;
+                if (that.user.account.length <= 0) {
+                    that.openWarn('请输入账号');
+                    return;
+                }
+                if (that.user.password.length < 6) {
+                    that.openWarn('密码需大于6个字符');
+                    return;
+                }
+                  window.location.href = './index.html';
+                  return
+                axios({
+                    method: 'POST',
+                    url: url_user_login,
+                    data: that.user
+                }).then(function (res) {
+                    if (res.data.code === 0) {
+                        localStorage.setItem('CMS_TOKEN', res.data.data.toString());
+                        window.location.href = './index.html';
+                    } else {
+                        that.openWarn(res.data.msg);
+                    }
+                }).catch(function (res) {
+                    that.openWarn(res);
+                })
+            },
+            openWarn(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'warning'
+                });
+            },
+            openMedia(){
+                let that = this;
+                that.visible = true;
+                // 开启摄像头
+                if (navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) {
+                    //调用用户媒体设备, 访问摄像头
+                    that.getUserMedia({
+                        video: {
+                            width: 1140,
+                            height: 630
+                        }
+                    }, that.success, that.error);
+                } else {
+                    alert('不支持访问用户媒体');
+                }
+            },
+            pageReload(){
+                this.visible = false;
+                this.successVisible = false;
+                this.video.srcObject = null;
+                clearInterval(this.videoTimeout);
+            },
+            toIndex(){
+                window.location.href = `./index.html`;
+            }
+        },
+        computed:{
+            visibleChange(){
+                return this.visible;
+            }
+        },
+        watch:{
+            visibleChange: function (val) {
+                if (val === false){
+                    this.video.srcObject = null;
+                    clearInterval(this.videoTimeout);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000)
+                }
+            }
+        }
+    }
+
+    const app = Vue.createApp(App);
+    app.use(ElementPlus, {
+        locale: ElementPlusLocaleZhCn,
+    });
+    app.mount("#app");
+</script>

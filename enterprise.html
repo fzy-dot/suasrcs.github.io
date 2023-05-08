@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./framework/element-plus/dist/index.css" />
+    <style>
+
+        #top-box{
+            width: 90%;
+            height: 330px;
+            margin: 100px 30px 30px 50px;
+            padding: 15px;
+            background: #FFFFFF;
+            border-radius: 15px;
+            float: left;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        #top-box > .enterprise-cover{
+            width: 100%;
+            height: 250px;
+            border-radius: 15px;
+            background: url("./img/enterprise-cover.jpg") center no-repeat;
+            background-size: 100%;
+        }
+
+        #top-box > .enterprise-info{
+            width: 100%;
+            float: left;
+        }
+
+        #top-box > .enterprise-info > .boss-head > img{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-top: -25px;
+            margin-left: 25px;
+            float: left;
+        }
+
+        #top-box > .enterprise-info > .boss-head > .info-box{
+            float: left;
+            min-width: 100px;
+            margin: 20px 5px 0 30px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        #top-box > .enterprise-info > .boss-head > .delete-box, #top-box > .enterprise-info > .boss-head > .create-box{
+            width: 60px;
+            height: 60px;
+            margin-top: 15px;
+            margin-right: 25px;
+            border-radius: 50%;
+            border: #aaaaaa 1px solid;
+            cursor: pointer;
+            float: right;
+            transition: .3s all ease-in-out;
+        }
+
+        #top-box > .enterprise-info > .boss-head > .delete-box{
+            background: url("./svg/delete.svg") center no-repeat;
+            background-size: 50%;
+        }
+
+        #top-box > .enterprise-info > .boss-head > .create-box{
+            background: url("./svg/create.svg") center no-repeat;
+            background-size: 50%;
+        }
+
+        #top-box > .enterprise-info > .boss-head > .delete-box:hover{
+            box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2), inset -10px -10px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        #top-box > .enterprise-info > .boss-head > .create-box:hover{
+            box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2), inset -10px -10px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        #top-box > .enterprise-info > .boss-head > .info-box > .info-name{
+            font-size: 18px;
+        }
+
+        #top-box > .enterprise-info > .boss-head > .info-box > .info-text{
+            font-size: 16px;
+            color: #aaaaaa;
+        }
+
+        #main-box {
+            width: 90%;
+            float: left;
+            margin-left: 50px;
+        }
+
+        #main-box > #info-box{
+            width: 39%;
+            height: 200px;
+            float: left;
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        #main-box > #info-box > .info-block{
+            width: 24%;
+            height: 60%;
+            margin: 7% 4%;
+            float: left;
+            border-radius: 15px;
+            border: #f4f4f5 1px solid;
+            cursor: pointer;
+            transition: .3s all ease-in-out;
+        }
+
+        #main-box > #info-box > .info-block:hover{
+            box-shadow: inset 10px 10px 10px rgba(0, 0, 0, 0.2), inset -10px -10px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        #main-box > #info-box > .info-block > .info-number{
+            font-size: 26px;
+            text-align: center;
+            margin-top: 30px;
+            color: #666666;
+        }
+
+        #main-box > #info-box > .info-block > .info-text{
+            font-size: 16px;
+            text-align: center;
+            margin-top: 10px;
+            color: #999999;
+        }
+
+        #main-box > #schedule-box{
+            width: 60%;
+            height: 200px;
+            float: right;
+            background: #FFFFFF;
+            border-radius: 15px;
+            margin-right: -30px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #apply-box{
+            width: 90%;
+            height: 630px;
+            margin: 100px 30px 30px 50px;
+            padding: 15px;
+            background: #FFFFFF;
+            border-radius: 15px;
+            float: left;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        #permission-box{
+            width: 90%;
+            height: 630px;
+            margin: 100px 30px 30px 50px;
+            padding: 15px;
+            background: #FFFFFF;
+            border-radius: 15px;
+            float: left;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        #conference-box{
+            width: 90%;
+            height: 630px;
+            margin: 100px 30px 30px 50px;
+            padding: 15px;
+            background: #FFFFFF;
+            border-radius: 15px;
+            float: left;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        #conference-info-box{
+            width: 90%;
+            height: 630px;
+            margin: 100px 30px 30px 50px;
+            padding: 15px;
+            background: #FFFFFF;
+            border-radius: 15px;
+            float: left;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .el-table__cell > .cell > img{
+            width: 70px;
+            height: 70px;
+            border-radius: 25px;
+            margin-left: 25px;
+            float: left;
+        }
+
+        #nothing-box{
+            width: 90%;
+            height: 600px;
+            margin: 110px 30px 30px 50px;
+        }
+
+        #nothing-box > #button-box{
+            width: 640px;
+            height: 100px;
+            padding: 10px;
+            margin: 180px auto;
+        }
+
+        #nothing-box > #button-box > .button{
+            width: 250px;
+            height: 50px;
+            padding: 10px;
+            background: #FFFFFF;
+            cursor: pointer;
+            border-radius: 15px;
+            float: left;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+            margin: 15px 25px;
+            color: #666666;
+            line-height: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            letter-spacing: 2px;
+            transition: .3s all ease-in-out;
+        }
+
+        #nothing-box > #button-box > .button:hover{
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        #nothing-box > #button-box > .button > .join-box{
+            width: 50px;
+            height: 50px;
+            background: url("./svg/join.svg") center no-repeat;
+            background-size: 80%;
+            float: left;
+        }
+
+        #nothing-box > #button-box > .button > .create-box{
+            width: 50px;
+            height: 50px;
+            background: url("./svg/new.svg") center no-repeat;
+            background-size: 65%;
+            float: left;
+        }
+
+        #nothing-box > #input-box{
+            width: 640px;
+            height: 100px;
+            padding: 10px;
+            margin: 180px auto;
+        }
+
+        #nothing-box > #input-box > .outer-box{
+            width: 590px;
+            height: 70px;
+            margin: 15px 25px;
+            border-radius: 15px;
+            background: #FFFFFF;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #nothing-box > #input-box > .outer-box > .back{
+            width: 70px;
+            height: 70px;
+            background: url("./svg/back.svg") center no-repeat;
+            background-size: 50%;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            float: left;
+            cursor: pointer;
+            border-right: 1px solid #e5e7e9;
+            transition: .3s all ease-in-out;
+        }
+
+        #nothing-box > #input-box > .outer-box > input{
+            width: 368px;
+            height: 70px;
+            padding: 0 15px;
+            line-height: 70px;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            float: left;
+            letter-spacing: 1px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        #nothing-box > #input-box > .outer-box > .submit{
+            width: 120px;
+            height: 70px;
+            float: left;
+            font-size: 18px;
+            text-align: center;
+            line-height: 70px;
+            letter-spacing: 1px;
+            color: #666666;
+            cursor: pointer;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border-left: 1px solid #e5e7e9;
+            transition: .3s all ease-in-out;
+        }
+
+        #nothing-box > #input-box > .outer-box > .back:hover{
+            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #nothing-box > #input-box > .outer-box > .submit:hover{
+            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #wait-box{
+            width: 90%;
+            height: 300px;
+            margin: 110px 30px 30px 50px;
+        }
+
+        #reject-box{
+            width: 90%;
+            height: 300px;
+            margin: 110px 30px 30px 50px;
+        }
+
+        #remove-box{
+            width: 90%;
+            height: 300px;
+            margin: 110px 30px 30px 50px;
+        }
+
+        .el-result{
+            border-radius: 15px;
+            background: #FFFFFF;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .el-alert{
+            height: 60px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .el-alert__title{
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .el-overlay-message-box{
+            margin-top: 150px ;
+        }
+
+        .el-message-box{
+            transform: translate(55px, 141px);
+        }
+
+        .el-page-header{
+            font-size: 16px;
+            border-bottom: 1px solid #edf1f4;
+            padding: 20px;
+        }
+
+        .el-page-header__icon, .el-page-header__title{
+            font-size: 16px;
+        }
+
+        .el-page-header__content{
+            font-size: 16px;
+        }
+
+        .el-table__header > thead{
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 50px;
+            letter-spacing: 2px;
+        }
+
+        .el-table__body > tbody > .el-table__row{
+            font-size: 15px;
+            height: 100px;
+        }
+
+        .table-info-account{
+            font-size: 16px;
+            color: skyblue;
+            margin-bottom: 3px;
+            letter-spacing: 1px;
+        }
+
+        .table-info-name{
+            font-size: 20px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .table-info-block{
+            height: 22px;
+            line-height: 20px;
+        }
+
+        .table-info-phone{
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 5px;
+            background: url("./svg/table-phone.svg") left no-repeat;
+            background-size: 90%;
+        }
+
+        .table-info-email{
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 5px;
+            background: url("./svg/table-email.svg") left no-repeat;
+            background-size: 90%;
+        }
+
+        .table-info-address{
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 5px;
+            background: url("./svg/table-address.svg") left no-repeat;
+            background-size: 90%;
+        }
+
+        .reject-button, .permission-button, .remove-button{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            float: left;
+            margin-left: 30px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .reject-button{
+            background: #ff6746;
+        }
+
+        .reject-button:hover{
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .reject-button > .reject-svg{
+            width: 50px;
+            height: 50px;
+            background: url("./svg/reject.svg") center no-repeat;
+            background-size: 60%;
+        }
+
+        .remove-button{
+            background: #f7ba2a;
+        }
+
+        .remove-button:hover{
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .remove-button > .remove-svg{
+            width: 50px;
+            height: 50px;
+            background: url("./svg/remove-people.svg") center no-repeat;
+            background-size: 60%;
+        }
+
+        .permission-button{
+            background: #37d159;
+        }
+
+        .permission-button:hover{
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .permission-button > .permission-svg{
+            width: 50px;
+            height: 50px;
+            background: url("./svg/permission.svg") center no-repeat;
+            background-size: 70%;
+        }
+
+        .time-svg{
+            width: 30px;
+            height: 30px;
+            float: left;
+            background: url("./svg/conference-time.svg") center no-repeat;
+            background-size: 80%;
+            margin-top: -3px;
+        }
+
+        .place-svg{
+            width: 30px;
+            height: 30px;
+            float: left;
+            background: url("./svg/address.svg") center no-repeat;
+            background-size: 80%;
+            margin-top: -3px;
+        }
+
+        .el-table__cell > .cell > .el-tag{
+            font-size: 15px;
+            padding: 5px 10px;
+        }
+
+        .el-table__cell > .cell > .el-button{
+            font-size: 15px;
+            padding: 5px 20px;
+        }
+
+        .el-form-item__label{
+            line-height: 38px;
+            font-size: 14px;
+        }
+
+        .el-input__inner{
+            height: 38px;
+            font-size: 14px;
+        }
+
+        .conference-head-picture{
+            width: 60px;
+            height: 60px;
+            float: left;
+        }
+
+        .conference-head-picture > img{
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+        }
+
+        .conference-user-info{
+            font-size: 16px;
+            line-height: 60px;
+            float: left;
+            margin-left: 15px;
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div id="top-box" v-show="enterpriseRole !== 'nothing' && !applyVisible && !permissionVisible && !conferenceVisible && !conferenceInfoVisible" v-cloak>
+        <div class="enterprise-cover"></div>
+        <div class="enterprise-info">
+            <div class="boss-head">
+                <img :src="defaultHeaderPicture" v-show="!currentUser.fileDocumentId" class="avatar" v-cloak>
+                <img :src="currentUser.fileDocumentId" v-show="currentUser.fileDocumentId" class="avatar" v-cloak>
+                <div class="info-box">
+                    <div class="info-name" style="color:#1362FC" v-text="currentUser.name"></div>
+                    <div class="info-text">创办人</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-name" v-text="currentUser.email"></div>
+                    <div class="info-text">邮箱</div>
+                </div>
+                <div class="info-box" style="border-left: 1px #999999 solid;padding-left: 30px">
+                    <div class="info-name" v-text="enterprise.name"></div>
+                    <div class="info-text"><el-link @click="copyCode" v-text="'#' + enterprise.number"></el-link></div>
+                </div>
+                <el-popconfirm
+                        confirm-button-text="确定"
+                        cancel-button-text="不用了"
+                        @confirm="deleteEnterprise"
+                        icon-color="red"
+                        title="你确定解散企业吗?">
+                    <template #reference>
+                        <div class="delete-box" v-show="enterpriseRole === 'master'"></div>
+                    </template>
+                </el-popconfirm>
+                <el-popconfirm
+                        confirm-button-text="确定"
+                        cancel-button-text="不用了"
+                        @confirm="createEnterprise"
+                        icon-color="#1362FC"
+                        title="你需要新建会议吗?">
+                    <template #reference>
+                        <div class="create-box" v-show="enterpriseRole === 'master'"></div>
+                    </template>
+                </el-popconfirm>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-box" v-show="enterpriseRole !== 'nothing' && !applyVisible && !permissionVisible && !conferenceVisible && !conferenceInfoVisible" v-cloak>
+        <div id="info-box">
+            <div class="info-block" @click="openPermissionTable">
+                <div class="info-number" v-text="total.permission"></div>
+                <div class="info-text">企业人员</div>
+            </div>
+            <div class="info-block" v-show="enterpriseRole === 'master'" @click="openApplyTable">
+                <div class="info-number" v-text="total.apply"></div>
+                <div class="info-text">申请消息</div>
+            </div>
+            <div class="info-block" @click="openConferenceTable">
+                <div class="info-number" v-text="total.conference"></div>
+                <div class="info-text">会议记录</div>
+            </div>
+        </div>
+
+        <div id="schedule-box">
+            <el-steps finish-status="wait" v-show="conference.length > 0" align-center style="margin-top: 50px;">
+                <el-step v-for="item in conference.slice(0, 4)" :title="item.startTime.substring(5, 16)" :description="item.name"></el-step>
+            </el-steps>
+            <el-empty v-show="conference.length <= 0" description="暂无会议" :image-size="90"></el-empty>
+        </div>
+    </div>
+
+    <div id="apply-box" v-show="applyVisible">
+        <el-page-header content="加入企业申请" @click="applyVisible = false"></el-page-header>
+        <el-table
+                :data="applyTable"
+                height="550"
+                :show-header="false"
+                style="width: 100%">
+            <el-table-column width="150">
+                <template #default="scope">
+                    <img :src="scope.row.imageUrl" class="avatar" v-cloak>
+                </template>
+            </el-table-column>
+            <el-table-column width="250">
+                <template #default="scope">
+                    <div class="table-info-account" v-text="'#' + scope.row.account"></div>
+                    <div class="table-info-name" v-text="scope.row.userInfo.name"></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="250">
+                <template #default="scope">
+                    <div class="table-info-block"><div class="table-info-phone"></div><span v-text="scope.row.userInfo.phone"></span></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="250">
+                <template #default="scope">
+                    <div class="table-info-block"><div class="table-info-email"></div><span v-text="scope.row.userInfo.email"></span></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="300">
+                <template #default="scope">
+                    <div class="table-info-block"><div class="table-info-address"></div><span v-text="scope.row.userInfo.address"></span></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="250" fixed="right">
+                <template #default="scope">
+                    <el-tooltip
+                            class="box-item"
+                            effect="dark"
+                            content="拒绝申请"
+                            placement="left">
+                        <div class="reject-button" @click="rejectApply(scope.$index, scope.row)"><div class="reject-svg"></div></div>
+                    </el-tooltip>
+                    <el-tooltip
+                            class="box-item"
+                            effect="dark"
+                            content="接受申请"
+                            placement="right">
+                        <div class="permission-button" @click="permissionApply(scope.$index, scope.row)"><div class="permission-svg"></div></div>
+                    </el-tooltip>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+
+    <div id="permission-box" v-show="permissionVisible">
+        <el-page-header content="企业员工" @click="permissionVisible = false"></el-page-header>
+        <el-table
+                :data="permissionTable"
+                height="550"
+                :show-header="false"
+                style="width: 100%">
+            <el-table-column width="150">
+                <template #default="scope">
+                    <img :src="scope.row.imageUrl" class="avatar" v-cloak>
+                </template>
+            </el-table-column>
+            <el-table-column width="250">
+                <template #default="scope">
+                    <div class="table-info-account" v-text="'#' + scope.row.account"></div>
+                    <div class="table-info-name" v-text="scope.row.userInfo.name"></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="250">
+                <template #default="scope">
+                    <div class="table-info-block"><div class="table-info-phone"></div><span v-text="scope.row.userInfo.phone"></span></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="250">
+                <template #default="scope">
+                    <div class="table-info-block"><div class="table-info-email"></div><span v-text="scope.row.userInfo.email"></span></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="400">
+                <template #default="scope">
+                    <div class="table-info-block"><div class="table-info-address"></div><span v-text="scope.row.userInfo.address"></span></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="150" fixed="right">
+                <template #default="scope">
+                    <el-tooltip
+                            class="box-item"
+                            effect="dark"
+                            content="移除员工"
+                            placement="right">
+                        <div  v-show="enterpriseRole === 'master'" class="remove-button" @click="removePeople(scope.$index, scope.row)"><div class="remove-svg"></div></div>
+                    </el-tooltip>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+
+    <div id="conference-box" v-show="conferenceVisible && !conferenceInfoVisible">
+        <el-page-header content="企业会议" @click="conferenceVisible = false"></el-page-header>
+        <el-table
+                :data="conferenceTable"
+                height="550"
+                style="width: 100%">
+            <el-table-column width="255" label="会议名">
+                <template #default="scope">
+                    <div v-text="scope.row.name"></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="275" label="简介">
+                <template #default="scope">
+                    <div v-text="scope.row.explain"></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="275" label="地点">
+                <template #default="scope">
+                    <div><div class="place-svg"></div> <span v-text="scope.row.place"></span></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="320" label="时间">
+                <template #default="scope">
+                    <div class="time-svg"></div>
+                    <span  v-text="scope.row.day"></span> / <span v-text="scope.row.startTimeTemp.substring(0, 5)"></span> - <span v-text="scope.row.endTimeTemp.substring(0, 5)"></span>
+                </template>
+            </el-table-column>
+            <el-table-column width="150" label="状态">
+                <template #default="scope">
+                    <div v-show="scope.row.state === 'normal'"><el-button type="success">正常</el-button></div>
+                    <div v-show="scope.row.state === 'cancel'"><el-button type="danger">已取消</el-button></div>
+                    <div v-show="scope.row.state === 'finish'"><el-button type="info">已结束</el-button></div>
+                </template>
+            </el-table-column>
+            <el-table-column width="150" fixed="right">
+                <template #default="scope">
+                    <el-button v-show="enterpriseRole === 'master'" type="primary" :disabled="scope.row.state === 'finish'" @click="editConference(scope.$index, scope.row)">编辑</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+
+    <div id="conference-info-box" v-show="conferenceInfoVisible">
+        <el-page-header :content="isEdit ? '编辑会议' : '新建会议'" @click="backConferenceTable"></el-page-header>
+        <el-form :model="conferenceInfo" status-icon :rules="rules" ref="conferenceInfo" class="demo-ruleForm" hide-required-asterisk="true"
+                 style="margin: 20px;width: 60%;float: left">
+            <el-form-item label="会议编号" prop="number" v-show="isEdit">
+                <el-input v-model="conferenceInfo.number" disabled></el-input>
+            </el-form-item>
+            <el-form-item label="会议名称" prop="name">
+                <el-input v-model="conferenceInfo.name"></el-input>
+            </el-form-item>
+            <el-form-item label="会议状态" prop="state" v-show="isEdit">
+                <el-select v-model="conferenceInfo.state" placeholder="请选择会议状态">
+                    <el-option label="正常" value="normal"></el-option>
+                    <el-option label="取消" value="cancel"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="会议时间" required>
+                <el-col :span="7">
+                    <el-form-item prop="day">
+                        <el-date-picker type="date" value-format="YYYY-MM-DD" format="YYYY-MM-DD" placeholder="日期" v-model="conferenceInfo.day" style="width: 100%;"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+                <el-col class="line" :span="2" style="text-align: center">---</el-col>
+                <el-col :span="7">
+                    <el-form-item prop="startTime">
+                        <el-time-picker placeholder="开始时间" v-model="conferenceInfo.startTimeTemp" format="HH:mm" value-format="HH:mm" style="width: 100%;"></el-time-picker>
+                    </el-form-item>
+                </el-col>
+                <el-col class="line" :span="1" style="text-align: center">---</el-col>
+                <el-col :span="7">
+                    <el-form-item prop="endTime">
+                        <el-time-picker  placeholder="结束时间" v-model="conferenceInfo.endTimeTemp" format="HH:mm" value-format="HH:mm"style="width: 100%;"></el-time-picker>
+                    </el-form-item>
+                </el-col>
+            </el-form-item>
+            <el-form-item label="会议地点" prop="place">
+                <el-input v-model="conferenceInfo.place"></el-input>
+            </el-form-item>
+            <el-form-item label="会议说明" prop="explain">
+                <el-input type="textarea" maxlength="2048" v-model="conferenceInfo.explain" :rows="4"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="saveConferenceInfo" style="margin-left: 66px">保存会议</el-button>
+            </el-form-item>
+        </el-form>
+        <el-table
+                ref="multipleTable"
+                :data="permissionTable"
+                height="470"
+                @row-click="selectRow"
+                tooltip-effect="dark"
+                style="width: 35%; float: left;border: 1px solid #f0f0f0;margin-top: 20px;border-radius: 8px">
+            <el-table-column
+                    type="selection"
+                    width="50">
+            </el-table-column>
+            <el-table-column label="参与会议人员">
+                <template #default="scope">
+                    <div class="conference-head-picture"><img :src="scope.row.imageUrl"/></div>
+                    <div class="conference-user-info" v-text="scope.row.userInfo.name"></div>
+                    <div class="conference-user-info" v-text="scope.row.job"></div>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+
+    <div id="nothing-box" v-show="enterpriseRole === 'nothing' && enterpriseStatus === 'nothing' " v-cloak>
+        <el-alert title="暂无企业信息，请加入或创建一个企业" type="warning" center :closable="false"></el-alert>
+        <div id="button-box" v-show="buttonVisible">
+            <div class="button" @click="join"><div class="join-box"></div>加入企业&nbsp;&nbsp;&nbsp;</div>
+            <div class="button" @click="create"><div class="create-box"></div>创建企业&nbsp;&nbsp;&nbsp;</div>
+        </div>
+        <div id="input-box" v-show="!buttonVisible">
+            <div class="outer-box">
+                <div class="back" @click="buttonVisible = true"></div>
+                <input type="text" :placeholder="inputPlaceholder" v-model="inputContent"
+                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                <div class="submit" @click="inputSubmit">确认提交</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wait-box" v-show="enterpriseStatus === 'apply'" v-cloak>
+        <el-result icon="info" title="待确认">
+            <template #sub-title>
+                <p>已申请加入企业，请耐心等待企业创办人回复</p>
+            </template>
+            <template #extra>
+                <el-popconfirm
+                        confirm-button-text="确定"
+                        cancel-button-text="不用了"
+                        @confirm="applyCancel"
+                        icon-color="red"
+                        title="你确定撤销申请吗?">
+                    <template #reference>
+                        <el-button type="primary">撤销</el-button>
+                    </template>
+                </el-popconfirm>
+            </template>
+        </el-result>
+    </div>
+
+    <div id="reject-box" v-show="enterpriseStatus === 'reject'" v-cloak>
+        <el-result icon="error" title="被拒绝">
+            <template #sub-title>
+                <p>申请加入企业被拒绝，请另选企业加入</p>
+            </template>
+            <template #extra>
+                <el-button type="primary" @click="accept">确定</el-button>
+            </template>
+        </el-result>
+    </div>
+
+    <div id="remove-box" v-show="enterpriseStatus === 'remove'" v-cloak>
+        <el-result icon="warning" title="被移除">
+            <template #sub-title>
+                <p>你已被所在企业移除，请另选企业加入</p>
+            </template>
+            <template #extra>
+                <el-button type="primary" @click="accept">确定</el-button>
+            </template>
+        </el-result>
+    </div>
+</div>
+</body>
+<script src="./js/axios.js"></script>
+<script src="js/global-config.js"></script>
+<script src="./framework/vue/dist/vue.global.js"></script>
+<script src="./framework/element-plus/dist/index.full.js"></script>
+<script src="./framework/element-plus/dist/locale/zh-cn.js"></script>
+<script>
+
+    let App = {
+        data() {
+            return {
+                enterpriseRole: 'master',
+                enterpriseStatus: 'nothing',
+                enterpriseUserId: '',
+                enterprise: { },
+                currentUser: { },
+                total: { },
+                conference: [],
+                defaultHeaderPicture: './svg/default-head.svg',
+                inputPlaceholder: '请输入企业编码',
+                inputContent: '',
+                buttonVisible: true,
+                applyVisible: false,
+                permissionVisible: false,
+                conferenceVisible: false,
+                conferenceInfoVisible: false,
+                isJoin: true,
+                isEdit: true,
+                applyTable: [],
+                permissionTable: [],
+                conferenceTable: [],
+                conferenceInfo:{
+                    id: '',
+                    enterpriseId: '',
+                    userId: '',
+                    name: '',
+                    number: '',
+                    explain: '',
+                    place: '',
+                    day: '',
+                    startTime: '',
+                    startTimeTemp: '',
+                    endTime: '',
+                    endTimeTemp: '',
+                    state: ''
+                },
+                rules: {
+                    explain: [
+                        { required: true, message: '请输入会议说明', trigger: 'change' },
+                        { max: 2048, message: '长度不超过 2048 个字符', trigger: 'change' }
+                    ],
+                    place: [
+                        { required: true, message: '请输入会议地点', trigger: 'change' },
+                        { max: 256, message: '长度不超过 256 个字符', trigger: 'change' }
+                    ],
+                    name: [
+                        { required: true, message: '请输入会议名称', trigger: 'change' },
+                        { max: 64, message: '长度不超过 64 个字符', trigger: 'change' }
+                    ]
+                },
+                multipleSelection: []
+            }
+        },
+        methods: {
+            copyCode(){
+                let input = document.createElement('input');
+                document.body.appendChild(input);
+                input.setAttribute('value', this.enterprise.number);
+                input.select();
+                if (document.execCommand('copy')){
+                    document.execCommand('copy');
+                }
+                document.body.removeChild(input);
+                this.success('已复制企业代码');
+            },
+            warn(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'warning',
+                    offset: 100
+                });
+            },
+            success(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'success',
+                    offset: 100
+                });
+            },
+            countInit(id){
+                let that = this;
+                axios({
+                    method: 'GET',
+                    url: url_enterprise_user_total,
+                    params: {
+                        enterpriseId: id,
+                        state: 'permission'
+                    }
+                }).then(function (res) {
+                    that.total.permission = res.data.data;
+                });
+                axios({
+                    method: 'GET',
+                    url: url_enterprise_user_total,
+                    params: {
+                        enterpriseId: id,
+                        state: 'apply'
+                    }
+                }).then(function (res) {
+                    that.total.apply = res.data.data;
+                });
+                axios({
+                    method: 'GET',
+                    url: url_enterprise_conference_total,
+                    params: { enterpriseId: id }
+                }).then(function (res) {
+                    that.total.conference = res.data.data;
+                });
+                axios({
+                    method: 'GET',
+                    url: url_enterprise_conference_future,
+                    params: { enterpriseId: id }
+                }).then(function (res) {
+                    that.conference = res.data.data;
+                });
+            },
+            deleteEnterprise(){
+                let that = this;
+                axios({
+                    method: 'DELETE',
+                    url: url_enterprise + `/${that.enterprise.id}`,
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.success('删除企业成功');
+                        setTimeout(function () {
+                            that.init();
+                        }, 2000);
+                    }else {
+                        that.warn(res.data.msg);
+                    }
+                })
+            },
+            createEnterprise(){
+                let that = this;
+                that.isEdit = false;
+                that.conferenceInfoVisible = true;
+                that.$refs['conferenceInfo'].resetFields();
+                that.conferenceInfo = {};
+                that.getPermissionTable();
+            },
+            openApplyTable(){
+                let that = this;
+                that.applyVisible = true;
+                that.applyTable = [];
+                axios({
+                    method: 'GET',
+                    url: url_enterprise_user,
+                    params: {
+                        enterpriseId: that.enterprise.id,
+                        state: 'apply'
+                    }
+                }).then(function (res) {
+                    res.data.data.forEach(item => {
+                        axios({
+                            method: 'GET',
+                            url: url_user + `/${item.userId}`,
+                        }).then(function (res) {
+                            let data = res.data.data;
+                            data.enterpriseId = item.id;
+                            data.imageUrl = data.userInfo.fileDocumentId ? url_file_view + data.userInfo.fileDocumentId : that.defaultHeaderPicture;
+                            that.applyTable.push(data);
+                        })
+                    })
+                });
+            },
+            openPermissionTable(){
+                let that = this;
+                that.permissionVisible = true;
+                that.getPermissionTable();
+            },
+            getPermissionTable(){
+                let that = this;
+                that.permissionTable = [];
+                axios({
+                    method: 'GET',
+                    url: url_enterprise_user,
+                    params: {
+                        enterpriseId: that.enterprise.id,
+                        state: 'permission'
+                    }
+                }).then(function (res) {
+                    res.data.data.forEach(item => {
+                        axios({
+                            method: 'GET',
+                            url: url_user + `/${item.userId}`,
+                        }).then(function (res) {
+                            let data = res.data.data;
+                            data.enterpriseId = item.id;
+                            data.job = item.job;
+                            data.imageUrl = data.userInfo.fileDocumentId ? url_file_view + data.userInfo.fileDocumentId : that.defaultHeaderPicture;
+                            that.permissionTable.push(data);
+                        })
+                    })
+
+                    if (that.permissionVisible === false){
+                        setTimeout(function () {
+                            if (that.isEdit){
+                                axios({
+                                    method: 'GET',
+                                    url: url_conference_user,
+                                    params: {
+                                        conferenceId: that.conferenceInfo.id
+                                    }
+                                }).then(function (res) {
+                                    let conferenceUser = res.data.data;
+                                    if (that.permissionTable.length > 0 && conferenceUser.length > 0){
+                                        conferenceUser.forEach(item => {
+                                            that.permissionTable.forEach(row => {
+                                                if (item.userId === row.id) that.$refs.multipleTable.toggleRowSelection(row);
+                                            })
+                                        })
+
+                                    }
+                                })
+                            }else {
+                                that.$refs.multipleTable.toggleAllSelection();
+                            }
+                        }, 200)
+                    }
+                });
+            },
+            selectRow(row){
+                this.$refs.multipleTable.toggleRowSelection(row);
+            },
+            openConferenceTable(){
+                let that = this;
+                that.conferenceVisible = true;
+                that.getConferenceTable();
+            },
+            getConferenceTable(){
+                let that = this;
+                that.conferenceTable = [];
+                axios({
+                    method: 'GET',
+                    url: url_enterprise_conference,
+                    params: {
+                        enterpriseId: that.enterprise.id
+                    }
+                }).then(function (res) {
+                    that.conferenceTable = res.data.data;
+                    that.conferenceTable.forEach(item => {
+                       if (new Date(item.endTime) < new Date()){
+                           item.state = 'finish';
+                       }
+                       item.day = item.startTime.substring(0, 10);
+                       item.startTimeTemp = item.startTime.substring(11, 19);
+                       item.endTimeTemp = item.endTime.substring(11, 19);
+                    });
+                });
+            },
+            backConferenceTable(){
+                let that = this;
+                that.conferenceInfoVisible = false;
+                that.getConferenceTable();
+            },
+            rejectApply(index, row){
+                let that = this;
+                axios({
+                    method: 'PUT',
+                    url: url_enterprise_user,
+                    data: { id: row.enterpriseId,  job: '员工',  state: 'reject'}
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.$message({ type: 'info',  message: '已拒绝加入申请',  offset: 100 })
+                        that.applyTable.splice(index, 1);
+                    }else { that.warn(res.data.msg); }
+                })
+            },
+            permissionApply(index, row){
+                let that = this;
+                axios({
+                    method: 'PUT',
+                    url: url_enterprise_user,
+                    data: { id: row.enterpriseId, job: '员工', state: 'permission'}
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.success('已接受加入申请');
+                        that.applyTable.splice(index, 1);
+                    }else { that.warn(res.data.msg); }
+                })
+            },
+            removePeople(index, row){
+                let that = this;
+                axios({
+                    method: 'PUT',
+                    url: url_enterprise_user,
+                    data: {
+                        id: row.enterpriseId,
+                        job: '员工',
+                        state: 'remove'
+                    }
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.success('已移除该员工');
+                        that.permissionTable.splice(index, 1);
+                    }
+                })
+            },
+            join() {
+                this.buttonVisible = false;
+                this.inputPlaceholder = '请输入企业编码';
+                this.isJoin = true;
+            },
+            create() {
+                this.buttonVisible = false;
+                this.inputPlaceholder = '请输入企业名称';
+                this.isJoin = false;
+            },
+            inputSubmit() {
+                let that = this;
+                if (that.isJoin){
+                    if (that.inputContent.length !== 0){
+                        axios({
+                            method: 'POST',
+                            url: url_enterprise_user_join + `/${that.inputContent}`,
+                        }).then(function (res) {
+                            if (res.data.code === 0){
+                                that.success('已提交申请，请耐心等候');
+                                that.buttonVisible = true;
+                                setTimeout(function () {
+                                    that.init();
+                                }, 3000);
+                            }else {
+                                that.warn(res.data.msg);
+                            }
+                        })
+                    } else {
+                        that.warn('未输入企业编码');
+                    }
+                }else {
+                    if (that.inputContent.length > 2 && that.inputContent.length < 64){
+                        axios({
+                            method: 'POST',
+                            url: url_enterprise,
+                            data: {
+                                name: that.inputContent
+                            }
+                        }).then(function (res) {
+                            if (res.data.code === 0){
+                                that.success('创建企业成功！');
+                                that.buttonVisible = true;
+                                setTimeout(function () {
+                                    that.init();
+                                }, 2000);
+                            }else {
+                                that.warn(res.data.msg);
+                            }
+                        })
+                    }else {
+                        that.warn('企业名称在 2 到 64 个字符');
+                    }
+                }
+            },
+            applyCancel(){
+                let that = this;
+                axios({
+                    method: 'DELETE',
+                    url: url_enterprise_user + `/${that.enterpriseUserId}`,
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.success('撤销申请成功');
+                        setTimeout(function () {
+                            that.enterpriseStatus = 'nothing';
+                        }, 1000)
+                    }else {
+                        that.warn(res.data.msg);
+                    }
+                })
+            },
+            accept(){
+                let that = this;
+                axios({
+                    method: 'DELETE',
+                    url: url_enterprise_user + `/${that.enterpriseUserId}`,
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        setTimeout(function () {
+                            that.enterpriseStatus = 'nothing';
+                        }, 1000)
+                    }else {
+                        that.warn(res.data.msg);
+                    }
+                })
+            },
+            editConference(index, row){
+                let that = this;
+                that.isEdit = true;
+                that.conferenceInfoVisible = true;
+                that.conferenceInfo = row;
+                that.getPermissionTable();
+            },
+            saveConferenceInfo() {
+                let that = this;
+                if (!that.isEdit) that.conferenceInfo.enterpriseId = that.enterprise.id;
+                that.conferenceInfo.startTime = that.conferenceInfo.day + ' ' + that.conferenceInfo.startTimeTemp + ':00';
+                that.conferenceInfo.endTime = that.conferenceInfo.day + ' ' + that.conferenceInfo.endTimeTemp + ':00';
+                that.conferenceInfo.updateTime = '';
+                that.conferenceInfo.createTime = '';
+                if (!that.timeValidation()){
+                    this.$refs['conferenceInfo'].validate((valid) => {
+                        if (valid) {
+                            let selectionRows = that.$refs.multipleTable.getSelectionRows();
+                            if (selectionRows.length === 0){
+                                that.warn('请至少选择一位与会人员！');
+                                return ;
+                            }
+                            axios({
+                                method: that.isEdit ? 'PUT' : 'POST',
+                                url: url_enterprise_conference,
+                                data: that.conferenceInfo
+                            }).then(function (res) {
+                                if (res.data.code === 0) {
+                                    if (that.isEdit){
+                                        axios({
+                                            method: 'DELETE',
+                                            url: url_conference_user_clear + `/${that.conferenceInfo.id}`
+                                        }).then(function (res) {
+                                            if (res.data.code === 0){
+                                                selectionRows.forEach(item => {
+                                                    axios({
+                                                        method: 'POST',
+                                                        url: url_conference_user,
+                                                        data: {
+                                                            conferenceId: that.conferenceInfo.id,
+                                                            userId: item.id
+                                                        }
+                                                    });
+                                                })
+                                            }else {
+                                                that.warn(res.data.msg);
+                                            }
+                                        })
+                                    }else {
+                                        selectionRows.forEach(item => {
+                                            axios({
+                                                method: 'POST',
+                                                url: url_conference_user,
+                                                data: {
+                                                    conferenceId: res.data.data,
+                                                    userId: item.id
+                                                }
+                                            });
+                                        })
+                                    }
+                                    that.success('保存成功！');
+                                    setTimeout(function () {
+                                        that.conferenceVisible = true;
+                                        that.conferenceInfoVisible = false;
+                                        that.getConferenceTable();
+                                    }, 1000);
+                                } else {
+                                    that.warn(res.data.msg);
+                                }
+                            })
+                        } else {
+                            that.warn('请正确完成表单！');
+                            return false;
+                        }
+                    })
+                }
+            },
+            timeValidation(){
+                let that = this;
+                if (new Date(that.conferenceInfo.startTime) < new Date()){
+                    that.warn('开始时间不能早于当前时间');
+                    return true;
+                }
+                if (new Date(that.conferenceInfo.startTime) > new Date(that.conferenceInfo.endTime)){
+                    that.warn('开始时间不能早于结束时间');
+                    return true;
+                }
+                return false;
+            },
+            init(){
+                let that = this;
+                axios({
+                    method: 'GET',
+                    url: url_enterprise_me
+                }).then(function (res) {
+                    if (res.data.count > 0){
+                        that.enterprise = res.data.data[0];
+                        that.enterpriseRole = 'master';
+                        that.countInit(that.enterprise.id);
+                        axios({
+                            method: 'GET',
+                            url: url_user + `/${that.enterprise.userId}`,
+                        }).then(function (res) {
+                            let data = res.data.data.userInfo;
+                            that.currentUser.name = data.name;
+                            that.currentUser.email = data.email;
+                            that.currentUser.fileDocumentId = data.fileDocumentId ? url_file_view + data.fileDocumentId : null;
+                        })
+                    }else {
+                        axios({
+                            method: 'GET',
+                            url: url_enterprise_user_me
+                        }).then(function (res) {
+                            if (res.data.count > 0){
+                                let enterpriseUser = res.data.data[0];
+                                that.enterpriseUserId = enterpriseUser.id;
+                                that.enterpriseStatus = enterpriseUser.state;
+                                if (enterpriseUser.state === 'permission'){
+                                    axios({
+                                        method: 'GET',
+                                        url: url_enterprise + `/${enterpriseUser.enterpriseId}`,
+                                    }).then(function (res) {
+                                        that.enterprise = res.data.data;
+                                        that.enterpriseRole = 'member';
+                                        that.countInit(enterpriseUser.enterpriseId);
+                                    })
+                                    axios({
+                                        method: 'GET',
+                                        url: url_user + `/${enterpriseUser.userId}`,
+                                    }).then(function (res) {
+                                        let data = res.data.data.userInfo;
+                                        that.currentUser.name = res.data.data.userInfo.name;
+                                        that.currentUser.email = res.data.data.userInfo.email;
+                                        that.currentUser.fileDocumentId = data.fileDocumentId ? url_file_view + data.fileDocumentId : null;
+                                    })
+                                }else {
+                                    that.enterpriseRole = 'nothing';
+                                }
+                            }else {
+                                that.enterpriseRole = 'nothing';
+                            }
+                        }).catch(function (res) {
+                            that.openWarn(res);
+                        })
+                    }
+                }).catch(function () {
+                    that.warn('请先登录');
+                    // window.location.href = './login.html';
+                })
+            }
+        },
+        mounted: function () {
+            let that = this;
+            if (localStorage.getItem('CMS_TOKEN') === null || localStorage.getItem('CMS_TOKEN').toString().length <= 0){
+                setTimeout(function () {
+                    // window.location.href = './login.html';
+                }, 1000)
+                that.warn('请先登录');
+            }
+            that.init();
+        }
+    }
+
+    let app = Vue.createApp(App);
+    app.use(ElementPlus, {
+        locale: ElementPlusLocaleZhCn,
+    });
+    app.mount("#app");
+</script>
+</html>

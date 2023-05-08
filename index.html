@@ -1,2 +1,1405 @@
-<!DOCTYPE html><html lang=zh-CN><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>云家金币</title><script>var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
-            document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')</script><link rel=stylesheet href=./static/index.b0707a6a.css></head><body><noscript><strong>Please enable JavaScript to continue.</strong></noscript><div id=app></div><script src=./static/js/chunk-vendors.f88ba259.js></script><script src=./static/js/index.f7180387.js></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>会议管理系统</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./framework/element-plus/dist/index.css" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        html{
+            min-width: 1260px;
+        }
+
+        #top{
+            width: 100%;
+            height: 100px;
+            min-width: 1260px;
+            position: fixed;
+            z-index: 100;
+            background-color: #f4f4f5;
+        }
+
+        #top > .logo-box{
+            padding-left: 30px;
+            float: left;
+            cursor: pointer;
+        }
+
+        #top > .logo-box > .logo-svg{
+            width: 80px;
+            height: 80px;
+            margin-top: 10px;
+            background: url("svg/logo.svg") center no-repeat;
+            background-size: 70%;
+            float: left;
+        }
+
+        #top > .logo-box > .logo-text{
+            padding-left: 10px;
+            font: italic 40px Georgia, serif;
+            font-weight: bold;
+            color: #33c9ff;
+            letter-spacing: 5px;
+            line-height: 100px;
+            float: left;
+        }
+
+        #top > .user-box{
+            margin: 30px 100px 20px 15px;
+            float: right;
+            cursor: pointer;
+        }
+
+        #top > .user-box > .user-head-picture{
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            float: left;
+        }
+
+        #top > .user-box > .user-head-picture > .el-image{
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+        }
+
+        #top > .user-box > .user-info{
+            height: 50px;
+            float: left;
+            margin-left: 20px;
+        }
+
+        #top > .user-box > .user-info > .user-info-name{
+            margin-right: 20px;
+            font-size: 18px;
+            letter-spacing: 2px;
+            float: left;
+            color: #333333;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        #top > .user-box > .user-info > .user-info-role{
+            font-size: 14px;
+            float: left;
+            color: #666666;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            margin-top: 5px;
+        }
+
+        #top > .user-box > .user-tool-box{
+            width: 200px;
+            height: 100px;
+            border-radius: 25px;
+            background: #FFFFFF;
+            position: absolute;
+            float: right;
+            top: 108px;
+            right: 100px;
+            color: #666666;
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        #top > .user-box > .user-tool-box > .user-info{
+            width: 200px;
+            height: 50px;
+            background: #FFFFFF;
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+            float: left;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            line-height: 50px;
+        }
+
+        #top > .user-box > .user-tool-box > .user-logout{
+            width: 200px;
+            height: 50px;
+            float: left;
+            background: #FFFFFF;
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            line-height: 50px;
+        }
+
+        #top > .user-box > .user-tool-box > .user-info > .user-info-svg{
+            width: 50px;
+            height: 50px;
+            margin-left: 30px;
+            background: url("./svg/user-info.svg") center no-repeat;
+            background-size: 45%;
+            float: left;
+        }
+
+        #top > .user-box > .user-tool-box > .user-logout > .user-logout-svg{
+            width: 50px;
+            height: 50px;
+            margin-left: 30px;
+            background: url("./svg/user-logout.svg") center no-repeat;
+            background-size: 45%;
+            float: left;
+        }
+
+        #top > .user-box > .user-tool-box > .user-info:hover{
+            background: #f4f4f5;
+        }
+
+        #top > .user-box > .user-tool-box > .user-logout:hover{
+            background: #f4f4f5;
+        }
+
+        #top > .tool-box{
+            float: right;
+            height: 50px;
+            border-right: #d4d7de 1px solid;
+            margin: 30px 10px;
+        }
+
+        #top > .tool-box > .search-box{
+            width: 350px;
+            height: 50px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            float: left;
+            margin-right: 20px;
+        }
+
+        #top > .tool-box > .search-box > input{
+            width: 215px;
+            height: 30px;
+            margin: 10px 30px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            float: left;
+            outline: none;
+            border: none;
+        }
+
+        #top > .tool-box > .search-box > .search-button{
+            width: 40px;
+            height: 40px;
+            margin: 5px 10px;
+            float: right;
+            cursor: pointer;
+            background: url("svg/search.svg") center no-repeat;
+            background-size: 70%;
+        }
+
+        #top > .tool-box > .search-box > input::-webkit-input-placeholder{ color: #c1c5c8; }
+        #top > .tool-box > .search-box > input:-moz-placeholder{ color: #c1c5c8; }
+        #top > .tool-box > .search-box > input::-moz-placeholder{ color: #c1c5c8; }
+        #top > .tool-box > .search-box > input:-ms-input-placeholder{ color: #c1c5c8; }
+
+        #top > .tool-box > .tools{
+            float: left;
+        }
+
+        #top > .tool-box > .tools > .tool-block{
+            width: 50px;
+            height: 50px;
+            float: left;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        #top > .tool-box > .tools > .tool-block:hover{
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        #top > .tool-box > .tools > .tool-block > .tool-svg{
+            width: 50px;
+            height: 50px;
+        }
+
+        #top > .tool-box > .tools > .tool-block > .tool-svg-1{
+            background: url("svg/tool-svg-1.svg") center no-repeat;
+            background-size: 50%;
+        }
+
+        #top > .tool-box > .tools > .tool-block > .tool-svg-2{
+            background: url("svg/tool-svg-2.svg") center no-repeat;
+            background-size: 50%;
+        }
+
+        #top > .tool-box > .tools > .tool-block > .tool-svg-3{
+            background: url("svg/tool-svg-3.svg") center no-repeat;
+            background-size: 50%;
+        }
+
+        #left {
+            width: 15%;
+            height: 100vh;
+            background-color: #f4f4f5;
+            color: #333;
+            float: left;
+            position: fixed;
+            z-index: 2;
+            min-width: 230px;
+        }
+
+        #right {
+            min-width: 85%;
+            min-height: 100vh;
+            background-color: #f4f4f5;
+            position: relative;
+            color: #333;
+            float: left;
+            left: 15%;
+            z-index: 1;
+        }
+
+        #userinfo-box{
+            width: 100%;
+        }
+
+        #userinfo-box > .info-top{
+            width: 100%;
+            height: 100px;
+            float: left;
+        }
+
+        #userinfo-box > .info-top > .avatar-uploader{
+            display: block;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+        }
+
+        #userinfo-box > .info-top > .avatar-uploader .el-upload {
+            border: 1px dashed #d9d9d9;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #userinfo-box > .info-top > .avatar-uploader .el-upload:hover {
+            border-color: #409EFF;
+        }
+
+        .avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            display: block;
+        }
+
+        #userinfo-box > .info-box{
+            width: 100%;
+            float: left;
+            margin-top: 30px;
+        }
+
+        .menu-box{
+            width: 90%;
+            margin: 110px auto 0 auto;
+        }
+
+        .menu-box > .menu-block-active{
+            height: 60px;
+            background: #2f80ec;
+            border-radius: 15px;
+            font-size: 18px;
+            line-height: 60px;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.12);
+            /*box-shadow: 0 0.75rem 1.75rem hsla(219.7, 97.5%, 53.1%, 0.3);*/
+        }
+
+        .menu-box > .menu-block{
+            height: 60px;
+            border-radius: 15px;
+            font-size: 18px;
+            line-height: 60px;
+            color: #999999;
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 1px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            margin-top: 20px;
+            background: #FFFFFF;
+            box-shadow: inset 0 0.75rem 1.75rem rgba(0, 0, 0, .05);
+        }
+
+        .home-svg{
+            width: 60px;
+            height: 60px;
+            background: url("./svg/menu-home.svg") center no-repeat;
+            background-size: 40%;
+            float: left;
+        }
+
+        .menu-box > .menu-block-active > .home-svg{
+            width: 60px;
+            height: 60px;
+            background: url("./svg/menu-home-white.svg") center no-repeat;
+            background-size: 40%;
+            float: left;
+        }
+
+        .user-svg{
+            width: 60px;
+            height: 60px;
+            background: url("./svg/menu-user.svg") center no-repeat;
+            background-size: 40%;
+            float: left;
+        }
+
+        .menu-box > .menu-block-active > .user-svg{
+            width: 60px;
+            height: 60px;
+            background: url("./svg/menu-user-white.svg") center no-repeat;
+            background-size: 40%;
+            float: left;
+        }
+
+        .enterprise-svg{
+            width: 60px;
+            height: 60px;
+            background: url("./svg/menu-enterprise.svg") center no-repeat;
+            background-size: 40%;
+            float: left;
+        }
+
+        .menu-box > .menu-block-active > .enterprise-svg{
+            width: 60px;
+            height: 60px;
+            background: url("./svg/menu-enterprise-white.svg") center no-repeat;
+            background-size: 40%;
+            float: left;
+        }
+
+        .menu-box > .menu-block-active > .flag-svg{
+            width: 60px;
+            height: 60px;
+            background: url("./svg/flag-svg-white.svg") center no-repeat;
+            background-size: 40%;
+            float: right;
+        }
+
+        .flag-svg{
+            width: 60px;
+            height: 60px;
+            background: url("./svg/flag-svg.svg") center no-repeat;
+            background-size: 40%;
+            float: right;
+        }
+
+        .menu-text{
+            float: left;
+        }
+
+        .menu-box > .menu-block:hover{
+            color: #2f80ec;
+        }
+
+
+        .el-card__body, .el-main{
+            min-width: 240px;
+            min-height: 60px;
+        }
+
+        .el-card__body > h4{
+            margin-bottom: 15px;
+        }
+
+        .el-drawer__header{
+            padding: 40px 0 20px 30px;
+            margin-bottom: 0;
+        }
+
+        .el-drawer__body{
+            margin-right: 30px;
+            margin-left: 5px;
+        }
+
+
+        .el-drawer__header > .el-drawer__close-btn{
+            margin-right: 30px;
+        }
+
+        .el-tag{
+            margin-right: 10px;
+        }
+
+        .demo-image__placeholder{
+            width: 100%;
+            padding-bottom: 30px;
+            float: left;
+        }
+
+        .demo-image__placeholder > .block{
+            width: 100%;
+            text-align: center;
+            line-height: 30px;
+            position: relative;
+            z-index: 1;
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .demo-image__placeholder > .block > .block-cover{
+            position: absolute;
+            width: 100%;
+            height: 0;
+            margin: 25% 0;
+            z-index: 100;
+            background: #999999;
+            opacity: 0;
+            overflow: hidden;
+            transition: .3s all ease-in-out;
+        }
+
+        .block:hover .block-cover{
+            height: 50%;
+            margin: 16% 0;
+            opacity: 0.5;
+        }
+
+        .demo-image__placeholder > .block > .block-cover > .demonstration{
+            width: 100%;
+            line-height: 50px;
+            font-size: 20px;
+            color: #000000;
+            font-weight: bold;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            float: left;
+        }
+
+        .demo-image__placeholder > .block > .block-cover > .button-box{
+            position: relative;
+            width: 200px;
+            height: 50px;
+            left: 58%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+            float: left;
+        }
+
+        .demo-image__placeholder > .block > .block-cover > .button-box > .preview-button{
+            width: 40px;
+            height: 40px;
+            background: url("./svg/preview.svg") center no-repeat;
+            background-size: 50%;
+            border-radius: 50%;
+            border: #333333 1px solid;
+            float: left;
+            cursor: pointer;
+            transition: .3s all ease-in-out;
+        }
+
+        .demo-image__placeholder > .block > .block-cover > .button-box > .preview-button:hover{
+            border: black 1px solid;
+            background-size: 60%;
+        }
+
+        .demo-image__placeholder > .block > .block-cover > .button-box > .remove-button{
+            width: 40px;
+            height: 40px;
+            margin-left: 40px;
+            background: url("./svg/remove.svg") center no-repeat;
+            background-size: 50%;
+            border-radius: 50%;
+            border: #333333 1px solid;
+            float: left;
+            cursor: pointer;
+            transition: .3s all ease-in-out;
+        }
+
+        .demo-image__placeholder > .block > .block-cover > .button-box > .remove-button:hover{
+            border: black 1px solid;
+            background-size: 60%;
+        }
+
+        .demo-image__placeholder > .block > .face-upload{
+            width: 100%;
+            height: 80px;
+            border: 1px dashed #d9d9d9;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            display: block;
+            background: url("./svg/face-upload-add.svg") center no-repeat;
+            background-size: 15%;
+            color: #d9d9d9;
+            padding-top: 150px;
+            letter-spacing: 1px;
+        }
+
+        .demo-image__placeholder > .block > .face-upload:hover{
+            border-color: #79bbff;
+            background: url("./svg/face-upload-add-blue.svg") center no-repeat;
+            background-size: 15%;
+            color: #79bbff;
+        }
+
+        #face-video-box{
+            border: none;
+        }
+
+        .video-box{
+            width: 1140px;
+            height: 700px;
+            margin: 0 auto;
+        }
+
+        .video{
+            position: relative;
+            width: 1140px;
+            height: 630px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 1);
+            border-radius: 10px;
+        }
+
+        .el-dialog__header{
+            font-size: 18px;
+            margin-bottom: -20px;
+            letter-spacing: 1px;
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div id="top" v-cloak>
+        <div class="logo-box" @click="toIndex()">
+            <div class="logo-svg"></div>
+            <div class="logo-text">MIQI</div>
+        </div>
+        <div class="user-box" @click="openUserTool">
+            <div class="user-head-picture"><el-image :src="userInfoForm.imageUrl" :fit="fit" /></div>
+            <div class="user-info">
+                <div class="user-info-name" v-text="userInfoForm.userInfo.name"></div><br>
+                <div class="user-info-role" v-text="isAdmin ? '超级管理员' : isMaster ? '企业主' : '员工'"></div>
+            </div>
+            <div class="user-tool-box" v-show="userToolVisible" v-cloak>
+                <div class="user-info" @click="openUserInfo"><div class="user-info-svg"></div>&nbsp;个人信息</div>
+                <div class="user-logout" @click="logout"><div class="user-logout-svg"></div>&nbsp;退出登录</div>
+            </div>
+        </div>
+        <div class="tool-box">
+            <div class="search-box" style="display: none">
+                <input type="text" placeholder="搜索信息"/>
+                <div class="search-button"></div>
+            </div>
+            <div class="tools">
+                <div class="tool-block" @click="openSchedule" type="primary" style="margin-left: 16px;"><div class="tool-svg tool-svg-1"></div></div>
+                <div class="tool-block" @click="drawer_notice = true" type="primary"><div class="tool-svg tool-svg-2"></div></div>
+                <div class="tool-block" @click="reload"><div class="tool-svg tool-svg-3"></div></div>
+            </div>
+        </div>
+    </div>
+    <el-drawer v-cloak
+            title="今天的会议日程"
+            v-model="drawer_schedule"
+            :direction="direction">
+        <div>
+            <el-timeline>
+                <el-timeline-item placement="top"
+                    v-for="(conference, index) in todayConference"
+                    :key="index"
+                    :type="conference.type"
+                    :color="conference.color"
+                    :size="conference.size"
+                    :timestamp="conference.createTime"
+                    @click="toConferenceInfo(conference.id)">
+                    <el-card>
+                        <h4>{{conference.name}}</h4>
+                        <p>会议时间 : {{conference.startTime.substring(11, 16) + ' - ' + conference.endTime.substring(11, 16)}}</p>
+                    </el-card>
+                </el-timeline-item>
+            </el-timeline>
+        </div>
+        <template #footer>
+            <div style="flex: auto">
+                <el-button @click="drawer_schedule = false">返回</el-button>
+            </div>
+        </template>
+    </el-drawer>
+    <el-drawer v-cloak
+               title="系统公告"
+               v-model="drawer_notice"
+               :direction="direction">
+        <el-collapse v-model="activeNumber" accordion>
+            <el-collapse-item v-for="item in noticeTable" @click="openNotice(item)">
+                <template #title>
+                    <el-tag v-if="item.type === 'enterprise'">企业</el-tag>
+                    <el-tag v-if="item.type === 'conference'" type="success">会议</el-tag>
+                    <el-tag v-if="item.type === 'person'" type="warning">个人</el-tag>
+                    <span v-text="item.title"></span><span style="color: #f56c6c;text-indent: 10px" v-if="!item.read && !isMaster" type="danger"> [未读] </span>
+                </template>
+                <div v-text="item.content"></div>
+            </el-collapse-item>
+        </el-collapse>
+        <template #footer>
+            <div style="flex: auto">
+                <el-button @click="drawer_notice = false">返回</el-button>
+            </div>
+        </template>
+    </el-drawer>
+    <el-drawer v-cloak
+               v-model="drawer_userInfo"
+               :direction="direction"
+               :before-close="handleClose">
+        <div id="userinfo-box">
+            <div class="info-top">
+                <el-upload
+                        class="avatar-uploader"
+                        accept=".jpeg,.png,.jpg,.bmp,.gif"
+                        :before-upload="beforeAvatarUpload"
+                        :show-file-list="false">
+                    <img v-if="userInfoForm.imageUrl" :src="userInfoForm.imageUrl" class="avatar">
+                </el-upload>
+            </div>
+            <div class="info-box">
+                <el-form :model="userInfoForm" status-icon :rules="rules" ref="userInfoForm" class="demo-ruleForm" hide-required-asterisk="true">
+                    <el-form-item label="账号" prop="accont">
+                        <el-input v-model="userInfoForm.account" disabled></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码" prop="password">
+                        <el-input v-model="userInfoForm.password" type="password"></el-input>
+                    </el-form-item>
+                    <el-form-item label="名称" prop="userInfo.name">
+                        <el-input v-model="userInfoForm.userInfo.name"></el-input>
+                    </el-form-item>
+                    <el-form-item label="性别" prop="userInfo.gender">
+                        <el-select v-model="userInfoForm.userInfo.gender" placeholder="请选择性别">
+                            <el-option label="男" value="true"></el-option>
+                            <el-option label="女" value="false"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="手机" prop="userInfo.phone">
+                        <el-input v-model="userInfoForm.userInfo.phone" onkeyup="this.value = this.value.replace(/\D|^0/g, '')"></el-input>
+                    </el-form-item>
+                    <el-form-item label="邮箱" prop="userInfo.email">
+                        <el-input v-model="userInfoForm.userInfo.email" @blur="emailValidation"></el-input>
+                    </el-form-item>
+                    <el-form-item label="住址" prop="userInfo.address">
+                        <el-input v-model="userInfoForm.userInfo.address"></el-input>
+                    </el-form-item>
+                </el-form>
+            </div>
+            <el-divider content-position="center" style="float: left;margin-top: 50px">面部信息</el-divider>
+
+            <el-dialog v-model="previewDialog" width="1340px" center top="5vh">
+                <img w-full :src="previewImageUrl" alt="Preview Image" width="1280" height="720"/>
+            </el-dialog>
+
+            <ul class="demo-image__placeholder">
+                <li class="block" v-show="userFaceList.center">
+                    <div class="block-cover">
+                        <span class="demonstration">正脸</span>
+                        <div class="button-box">
+                            <div class="preview-button" @click="handlePictureCardPreview('center')"></div>
+                            <div class="remove-button" @click="handlePictureCardDelete('center')"></div>
+                        </div>
+                    </div>
+                    <el-image :src="userFaceList.center" fit="fill"></el-image>
+                </li>
+                <li class="block" v-show="!userFaceList.center" @click="openMedia('center', '请保持正脸面向屏幕')">
+                    <div class="face-upload">
+                        点击拍摄正面人脸
+                    </div>
+                </li>
+                <li class="block" v-show="userFaceList.up">
+                    <div class="block-cover">
+                        <span class="demonstration">抬头</span>
+                        <div class="button-box">
+                            <div class="preview-button" @click="handlePictureCardPreview('up')"></div>
+                            <div class="remove-button" @click="handlePictureCardDelete('up')"></div>
+                        </div>
+                    </div>
+                    <el-image :src="userFaceList.up" fit="fill"></el-image>
+                </li>
+                <li class="block" v-show="!userFaceList.up" @click="openMedia('up', '请保持抬头面向屏幕')">
+                    <div class="face-upload">
+                        点击拍摄抬头人脸
+                    </div>
+                </li>
+                <li class="block" v-show="userFaceList.down">
+                    <div class="block-cover">
+                        <span class="demonstration">低头</span>
+                        <div class="button-box">
+                            <div class="preview-button" @click="handlePictureCardPreview('down')"></div>
+                            <div class="remove-button" @click="handlePictureCardDelete('down')"></div>
+                        </div>
+                    </div>
+                    <el-image :src="userFaceList.down" fit="fill"></el-image>
+                </li>
+                <li class="block" v-show="!userFaceList.down" @click="openMedia('down', '请保持低头面向屏幕')">
+                    <div class="face-upload">
+                        点击拍摄低头人脸
+                    </div>
+                </li>
+                <li class="block" v-show="userFaceList.right">
+                    <div class="block-cover">
+                        <span class="demonstration">侧脸-右</span>
+                        <div class="button-box">
+                            <div class="preview-button" @click="handlePictureCardPreview('right')"></div>
+                            <div class="remove-button" @click="handlePictureCardDelete('right')"></div>
+                        </div>
+                    </div>
+                    <el-image :src="userFaceList.right" fit="fill"></el-image>
+                </li>
+                <li class="block" v-show="!userFaceList.right" @click="openMedia('right', '请保持向右侧脸面向屏幕')">
+                    <div class="face-upload">
+                        点击拍摄右侧脸人脸
+                    </div>
+                </li>
+                <li class="block" v-show="userFaceList.left">
+                    <div class="block-cover">
+                        <span class="demonstration">侧脸左</span>
+                        <div class="button-box">
+                            <div class="preview-button" @click="handlePictureCardPreview('left')"></div>
+                            <div class="remove-button" @click="handlePictureCardDelete('left')"></div>
+                        </div>
+                    </div>
+                    <el-image :src="userFaceList.left" fit="fill"></el-image>
+                </li>
+                <li class="block" v-show="!userFaceList.left" @click="openMedia('left', '请保持向左侧脸面向屏幕')">
+                    <div class="face-upload">
+                        点击拍摄左侧脸人脸
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <template #footer>
+            <div style="flex: auto">
+                <el-button @click="drawer_userInfo = false">返回</el-button>
+                <el-button type="primary" @click="saveUserInfo">保存</el-button>
+            </div>
+        </template>
+    </el-drawer>
+
+    <el-dialog v-cloak
+               v-model="videoVisible"
+               :show-close="true"
+               :title="mediaTitle"
+               width="1190px"
+               top="10vh"
+               center>
+        <div class="video-box" v-cloak>
+            <fieldset id="face-video-box">
+                <video class="video"></video>
+            </fieldset>
+            <div style="width: 100%;height: 70px;">
+                <el-button size="large" style="margin: 20px 500px;width: 140px;font-size: 18px" @click="clickGetCanvas">录入人脸</el-button>
+            </div>
+        </div>
+    </el-dialog>
+
+    <div id="left" v-cloak>
+        <div class="menu-box">
+            <div :class="isMenuActive === 0 ? 'menu-block-active' : 'menu-block'" @click="toPage(0, './index-page.html')">
+                <div class="menu-svg home-svg"></div>
+                <div class="menu-text">主页</div>
+                <div class="flag-svg"></div>
+            </div>
+            <div :class="isMenuActive === 1 ? 'menu-block-active' : 'menu-block'" @click="toPage(1, './user.html')" v-show="isAdmin">
+                <div class="menu-svg user-svg"></div>
+                <div class="menu-text">用户管理</div>
+                <div class="flag-svg"></div>
+            </div>
+            <div :class="isMenuActive === 2 ? 'menu-block-active' : 'menu-block'" @click="toPage(2, './enterprise.html')">
+                <div class="menu-svg enterprise-svg"></div>
+                <div class="menu-text">我的企业</div>
+                <div class="flag-svg"></div>
+            </div>
+            <div :class="isMenuActive === 3 ? 'menu-block-active' : 'menu-block'" @click="toPage(3, './notice.html')" v-show="isMaster">
+                <div class="menu-svg enterprise-svg"></div>
+                <div class="menu-text">我的公告</div>
+                <div class="flag-svg"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="right" v-cloak >
+        <iframe :src="pageSrc" frameborder="0" style="width: 100%;height: 99vh"></iframe>
+    </div>
+</div>
+
+</body>
+</html>
+<script src="./js/axios.js"></script>
+<script src="js/global-config.js"></script>
+<script src="./framework/vue/dist/vue.global.js"></script>
+<script src="./framework/element-plus/dist/index.full.js"></script>
+<script src="./js/echarts.js"></script>
+<script src="./js/html2canvas.js"></script>
+<script src="./framework/element-plus/dist/locale/zh-cn.js"></script>
+<script>
+
+    let App = {
+        data() {
+            return {
+                isAdmin: false,
+                isMaster: false,
+                isMenuActive: 0,
+                pageSrc: './index-page.html',
+                previewImageUrl: '',
+                previewDialog: false,
+                uploadFileUrl: url_file_upload,
+                userFaceList:{
+                    center : '',
+                    up  : '',
+                    down: '',
+                    left: '',
+                    right: '',
+                },
+                videoVisible: false,
+                mediaTitle: '人脸识别中，请面向屏幕',
+                currentTitle: '',
+                recordType: '',
+                video: null,
+                countDownTimeout: null,
+                countDownInterval: null,
+                userToolVisible: false,
+                drawer_schedule: false,
+                drawer_notice: false,
+                drawer_userInfo: false,
+                direction: 'rtl',
+                activeNumber: '1',
+                todayConference: [],
+                userInfoForm: {
+                    imageUrl: './svg/default-head.svg',
+                    account: '',
+                    password: '',
+                    userInfo: {
+                        fileDocumentId: '',
+                        name: '',
+                        gender: '',
+                        phone: '',
+                        email: '',
+                        address: ''
+                    }
+                },
+                rules: {
+                    account: [
+                        { required: true, message: '请输入账号', trigger: 'change' },
+                        { min: 4, max: 64, message: '长度在 4 到 64 个字符', trigger: 'change' }
+                    ],
+                    password: [
+                        { required: true, message: '请输入密码', trigger: 'change' },
+                        { min: 6, max: 256, message: '长度在 6 到 256 个字符', trigger: 'change' }
+                    ],
+                    'userInfo.name': [
+                        { required: true, message: '请输入昵称', trigger: 'change' },
+                        { max: 16, message: '长度不超过 16 个字符', trigger: 'change' }
+                    ],
+                    'userInfo.gender': [
+                        { required: true, message: '请选择性别', trigger: 'blur' }
+                    ],
+                    'userInfo.phone': [
+                        { required: true, message: '请填写手机号', trigger: 'change' },
+                        { min: 11, max: 11, message: '长度为 11 个字符', trigger: 'change' }
+                    ],
+                    'userInfo.email': [
+                        { required: true, message: '请填写电子邮箱', trigger: 'change' },
+                        { max: 256, message: '长度不超过 256 个字符', trigger: 'change' }
+                    ],
+                    'userInfo.address': [
+                        { required: true, message: '请填写家庭住址', trigger: 'change' },
+                        { max: 512, message: '长度不超过 512 个字符', trigger: 'change' }
+                    ]
+                },
+                noticeTable: []
+            }
+        },
+        methods: {
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClick(tab, event) {
+                console.log(tab, event);
+            },
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        done();
+                    })
+                    .catch(_ => {});
+            },
+            toIndex() {
+                window.location.href = 'index.html';
+            },
+            toPage(active, src) {
+                this.isMenuActive = active;
+                this.pageSrc = src;
+            },
+            reload(){
+                window.location.reload();
+            },
+            openSchedule(){
+                let that = this;
+                that.drawer_schedule = true;
+            },
+            openUserTool(){
+                let that = this;
+                that.userToolVisible = !that.userToolVisible;
+                setTimeout(function () {
+                    that.userToolVisible = false
+                }, 3000);
+            },
+            openUserInfo() {
+                let that = this;
+                axios({
+                    method: 'GET',
+                    url: url_face,
+                    params: {
+                        userId: that.userInfoForm.id
+                    }
+                }).then(function (res) {
+                    if (res.data.count > 0){
+                        let data = res.data.data;
+                        data.forEach(item => {
+                            that.userFaceList[item.type] = url_face_view + item.id;
+                        });
+                    }
+                })
+                this.drawer_userInfo = true;
+            },
+            logout(){
+                localStorage.setItem('CMS_TOKEN', '');
+                // window.location.href = './login.html';
+            },
+            warn(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'warning'
+                });
+            },
+            success(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'success'
+                });
+            },
+            saveUserInfo(){
+                let that = this;
+                this.$refs['userInfoForm'].validate((valid) => {
+                    if (valid) {
+                        this.$confirm('确认保存个人信息吗?', '提示', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'info'
+                        }).then(() => {
+                            let tip = this;
+                            axios({
+                                method: 'PUT',
+                                url: url_user,
+                                data: that.userInfoForm
+                            }).then(function (res) {
+                                if (res.data.code === 0){
+                                    that.success('保存成功!');
+                                }else {
+                                    that.warn(res.data.msg);
+                                }
+                            })
+                        }).catch(() => {
+                            that.warn('已取消保存');
+                        });
+                    } else {
+                        that.warn('请正确完成表单！');
+                        return false;
+                    }
+                })
+            },
+            emailValidation(){
+                let regEmail = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+                if (this.userInfoForm.userInfo.email !== '' && !regEmail.test(this.userInfoForm.userInfo.email)) {
+                    this.warn('请输入正确的邮箱格式');
+                    return true;
+                }
+                return false;
+            },
+            beforeAvatarUpload(file) {
+                const isLt1M = file.size / 1024 / 1024 < 10;
+                if (!isLt1M) {
+                    this.$message.error('上传头像图片大小不能超过 10MB!');
+                    return;
+                }
+                let copyFile = new File([file], Date.now() + '.jpg');
+                this.handleHeadPictureUpload(copyFile);
+            },
+            handleHeadPictureUpload(copyFile) {
+                let formdata = new FormData();
+                formdata.append('file', copyFile);
+                this.handleHeadPicturePost(formdata);
+            },
+            handleHeadPicturePost(formdata) {
+                let that = this;
+                axios({
+                    method: 'POST',
+                    url: url_file_upload,
+                    data: formdata
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.success('切换成功!');
+                        that.userInfoForm.userInfo.fileDocumentId = res.data.data;
+                        that.userInfoForm.imageUrl = url_file_view + res.data.data;
+                    }else {
+                        that.warn(res.data.msg);
+                    }
+                })
+            },
+            handlePictureCardPreview(type){
+                this.previewImageUrl = this.userFaceList[type];
+                this.previewDialog = true;
+            },
+            handlePictureCardDelete(type){
+                let that = this;
+                that.$confirm('确认删除此人脸图片吗?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'info'
+                }).then(() => {
+                    let url = this.userFaceList[type];
+                    let id = url.substring(url.lastIndexOf('/') + 1, url.length);
+                    axios({
+                        method: 'DELETE',
+                        url: url_face + `/${id}`,
+                    }).then(function (res) {
+                        if (res.data.code === 0){
+                            that.userFaceList[type] = '';
+                            that.success('删除人脸信息成功');
+                        }else {
+                            that.warn(res.data.msg);
+                        }
+                    }).catch(function (res) {
+                        that.openWarn(res);
+                    })
+                });
+            },
+            openMedia(type, title){
+                let that = this;
+                that.videoVisible = true;
+                that.recordType = type;
+                that.mediaTitle = title;
+                that.currentTitle = title;
+                // 开启摄像头
+                if (navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) {
+                    //调用用户媒体设备, 访问摄像头
+                    that.getUserMedia({
+                        video: {
+                            width: 1140,
+                            height: 630
+                        }
+                    }, that.successMedia, that.errorMedia);
+                } else {
+                    alert('不支持访问用户媒体');
+                }
+            },
+            getUserMedia(constraints, success, error) {
+                if (navigator.mediaDevices.getUserMedia) {
+                    //最新的标准API
+                    navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
+                } else if (navigator.webkitGetUserMedia) {
+                    //webkit核心浏览器
+                    navigator.webkitGetUserMedia(constraints, success, error)
+                } else if (navigator.mozGetUserMedia) {
+                    //firfox浏览器
+                    navigator.mozGetUserMedia(constraints, success, error);
+                } else if (navigator.getUserMedia) {
+                    //旧版API
+                    navigator.getUserMedia(constraints, success, error);
+                }
+            },
+            successMedia(stream) {
+                let that = this;
+                that.video = document.getElementsByClassName('video')[0];
+                that.video.srcObject = stream;
+                that.video.play();
+                that.countDownTimeout = setTimeout(this.getCurrentCanvas, 3500);
+
+                let second = 3;
+                that.countDownInterval = setInterval(function () {
+                    if (second <= 0) {
+                        clearInterval(that.countDownInterval);
+                        second = 0;
+                    }
+                    that.mediaTitle = that.currentTitle + ' ' + second-- + ' 秒后自动截取人脸信息';
+                }, 1000);
+            },
+            errorMedia(error) {
+                console.log(`访问用户媒体设备失败${error.name}, ${error.message}`);
+            },
+            clickGetCanvas(){
+                this.mediaTitle = '正在截取人脸信息，请耐心等待';
+                clearTimeout(this.countDownTimeout);
+                clearInterval(this.countDownInterval);
+                this.getCurrentCanvas();
+            },
+            getCurrentCanvas() {
+                html2canvas(document.getElementById('face-video-box'), {
+                    allowTaint: true,
+                    taintTest: false,
+                    useCORS: true,
+                }).then(canvas => {
+                    let that = this;
+                    let imageBase64 = canvas.toDataURL("image/png");
+                    let blob = this.dataURLtoBlob(imageBase64);
+                    let formData = new FormData(document.forms[0]);
+                    formData.append('image', blob, Date.now() + '.png');
+
+                    axios({
+                        method: 'POST',
+                        url: url_face_location,
+                        data: formData
+                    }).then(function (res) {
+                        if (res.data.count === 0) {
+                            that.mediaTitle = '未检测到人脸 . . .';
+                            that.$alert('未检测到人脸，请稍后重试。', '录入结果', {
+                                confirmButtonText: '确定',
+                                callback: action => { that.videoVisible = false; }
+                            });
+                        } else if (res.data.count > 1){
+                            that.mediaTitle = '检测到的人脸过多 . . .';
+                            that.$alert('每次录入应只包含一人，请稍后重试。', '录入结果', {
+                                confirmButtonText: '确定',
+                                callback: action => { that.videoVisible = false;}
+                            });
+                        } else {
+                            that.mediaTitle = '已截取到人脸';
+                            axios({
+                                method: 'POST',
+                                url: url_face_record + `/${that.recordType}`,
+                                data: formData
+                            }).then(function (res) {
+                                if (res.data.code === 0){
+                                    that.$alert('已成功录入人脸信息。', '录入结果', {
+                                        confirmButtonText: '确定',
+                                        callback: action => {
+                                            that.videoVisible = false;
+                                            that.userFaceList[that.recordType] = url_face_view + res.data.data;
+                                        }
+                                    });
+                                }else { that.warn(res.data.msg); }
+                            }).catch(function (res) {
+                                that.openWarn(res);
+                            });
+                        }
+                    }).catch(function (res) {
+                        that.openWarn(res);
+                    });
+                })
+            },
+            dataURLtoBlob(base64Data) {
+                let byteString;
+                if (base64Data.split(',')[0].indexOf('base64') >= 0)
+                    byteString = atob(base64Data.split(',')[1]);
+                else
+                    byteString = unescape(base64Data.split(',')[1]);
+                let mimeString = base64Data.split(',')[0].split(':')[1].split('.')[0];
+                let ia = new Uint8Array(byteString.length);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                return new Blob([ia], {type: mimeString});
+            },
+            toConferenceInfo(id){
+                localStorage.setItem('conferenceId', id);
+                window.open('./conference.html');
+            },
+            openNotice(notice){
+                notice.read = true;
+                axios({
+                    method: 'PUT',
+                    url: url_message_notice_read + `/${notice.id}`
+                })
+            }
+        },
+        mounted: function () {
+            if (localStorage.getItem('CMS_TOKEN') === null || localStorage.getItem('CMS_TOKEN').toString().length <= 0) ;
+
+            let that = this;
+            axios({
+                method: 'GET',
+                url: url_user_me
+            }).then(function (res) {
+                let data = res.data.data;
+                that.userInfoForm = data;
+                that.userInfoForm.userInfo.gender = data.userInfo.gender ? 'true' : 'false';
+                if (data.userInfo.fileDocumentId){
+                    that.userInfoForm.imageUrl = url_file_view + data.userInfo.fileDocumentId;
+                }else {
+                    that.userInfoForm.imageUrl = './svg/default-head.svg';
+                }
+
+                if (data.id === 1) that.isAdmin = true;
+                axios({
+                    method: 'GET',
+                    url: url_enterprise_me
+                }).then(function (res) {
+                    if (res.data.count > 0){
+                        that.isMaster = true;
+                        axios({
+                            method: 'GET',
+                            url: url_enterprise_conference,
+                            params: {
+                                userId: data.id
+                            }
+                        }).then(function (res) {
+                            let todayConference = res.data.data.filter(item => {
+                                let conferenceDate = new Date(item.startTime).setHours(0, 0, 0, 0);
+                                let today = new Date().setHours(0, 0, 0, 0);
+                                return conferenceDate === today;
+                            })
+                            that.todayConference = todayConference.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+                            that.todayConference.forEach(item => {
+                                let now = new Date();
+                                if (item.state === 'cancel') item.color = '#ffa570';
+                                else
+                                if (new Date(item.startTime) < now)
+                                    item.color = '#52ed97';
+                                else
+                                    item.color = '#f4f4f4';
+                                item.type = 'primary';
+                                item.size = 'large';
+                            });
+                        })
+
+                        axios({
+                            method: 'GET',
+                            url: url_message_notice,
+                            params: {
+                                userId : data.id
+                            }
+                        }).then(function (res) {
+                            if (res.data.count > 0){
+                                that.noticeTable = res.data.data;
+                                that.noticeTable = that.noticeTable.filter(item => new Date() > new Date(item.startTime) && new Date() < new Date(item.endTime))
+                            }
+                        })
+                    } else {
+                        axios({
+                            method: 'GET',
+                            url: url_conference_user,
+                            params: {
+                                userId: data.id
+                            }
+                        }).then(function (res) {
+                            res.data.data.forEach(item => {
+                                axios({
+                                    method: 'GET',
+                                    url: url_enterprise_conference + `/${item.conferenceId}`
+                                }).then(function (res) {
+                                    that.todayConference.push(res.data.data);
+                                })
+                            })
+
+                            setTimeout(function () {
+                                that.todayConference = that.todayConference.filter(item => {
+                                    let conferenceDate = new Date(item.startTime).setHours(0, 0, 0, 0);
+                                    let today = new Date().setHours(0, 0, 0, 0);
+                                    return conferenceDate === today;
+                                })
+                                that.todayConference = that.todayConference.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+                                that.todayConference.forEach(item => {
+                                    let now = new Date();
+                                    if (item.state === 'cancel') item.color = '#ffa570';
+                                    else
+                                    if (new Date(item.startTime) < now)
+                                        item.color = '#52ed97';
+                                    else
+                                        item.color = '#f4f4f4';
+                                    item.type = 'primary';
+                                    item.size = 'large';
+                                });
+                            }, 200)
+                        })
+                    }
+                })
+
+                axios({
+                    method: 'GET',
+                    url: url_message_notice_user,
+                    params: {
+                        userId: that.userInfoForm.id
+                    }
+                }).then(function (res) {
+                    if (res.data.count > 0){
+                        that.noticeTable = res.data.data;
+                        that.noticeTable.forEach((item, index) => {
+                            axios({
+                                method: 'GET',
+                                url: url_message_notice + `/${item.noticeId}`
+                            }).then(function (res) {
+                                let notice = res.data.data;
+                                if (new Date() > new Date(notice.startTime) && new Date() < new Date(notice.endTime)){
+                                    item.content = notice.content;
+                                    item.title = notice.title;
+                                    item.type = notice.type;
+                                    item.startTime = notice.startTime;
+                                    item.endTime = notice.endTime;
+                                }else {
+                                    that.noticeTable.splice(index, 1);
+                                }
+                            })
+                        })
+                    }
+                })
+            }).catch(function (res) {
+                // window.location.href = './login.html';
+                that.openWarn(res);
+            })
+
+
+            setInterval(function () {
+                axios({
+                    method: 'POST',
+                    url: url_update_token
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        reloadToken(res.data.data);
+                    }else {
+                        that.warn(res.data.msg);
+                    }
+                })
+            }, 60000 * token_update_time);
+        },
+        computed:{
+            visibleChange(){
+                return this.videoVisible;
+            }
+        },
+        watch:{
+            visibleChange: function (val) {
+                if (val === false){
+                    this.video.srcObject = null;
+                    clearTimeout(this.countDownTimeout);
+                }
+            }
+        }
+    }
+
+    let app = Vue.createApp(App);
+    app.use(ElementPlus, {
+        locale: ElementPlusLocaleZhCn,
+    });
+    app.mount("#app");
+
+</script>

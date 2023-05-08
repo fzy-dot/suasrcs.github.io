@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会议管理系统·注册</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./framework/element-plus/dist/index.css" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #app{
+            width: 100%;
+            height: 100vh;
+            background: #edf1f4;
+        }
+
+        #step{
+            width: 800px;
+            margin: 0 auto;
+            padding-top: 80px;
+        }
+
+        #first-card{
+            width: 300px;
+            height: 145px;
+            position: relative;
+            margin-top: 80px;
+            margin-left: 120px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+            float: left;
+        }
+
+        #first-card > .header{
+            width: 300px;
+            height: 50px;
+        }
+
+        #first-card > .header > .join-enterprise{
+            width: 55%;
+            height: 50px;
+            line-height: 50px;
+            color: #FFFFFF;
+            background: #92b9cc;
+            font-size: 17px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            letter-spacing: 1px;
+            float: left;
+            text-align: center;
+            cursor: pointer;
+            transition: .3s all ease-in-out;
+        }
+
+        #first-card > .header > .create-enterprise{
+            width: 45%;
+            height: 50px;
+            line-height: 50px;
+            color: #666666;
+            font-size: 17px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            letter-spacing: 1px;
+            float: left;
+            text-align: center;
+            cursor: pointer;
+            transition: .3s all ease-in-out;
+        }
+
+        #first-card > .main-box{
+            width: 500px;
+            height: 70px;
+            background: #FFFFFF;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+            padding: 30px 30px 0 30px;
+        }
+
+        #second-card{
+            width: 540px;
+            padding: 30px 30px 10px 30px;
+            position: relative;
+            background: #FFFFFF;
+            margin-top: 80px;
+            margin-left: 100px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+            float: left;
+            border-radius: 8px;
+        }
+
+        #third-card{
+            width: 540px;
+            padding: 30px 30px 10px 30px;
+            position: relative;
+            background: #FFFFFF;
+            margin-top: 80px;
+            margin-left: 100px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+            float: left;
+            border-radius: 8px;
+        }
+
+        #register-success{
+            width: 300px;
+            height: 300px;
+            position: relative;
+            background: url("svg/register-success.svg") top no-repeat;
+            background-size: 70%;
+            margin-top: 80px;
+            margin-left: 250px;
+            float: left;
+            opacity: 0.7;
+            text-align: center;
+            font-size: 18px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            color: #67c23a;
+            letter-spacing: 1px;
+            padding-top: 270px;
+        }
+
+        #last-step{
+            width: 120px;
+            height: 40px;
+            font-size: 16px;
+            letter-spacing: 2px;
+            margin-top: 80px;
+            margin-left: 275px;
+            float: left;
+        }
+
+        #next-step{
+            width: 120px;
+            height: 40px;
+            font-size: 16px;
+            letter-spacing: 2px;
+            margin-top: 80px;
+            float: left;
+        }
+
+        .verification-code-box > .el-form-item__content > .el-input{
+            position: absolute;
+            width: 75%;
+            float: left;
+        }
+
+        .verification-code-box > .el-form-item__content > .el-button{
+            position: absolute;
+            float: right;
+            right: -1px;
+        }
+
+        .el-steps.el-steps--simple{
+            background: #FFFFFF;
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div id="step">
+        <el-steps :active="active" finish-status="success" simple>
+            <el-step title="企业信息"></el-step>
+            <el-step title="账号信息"></el-step>
+            <el-step title="个人信息"></el-step>
+        </el-steps>
+
+        <div id="first-card" v-show="active === 0" v-cloak>
+            <div class="header">
+                <div class="join-enterprise" @click="joinEnterprise()">加入企业</div>
+                <div class="create-enterprise" @click="createEnterprise()">创建企业</div>
+            </div>
+            <div class="main-box">
+                <div class="enterpriseNumber-box">
+                    <el-form :model="ruleForm"
+                             :label-position="labelPosition"
+                             :rules="rules"
+                             ref="ruleForm"
+                             class="demo-ruleForm">
+                        <el-form-item label="企业编号" prop="enterpriseNumber">
+                            <el-input v-model="ruleForm.enterpriseNumber"></el-input>
+                        </el-form-item>
+                    </el-form>
+                </div>
+                <div class="enterpriseName-box" style="display: none">
+                    <el-form :model="ruleForm"
+                             :label-position="labelPosition"
+                             :rules="rules"
+                             ref="ruleForm"
+                             class="demo-ruleForm">
+                        <el-form-item label="企业名称" prop="enterpriseName">
+                            <el-input v-model="ruleForm.enterpriseName"></el-input>
+                        </el-form-item>
+                    </el-form>
+                </div>
+            </div>
+        </div>
+
+        <div id="second-card" v-show="active === 1" v-cloak>
+            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+                <el-form-item label="用户账号" prop="account">
+                    <el-input v-model.number="ruleForm.account"></el-input>
+                </el-form-item>
+                <el-form-item label="用户密码" prop="password">
+                    <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="确认密码" prop="checkPass">
+                    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+                </el-form-item>
+            </el-form>
+        </div>
+
+        <div id="third-card" v-show="active === 2" v-cloak>
+            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+                <el-form-item label="名称" prop="userInfo.name">
+                    <el-input v-model="ruleForm.userInfo.name"></el-input>
+                </el-form-item>
+                <el-form-item label="性别" prop="userInfo.gender">
+                    <el-select v-model="ruleForm.userInfo.gender" placeholder="请选择性别">
+                        <el-option label="男" value="true"></el-option>
+                        <el-option label="女" value="false"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="手机" prop="userInfo.phone">
+                    <el-input v-model="ruleForm.userInfo.phone" onkeyup="this.value = this.value.replace(/\D|^0/g, '')"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱" prop="userInfo.email">
+                    <el-input v-model="ruleForm.userInfo.email" @blur="emailValidation"></el-input>
+                </el-form-item>
+                <el-form-item label="验证码" prop="verificationCode" class="verification-code-box">
+                    <el-input v-model="ruleForm.verificationCode" onkeyup="this.value = this.value.replace(/\D|^0/g, '')"></el-input>
+                    <el-button plain @click="sendVerificationCode" v-text="verificationCodeText" :disabled="emailRight"></el-button>
+                </el-form-item>
+                <el-form-item label="住址" prop="userInfo.address">
+                    <el-input v-model="ruleForm.userInfo.address"></el-input>
+                </el-form-item>
+            </el-form>
+        </div>
+
+        <div id="register-success" v-show="active === 3" v-cloak>
+            注册成功，<span class="count-dowm">{{countDown}}</span> 秒后跳转至登录页
+        </div>
+
+        <el-button id="last-step" plain  @click="lastStep" v-show="active < 3" v-cloak>上一步</el-button>
+        <el-button id="next-step" plain  @click="nextStep" v-show="active < 3" v-cloak>下一步</el-button>
+    </div>
+
+</div>
+</body>
+<script src="./js/axios.js"></script>
+<script src="js/global-config.js"></script>
+<script src="./framework/vue/dist/vue.global.js"></script>
+<script src="./framework/element-plus/dist/index.full.js"></script>
+<script>
+    const App = {
+        data() {
+            return {
+                isJoin: true,
+                labelPosition: 'left',
+                active: 0,
+                countDown: '3',
+                verificationCodeText: '发送验证码',
+                emailRight: true,
+                ruleForm: {
+                    enterpriseNumber: '',
+                    enterpriseName: '',
+                    verificationCode: '',
+                    account: '',
+                    password: '',
+                    checkPass: '',
+                    userInfo: {
+                        name: '',
+                        gender: '',
+                        phone: '',
+                        email: '',
+                        address: ''
+                    },
+                },
+                rules: {
+                    enterpriseNumber: [
+                        { required: true, message: '请输入企业编号', trigger: 'blur' },
+                        { min: 16 , max: 32, message: '长度在 16 到 32 个字符', trigger: 'blur' }
+                    ],
+                    enterpriseName: [
+                        { required: true, message: '请输入企业名称', trigger: 'blur' },
+                        { min: 4, max: 64, message: '长度在 4 到 64 个字符', trigger: 'blur' }
+                    ],
+                    verificationCode: [
+                        { required: true, message: '请输入验证码', trigger: 'blur' },
+                        { min: 6, max: 6, message: '长度为 6 个数字', trigger: 'blur' }
+                    ],
+                    account: [
+                        { required: true, message: '请输入账号', trigger: 'blur' },
+                        { min: 4, max: 64, message: '长度在 4 到 64 个字符', trigger: 'blur' }
+                    ],
+                    password: [
+                        { required: true, message: '请输入密码', trigger: 'blur' },
+                        { min: 6, max: 256, message: '长度在 6 到 256 个字符', trigger: 'blur' }
+                    ],
+                    checkPass: [
+                        { required: true, message: '请再次确认秘密', trigger: 'blur' },
+                        { min: 6, max: 256, message: '长度在 6 到 256 个字符', trigger: 'blur' }
+                    ],
+                    'userInfo.name': [
+                        { required: true, message: '请输入昵称', trigger: 'blur' },
+                        { min: 2, max: 16, message: '长度在 2 到 16 个字符', trigger: 'blur' }
+                    ],
+                    'userInfo.gender': [
+                        { required: true, message: '请选择性别', trigger: 'change' }
+                    ],
+                    'userInfo.phone': [
+                        { required: true, message: '请填写手机号', trigger: 'blur' },
+                        { min: 11, max: 11, message: '长度为 11 个字符', trigger: 'blur' }
+                    ],
+                    'userInfo.email': [
+                        { required: true, message: '请填写电子邮箱', trigger: 'blur' },
+                        { min: 6, max: 256, message: '长度在 6 到 256 个字符', trigger: 'blur' }
+                    ],
+                    'userInfo.address': [
+                        { required: true, message: '请填写家庭住址', trigger: 'blur' },
+                        { min: 2, max: 512, message: '长度在 2 到 512 个字符', trigger: 'blur' }
+                    ]
+                }
+            };
+        },
+        methods: {
+            joinEnterprise(){
+                let join = document.getElementsByClassName('join-enterprise')[0];
+                let create = document.getElementsByClassName('create-enterprise')[0];
+                join.style.background = '#92b9cc';
+                join.style.color = '#FFFFFF';
+                join.style.width = '55%';
+                create.style.background = 'none';
+                create.style.color = '#666666';
+                create.style.width = '45%';
+
+                document.getElementsByClassName('enterpriseName-box')[0].style.display = 'none';
+                document.getElementsByClassName('enterpriseNumber-box')[0].style.display = 'block';
+
+                this.isJoin = true;
+            },
+            createEnterprise(){
+                let join = document.getElementsByClassName('join-enterprise')[0];
+                let create = document.getElementsByClassName('create-enterprise')[0];
+                create.style.background = '#92b9cc';
+                create.style.color = '#FFFFFF';
+                create.style.width = '55%';
+                join.style.background = 'none';
+                join.style.color = '#666666';
+                join.style.width = '45%';
+
+                document.getElementsByClassName('enterpriseName-box')[0].style.display = 'block';
+                document.getElementsByClassName('enterpriseNumber-box')[0].style.display = 'none';
+
+                this.isJoin = false;
+            },
+            nextStep() {
+                let that = this;
+                if (that.active < 3)
+                    if (that.active === 0) {
+                        if (that.isJoin){
+                            that.ruleForm.enterpriseName = '';
+                            if (that.length_rule('企业编号', this.ruleForm.enterpriseNumber.length, 16, 32)) return;
+                        }
+                        else{
+                            that.ruleForm.enterpriseNumber = '';
+                            if (that.length_rule('企业名称', this.ruleForm.enterpriseName.length, 4, 64)) return;
+                        }
+                    }else if (that.active === 1){
+                        if (that.length_rule('用户账号', this.ruleForm.account.length, 4, 64)) return;
+                        if (that.length_rule('用户密码', this.ruleForm.password.length, 6, 256)) return;
+                        if (that.length_rule('用户密码', this.ruleForm.checkPass.length, 6, 256)) return;
+                        if (that.password_rule(this.ruleForm.password, this.ruleForm.checkPass)) return;
+                    }else if (that.active === 2){
+                        if (that.length_rule('名称', this.ruleForm.userInfo.name.length, 2, 16)) return;
+                        if (that.ruleForm.userInfo.gender.length <= 0) { this.warn('请选择性别'); return; }
+                        if (that.ruleForm.userInfo.phone.length !== 11) { this.warn('手机号为 11 位数字'); return; }
+                        if (that.ruleForm.verificationCode.length !== 6) { this.warn('验证码为 6 位数字'); return; }
+                        if (that.length_rule('邮箱', this.ruleForm.userInfo.email.length, 6, 256)) return;
+                        if (that.emailValidation()) return;
+                        if (that.length_rule('住址', this.ruleForm.userInfo.address.length, 2, 512)) return;
+
+                        axios({
+                            headers: {
+                                'content-Type': 'application/json'
+                            },
+                            method: 'POST',
+                            url: url_user_register,
+                            data: JSON.stringify(that.ruleForm),
+                            params: {
+                                enterpriseNumber : that.ruleForm.enterpriseNumber,
+                                enterpriseName : that.ruleForm.enterpriseName,
+                                verificationCode : that.ruleForm.verificationCode
+                            }
+                        }).then(function (res) {
+                            if (res.data.code === 0){
+                                setInterval(function () {
+                                    let current = parseInt(that.countDown);
+                                    that.countDown = current - 1;
+                                }, 1000);
+
+                                setTimeout(function () {
+                                    // window.location.href = './login.html';
+                                }, 3000);
+                            }else {
+                                that.active--;
+                                that.warn(res.data.msg);
+                            }
+                        }).catch(function (res) {
+                            that.warn(res);
+                        });
+
+                    }
+                this.active++;
+            },
+            lastStep() {
+                if (this.active > 0) this.active--;
+            },
+            warn(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'warning'
+                });
+            },
+            success(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'success'
+                });
+            },
+            length_rule(name, len, min, max){
+                if (len < min || len > max){
+                    this.warn(name + '长度在 ' + min +  ' 到 ' + max + ' 个字符');
+                    return true;
+                }
+                return false;
+            },
+            password_rule(a, b){
+                if (a === b) return false;
+                this.warn('两次输入密码不一致');
+                return true;
+            },
+            emailValidation(){
+                let regEmail = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+                if (this.ruleForm.userInfo.email === '' || !regEmail.test(this.ruleForm.userInfo.email)) {
+                    this.emailRight = true;
+                    this.warn('请输入正确的邮箱格式');
+                    return true;
+                }
+                this.emailRight = false;
+                return false;
+            },
+            sendVerificationCode(){
+                let that = this;
+                let email = that.ruleForm.userInfo.email;
+                if (email.length <= 0){
+                    this.warn('未输入邮箱，验证码发送失败');
+                }else if (!that.emailValidation()){
+                    axios({
+                        method: 'POST',
+                        url: url_send_verification,
+                        data: {
+                            'email': email
+                        },
+                        timeout: 1000000
+                    }).then(function (res) {
+                        if (res.data.code === 0){
+                            that.success('验证码发送成功，请在 60 秒内完成注册!');
+                            that.emailRight = true;
+                            let countDown = 60;
+                            let codeInterval = setInterval(function () {
+                                if (countDown <= 0) clearInterval(codeInterval);
+                                that.verificationCodeText = countDown-- + 'S';
+                            }, 1000);
+                        }else {
+                            this.$message({
+                                type: 'info',
+                                message: res.data.msg
+                            })
+                        }
+                    }).catch(function (res) {
+                        that.openWarn(res);
+                    });
+                }
+            }
+        }
+    };
+    const app = Vue.createApp(App);
+    app.use(ElementPlus);
+    app.mount("#app");
+</script>
+</html>

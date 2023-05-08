@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./framework/element-plus/dist/index.css" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #count{
+            width: 100%;
+            height: 200px;
+            min-width: 1260px;
+            margin-top: 100px;
+            float: left;
+        }
+
+        #count > .count-block {
+            width: 20%;
+            height: 150px;
+            border-radius: 25px;
+            margin: 10px 30px;
+            background: #d1edc4;
+            float: left;
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        #count > .count-block > .count-text{
+            width: 50%;
+            float: left;
+        }
+
+        #count > .count-block > .count-text > .text-number{
+            font-size: 30px;
+            color: #ffffff;
+            font-weight: bold;
+            margin-top: 35px;
+            margin-left: 30px;
+        }
+
+        #count > .count-block > .count-text > .text-detail{
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: bold;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            margin-left: 30px;
+        }
+
+        #count > .count-block > .count-svg{
+            width: 50%;
+            height: 100%;
+            float: right;
+        }
+
+        #count > .count-block > .count-svg-1{
+            background: url("svg/count-svg-1.svg") center no-repeat;
+            background-size: 45%;
+        }
+
+        #count > .count-block > .count-svg-2{
+            background: url("svg/count-svg-2.svg") center no-repeat;
+            background-size: 45%;
+        }
+
+        #count > .count-block > .count-svg-3{
+            background: url("svg/count-svg-3.svg") center no-repeat;
+            background-size: 45%;
+        }
+
+        #count > .count-block > .count-svg-4{
+            background: url("svg/count-svg-4.svg") center no-repeat;
+            background-size: 45%;
+        }
+
+        #main-box{
+            min-width: 1260px;
+        }
+
+        #main-box > #clock-box{
+            width: 20%;
+            height: 400px;
+            float: left;
+        }
+
+        #main-box > #clock-box > .clock{
+            width: 100%;
+            height: 70%;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-left: 30px;
+            cursor: pointer;
+            transition: .3s all ease-in-out;
+        }
+
+        #main-box > #clock-box > .clock:hover{
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+        }
+
+        #main-box > #clock-box > .clock > .countdown{
+            font-size: 50px;
+            color: #59ccff;
+            letter-spacing: 5px;
+            text-align: center;
+            padding-top: 50px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        #main-box > #clock-box > .clock > .countdown-title{
+            font-size: 25px;
+            color: #59ccff;
+            padding: 10px 10px 0 10px;
+            letter-spacing: 1px;
+            text-align: center;
+            max-height: 85px;
+            overflow: hidden;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        #main-box > #clock-box > .clock > .countdown-tip{
+            font-size: 20px;
+            color: #999999;
+            text-align: center;
+            padding-top: 25px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        #main-box > #clock-box > .status{
+            width: 100%;
+            height: 50%;
+            margin-top: 40px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-left: 30px;
+        }
+
+        #main-box > #clock-box > .status > .status-title{
+            padding: 20px 30px 10px 30px;
+            font-size: 20px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            letter-spacing: 2px;
+            color: #999999;
+        }
+
+        #main-box > #clock-box > .status > .status-percent{
+            padding-left: 30px;
+            font-size: 20px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            letter-spacing: 2px;
+        }
+
+        #main-box > #clock-box > .status > .status-tip{
+            width: 100%;
+            float: left;
+            padding-left: 30px;
+        }
+
+        #main-box > #clock-box > .status > .status-tip > .status-tip-box{
+            width: 25%;
+            font-size: 15px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            float: left;
+            line-height: 25px;
+            letter-spacing: 1px;
+        }
+
+        #main-box > #clock-box > .status > .status-tip > .status-tip-box > .tip{
+            width: 15px;
+            height: 15px;
+            margin: 5px 10px 5px 0;
+            border-radius: 50%;
+            float: left;
+        }
+
+        #main-box > #clock-box > .status > .status-number-box{
+            width: 100%;
+            float: left;
+            padding-left: 30px;
+        }
+
+        #main-box > #clock-box > .status > .status-number-box > .status-number{
+            width: 25%;
+            font-size: 16px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            float: left;
+            margin-top: 5px;
+            text-align: center;
+            color: #999999;
+        }
+
+        #main{
+            width: 67%;
+            height: 520px;
+            float: left;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 25px;
+            margin-left: 90px;
+            background: white;
+        }
+
+        .el-timeline{
+            width: 50%;
+            margin: 30px;
+        }
+
+        .el-timeline-item__content{
+            min-width: 300px;
+        }
+
+        .el-card__body, .el-main{
+            min-width: 240px;
+            min-height: 60px;
+        }
+
+        .el-card__body > h4{
+            margin-bottom: 15px;
+        }
+
+        .el-timeline-item__timestamp{
+            font-size: 16px;
+        }
+
+        .el-progress--line{
+            margin-bottom: 15px;
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+        </style>
+</head>
+<body>
+<div id="app">
+    <div id="count">
+        <div class="count-block" style="background: #59ccff">
+            <div class="count-text">
+                <div class="text-number" v-text="pendCount"></div>
+                <div class="text-detail">待参加会议</div>
+            </div>
+            <div class="count-svg count-svg-1"></div>
+        </div>
+        <div class="count-block" style="background: #52ed97">
+            <div class="count-text">
+                <div class="text-number" v-text="joinCount"></div>
+                <div class="text-detail">已参加会议</div>
+            </div>
+            <div class="count-svg count-svg-2"></div>
+        </div>
+        <div class="count-block" style="background: #fed178">
+            <div class="count-text">
+                <div class="text-number" v-text="lateCount"></div>
+                <div class="text-detail">迟到次数</div>
+            </div>
+            <div class="count-svg count-svg-3"></div>
+        </div>
+        <div class="count-block" style="background: #ffa570">
+            <div class="count-text">
+                <div class="text-number" v-text="absentCount"></div>
+                <div class="text-detail">缺席次数</div>
+            </div>
+            <div class="count-svg count-svg-4"></div>
+        </div>
+    </div>
+    <div id="main-box">
+        <div id="clock-box">
+            <div class="clock" @click="toConference">
+                <div class="countdown">
+                    <span v-text="countdownHour"></span>:<span v-text="countdownMin"></span>:<span v-text="countdownSecond"></span>
+                </div>
+                <div class="countdown-title" v-text="recentConference.name"></div>
+                <div class="countdown-tip" v-text="recentConference.name !== '' ? '最近的一场会议' : '今天已无会议'"></div>
+            </div>
+            <div class="status" v-cloak>
+                <div class="status-title">今天共有<span v-text="totalConference"></span>场会议</div>
+                <div class="status-percent">
+                    <el-progress :percentage="finishConference / totalConference * 100" :format="format" color="#52ed97" :stroke-width="10"></el-progress>
+                    <el-progress :percentage="pendingConference / totalConference * 100" :format="format" color="#fed178" :stroke-width="10"></el-progress>
+                    <el-progress :percentage="doneConference / totalConference * 100" :format="format" color="#ffa570" :stroke-width="10"></el-progress>
+                </div>
+                <div class="status-tip">
+                    <div class="status-tip-box"><div class="tip" style="background:#52ed97"></div>完成</div>
+                    <div class="status-tip-box"><div class="tip" style="background:#fed178"></div>等待</div>
+                    <div class="status-tip-box"><div class="tip" style="background:#ffa570"></div>缺席</div>
+                </div>
+                <div class="status-number-box">
+                    <div class="status-number" v-text="finishConference"></div>
+                    <div class="status-number" v-text="pendingConference"></div>
+                    <div class="status-number" v-text="doneConference"></div>
+                </div>
+            </div>
+        </div>
+        <div id="main"></div>
+    </div>
+</div>
+<script src="./framework/vue/dist/vue.global.js"></script>
+<script src="./js/axios.js"></script>
+<script src="js/global-config.js"></script>
+<script src="./framework/element-plus/dist/index.full.js"></script>
+<script src="./js/echarts.js"></script>
+<script src="./framework/element-plus/dist/locale/zh-cn.js"></script>
+</body>
+<script>
+
+    let App = {
+        data() {
+            return {
+                countdownSecond: '00',
+                countdownMin: '00',
+                countdownHour: '00',
+                todayConference: [],
+                recentConference: {
+                    name: ''
+                },
+                doneConference: 0,
+                finishConference: 0,
+                pendingConference: 0,
+                totalConference: 0,
+                pendCount: 0,
+                joinCount: 0,
+                lateCount: 0,
+                absentCount: 0
+            }
+        },
+        methods: {
+            format(percentage) {
+                return '';
+            },
+            toIndex() {
+                window.location.href = 'index.html';
+            },
+            toConference() {
+                if (this.recentConference.name === '') return;
+                localStorage.setItem('conferenceId', this.recentConference.id);
+                window.open('./conference.html');
+            }
+        },
+        mounted: function () {
+            let that = this;
+            if (localStorage.getItem('CMS_TOKEN') === null || localStorage.getItem('CMS_TOKEN').toString().length <= 0){
+                setTimeout(function () {
+                    // window.location.href = './login.html';
+                }, 1000)
+                that.warn('请先登录');
+            }
+
+            axios({
+                method: 'GET',
+                url: url_user_me
+            }).then(function (res) {
+                let data = res.data.data;
+                that.userInfoForm = data;
+                that.userInfoForm.userInfo.gender = data.userInfo.gender ? 'true' : 'false';
+                if (data.userInfo.fileDocumentId){
+                    that.userInfoForm.imageUrl = url_file_view + data.userInfo.fileDocumentId;
+                }else {
+                    that.userInfoForm.imageUrl = './svg/default-head.svg';
+                }
+
+                axios({
+                    method: 'GET',
+                    url: url_enterprise_me
+                }).then(function (res) {
+                    if (res.data.count > 0){
+                        axios({
+                            method: 'GET',
+                            url: url_enterprise_conference,
+                            params: {
+                                enterpriseId: res.data.data[0].id
+                            }
+                        }).then(function (res) {
+                            that.todayConference = res.data.data;
+                            res.data.data.forEach(item => {
+                                if (item.state === 'finish') that.joinCount += 1;
+                                if (item.state === 'normal') that.pendCount += 1;
+                            })
+
+                            setTimeout(function () {
+                                that.todayConference = that.todayConference.filter(item => {
+                                    let conferenceDate = new Date(item.startTime).setHours(0, 0, 0, 0);
+                                    let today = new Date().setHours(0, 0, 0, 0);
+                                    return conferenceDate === today && item.state !== 'cancel';
+                                }).sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+
+                                that.todayConference.forEach(item => {
+                                    let now = new Date();
+                                    if (that.recentConference.name === '' && new Date(item.startTime) > now){
+                                        that.recentConference = item;
+                                    }
+
+                                    if (item.state === 'cancel') that.doneConference += 1;
+                                    else
+                                    if (new Date(item.startTime) < now)
+                                        that.finishConference += 1;
+                                    else
+                                        that.pendingConference += 1;
+                                    that.totalConference += 1;
+
+                                })
+
+                                if (that.recentConference.name !== '') {
+                                    let dateDiff = new Date(that.recentConference.startTime) - new Date();
+                                    let tempHour = Math.floor(dateDiff / (3600 * 1000)) + '';
+                                    let tempMin = Math.floor(dateDiff % (3600 * 1000) / (60 * 1000)) + '';
+                                    let tempSecond = Math.floor(dateDiff % (60 * 1000) / 1000) + '';
+
+                                    that.countdownHour = parseInt(tempHour) < 10 ? '0' + parseInt(tempHour) : parseInt(tempHour);
+                                    that.countdownMin = parseInt(tempMin) < 10 ? '0' + parseInt(tempMin) : parseInt(tempMin);
+                                    that.countdownSecond = parseInt(tempSecond) < 10 ? '0' + parseInt(tempSecond) : parseInt(tempSecond);
+
+                                    setInterval(function () {
+                                        let h = parseInt(that.countdownHour), m = parseInt(that.countdownMin),
+                                            s = parseInt(that.countdownSecond);
+                                        if (s > 0) that.countdownSecond = s-- <= 10 ? '0' + s : s;
+                                        else if (m > 0) {
+                                            that.countdownMin = m-- <= 10 ? '0' + m : m;
+                                            that.countdownSecond = 59;
+                                        } else if (h > 0) {
+                                            that.countdownHour = h-- <= 10 ? '0' + h : h;
+                                            that.countdownMin = 59;
+                                            that.countdownSecond = 59;
+                                        }
+                                    }, 1000);
+                                }
+                            }, 200)
+                        })
+                    } else {
+                        axios({
+                            method: 'GET',
+                            url: url_conference_user,
+                            params: {
+                                userId: data.id
+                            }
+                        }).then(function (res) {
+                            res.data.data.forEach(item => {
+                                axios({
+                                    method: 'GET',
+                                    url: url_enterprise_conference + `/${item.conferenceId}`
+                                }).then(function (res) {
+                                    that.todayConference.push(res.data.data);
+                                    if ((new Date(res.data.data.startTime) - new Date(item.enterTime)) > 15 * 60 * 1000){
+                                        that.lateCount += 1;
+                                    }
+                                    if (item.arrived) {
+                                        that.joinCount += 1;
+                                    }else if (new Date(res.data.data.endTime) < new Date()){
+                                        that.absentCount += 1;
+                                    } else {
+                                        that.pendCount += 1;
+                                    }
+                                })
+                            })
+
+                            setTimeout(function () {
+
+                                that.todayConference = that.todayConference.filter(item => {
+                                    let conferenceDate = new Date(item.startTime).setHours(0, 0, 0, 0);
+                                    let today = new Date().setHours(0, 0, 0, 0);
+                                    return conferenceDate === today && item.state !== 'cancel';
+                                }).sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+                                that.todayConference.forEach(item => {
+                                    let now = new Date();
+                                    if (that.recentConference.name === '' && new Date(item.startTime) > now){
+                                        that.recentConference = item;
+                                    }
+
+                                    if (item.state === 'cancel') that.doneConference += 1;
+                                    else
+                                    if (new Date(item.startTime) < now)
+                                        that.finishConference += 1;
+                                    else
+                                        that.pendingConference += 1;
+                                    that.totalConference += 1;
+
+                                })
+
+                                if (that.recentConference.name !== ''){
+                                    let dateDiff = new Date(that.recentConference.startTime) - new Date();
+                                    let tempHour = Math.floor(dateDiff / (3600 * 1000)) + '';
+                                    let tempMin = Math.floor(dateDiff % (3600 * 1000) / (60 * 1000)) + '';
+                                    let tempSecond = Math.floor(dateDiff % (60 * 1000) / 1000) + '';
+
+                                    that.countdownHour = parseInt(tempHour) < 10 ? '0' + parseInt(tempHour) : parseInt(tempHour);
+                                    that.countdownMin = parseInt(tempMin) < 10 ? '0' + parseInt(tempMin) : parseInt(tempMin);
+                                    that.countdownSecond = parseInt(tempSecond) < 10 ? '0' + parseInt(tempSecond) : parseInt(tempSecond);
+
+                                    setInterval(function () {
+                                        let h = parseInt(that.countdownHour), m = parseInt(that.countdownMin),
+                                            s = parseInt(that.countdownSecond);
+                                        if (s > 0) that.countdownSecond = s-- <= 10 ? '0' + s : s;
+                                        else if (m > 0) {
+                                            that.countdownMin = m-- <= 10 ? '0' + m : m;
+                                            that.countdownSecond = 59;
+                                        } else if (h > 0) {
+                                            that.countdownHour = h-- <= 10 ? '0' + h : h;
+                                            that.countdownMin = 59;
+                                            that.countdownSecond = 59;
+                                        }
+                                    }, 1000);
+                                }
+                            }, 200);
+                        })
+                    }
+                })
+            }).catch(function () {
+                // window.location.href = './login.html';
+            })
+
+            window.onresize = function () {
+                document.getElementById('main').style.width = '67%';
+                document.getElementsByTagName('canvas')[0].style.width = document.getElementById('main').offsetWidth + 'px';
+            }
+        }
+    }
+
+    let app = Vue.createApp(App);
+    app.use(ElementPlus, {
+        locale: ElementPlusLocaleZhCn,
+    });
+    app.mount("#app");
+
+    let myChart = echarts.init(document.getElementById('main'));
+    let option;
+    axios({
+        method: 'GET',
+        url: url_conference_day_count
+    }).then(function (res) {
+
+        // 从后台接口获取统计数据
+        let dayCount = res.data.data;
+        let dayArr = ['周日', '周一', '周二', '周三', '周四' ,'周五', '周六'];
+
+        option = {
+            xAxis: { type: 'category', data: dayArr  },
+            yAxis: { type: 'value'},
+            series: [
+                {
+                    data: dayCount,
+                    type: 'line',
+                    symbol: 'triangle',
+                    symbolSize: 20,
+                    lineStyle: {
+                        color: '#5470C6',
+                        width: 4,
+                        type: 'dashed'
+                    },
+                    itemStyle: {
+                        borderWidth: 3,
+                        borderColor: '#EE6666',
+                        color: 'yellow'
+                    }
+                }
+            ]
+        };
+        option && myChart.setOption(option);
+    })
+
+</script>
+</html>

@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会议</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./framework/element-plus/dist/index.css" />
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        #menu-box{
+            width: 80px;
+            height: 100vh;
+            min-height: 760px;
+            float: left;
+            position: relative;
+            background: #2f80ec;
+            z-index: 3;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        #menu-box > .logo-svg{
+            width: 80px;
+            height: 100px;
+            background: url("./svg/logo.svg") center no-repeat;
+            background-size: 60%;
+        }
+
+        #menu-box > .menu-box{
+            width: 80px;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        #menu-box > .menu-box > .menu-block{
+            width: 50px;
+            height: 50px;
+            margin: 20px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        #menu-box > .menu-box > .menu-block-active{
+            width: 50px;
+            height: 50px;
+            margin: 20px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            background: #1a73e9;
+        }
+
+        #menu-box > .menu-box > .menu-block > img{
+            width: 30px;
+            height: 30px;
+            margin: 10px;
+        }
+
+        #menu-box > .menu-box > .menu-block-active > img{
+            width: 30px;
+            height: 30px;
+            margin: 10px;
+        }
+
+        #left-box{
+            width: 470px;
+            height: 100vh;
+            min-height: 760px;
+            float: left;
+            position: relative;
+            background: #f1f7fe;
+            margin-left: -5px;
+            z-index: 2;
+        }
+
+        #left-box > .user-top{
+            width: 410px;
+            height: 60px;
+            margin: 30px;
+        }
+
+        #left-box > .user-top > .head-picture{
+            width: 60px;
+            height: 60px;
+            float: left;
+        }
+
+        #left-box > .user-top > .head-picture > img{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        #left-box > .user-top > .user-info{
+            width: 220px;
+            height: 60px;
+            margin-left: 20px;
+            float: left;
+            overflow: hidden;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        #left-box > .user-top > .user-info > .user-info-name{
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #left-box > .user-top > .user-info > .user-info-email{
+            line-height: 30px;
+            color: #28a745;
+        }
+
+        #left-box > .user-top > .user-role{
+            width: 110px;
+            height: 60px;
+            float: left;
+        }
+
+        #left-box > .conference-info-box{
+            width: 410px;
+            height: 580px;
+            margin: 30px;
+        }
+
+        #left-box > .conference-info-box > .conference-info-block{
+            width: 410px;
+            margin-bottom: 30px;
+            float: left;
+        }
+
+        #left-box > .conference-info-box > .conference-info-block > .conference-info-title{
+            width: 60px;
+            letter-spacing: 1px;
+            font-size: 14px;
+            float: left;
+            padding: 10px 0;
+        }
+
+        #left-box > .conference-info-box > .conference-info-block > .conference-info-content{
+            width: 330px;
+            background: #FFFFFF;
+            float: left;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        #attendees-box{
+            width: 470px;
+            height: 100vh;
+            float: left;
+            position: relative;
+            background: #f1f7fe;
+            margin-left: -5px;
+            z-index: 2;
+        }
+
+        #attendees-box > .user-top{
+            width: 410px;
+            height: 30px;
+            margin: 50px 30px;
+        }
+
+        #attendees-box > .user-top > .user-title{
+            font-size: 16px;
+            letter-spacing: 2px;
+            line-height: 30px;
+            text-indent: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            float: left;
+        }
+
+        #attendees-box > .user-top > .user-button{
+            float: right;
+        }
+
+        #attendees-box > .user-box{
+            width: 410px;
+            float: left;
+            margin: 0 30px;
+        }
+
+        .attendees-head-picture{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            float: left;
+            margin: 5px 0;
+        }
+
+        .attendees-head-picture > img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .attendees-user-info{
+            line-height: 60px;
+            float: left;
+            margin-left: 20px;
+            color: #666666;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        .sign-status{
+            float: right;
+            margin: 18px 0;
+        }
+
+        #right-box{
+            width: 100%;
+            min-height: 760px;
+            margin: 0 auto;
+            height: 100vh;
+            float: left;
+            position: absolute;
+            background: #f8f9fb;
+            z-index: 1;
+            min-width: 1520px;
+        }
+
+        #right-box > .message-box{
+            width: 900px;
+            height: 750px;
+            margin: 0 auto;
+            transform: translate(30%, 10%);
+        }
+
+        @media screen and (max-width: 1730px){
+            #right-box > .message-box{
+                transform: translate(30%, 1%);
+            }
+        }
+
+        #right-box > .message-box > .message-top-box{
+            width: 100%;
+            height: 15%;
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #right-box > .message-box > .message-top-box > .top-title{
+            width: 700px;
+            height: 100%;
+            float: left;
+        }
+
+        #right-box > .message-box > .message-top-box > .top-title > .title-name{
+            margin-top: 30px;
+            margin-left: 30px;
+            font-size: 18px;
+        }
+
+        #right-box > .message-box > .message-top-box > .top-title > .title-state{
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        #right-box > .message-box > .message-top-box > .top-tool{
+            width: 200px;
+            height: 100%;
+            float: left;
+        }
+
+        #right-box > .message-box > .message-top-box > .top-tool > .tool-button{
+            width: 40px;
+            height: 40px;
+            margin: 35px 20px 35px 0;
+            background: #2f80ec;
+            float: right;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #right-box > .message-box > .message-top-box > .top-tool > .tool-button > img{
+            width: 20px;
+            height: 20px;
+            margin: 10px;
+        }
+
+        #right-box > .message-box > .message-main-box{
+            width: 100%;
+            height: 70%;
+            margin: 3% 0;
+        }
+
+        #right-box > .message-box > .message-main-box > .countDown-box{
+            width: 380px;
+            height: 100%;
+            margin: 0 auto;
+            line-height: 9;
+            text-align: center;
+            font-size: 50px;
+            color: #2f80ec;
+            letter-spacing: 2px;
+        }
+
+        #message-main{
+            width: 100%;
+            padding-bottom: 50px;
+            float: left;
+        }
+
+        #message-main > .message-block-other{
+            width: 100%;
+            float: left;
+            margin-bottom: 12px;
+        }
+
+        #message-main > .message-block-other > .message-sender{
+            width: 100%;
+            height: 60px;
+            float: left;
+        }
+
+        #message-main > .message-block-other > .message-sender > .sender-head{
+            width: 60px;
+            height: 60px;
+            float: left;
+        }
+
+        #message-main > .message-block-other > .message-sender > .sender-head > img{
+            width: 50px;
+            height: 50px;
+            margin: 5px 5px 5px 0;
+            border-radius: 50%;
+        }
+
+        #message-main > .message-block-other > .message-sender > .sender-info{
+            float: left;
+            text-indent: 10px;
+        }
+
+        #message-main > .message-block-other > .message-sender > .sender-info > .sender-info-name{
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #message-main > .message-block-other > .message-sender > .sender-info > .sender-info-time{
+            font-size: 15px;
+            color: #999999;
+        }
+
+        #message-main > .message-block-other > .message-info {
+            font-size: 15px;
+            color: #666666;
+            padding: 15px 30px;
+            margin-left: 60px;
+            margin-top: 5px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            letter-spacing: 1px;
+            float: left;
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #message-main > .message-block-me{
+            width: 100%;
+            float: right;
+            margin-bottom: 12px;
+            margin-right: 10px;
+        }
+
+        #message-main > .message-block-me > .message-sender{
+            width: 100%;
+            height: 60px;
+            float: right;
+        }
+
+        #message-main > .message-block-me > .message-sender > .sender-head{
+            width: 60px;
+            height: 60px;
+            float: right;
+        }
+
+        #message-main > .message-block-me > .message-sender > .sender-head > img{
+            width: 50px;
+            height: 50px;
+            margin: 5px 0 5px 5px;
+            border-radius: 50%;
+        }
+
+        #message-main > .message-block-me > .message-sender > .sender-info{
+            float: right;
+            margin-right: 10px;
+        }
+
+        #message-main > .message-block-me > .message-sender > .sender-info > .sender-info-name{
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        #message-main > .message-block-me > .message-sender > .sender-info > .sender-info-time{
+            font-size: 15px;
+            color: #999999;
+            text-align: right;
+        }
+
+        #message-main > .message-block-me > .message-info {
+            font-size: 15px;
+            color: #FFFFFF;
+            padding: 15px 30px;
+            margin-right: 60px;
+            margin-top: 5px;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            letter-spacing: 1px;
+            float: right;
+            background: #2f80ec;
+            border-radius: 15px;
+            box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #right-box > .message-box > .message-foot-box{
+            width: 100%;
+            height: 8%;
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #right-box > .message-box > .message-foot-box > .message-input{
+            width: 810px;
+            height: 100%;
+            line-height: 20px;
+            font-size: 16px;
+            text-indent: 20px;
+            float: left;
+            border: none;
+            outline: none;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+
+        #right-box > .message-box > .message-foot-box > .send-button{
+            width: 90px;
+            height: 100%;
+            float: left;
+            background: #2f80ec;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            cursor: pointer;
+        }
+
+        #right-box > .message-box > .message-foot-box > .send-button > .send-button-svg{
+            width: 90px;
+            height: 100%;
+            background: url("./svg/conference-send-button.svg") center no-repeat;
+            background-size: 30%;
+        }
+
+        #right-box > .message-box > .result-box{
+            width: 900px;
+            height: 430px;
+            margin-top: 30px;
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #right-box > .message-box > .result-box > #sign-chart{
+            width: 350px;
+            height: 350px;
+            margin: 50px;
+            float: left;
+        }
+
+        #right-box > .message-box > .result-box > #face-chart{
+            width: 350px;
+            height: 350px;
+            margin: 50px;
+            float: left;
+        }
+
+        #right-box > .message-box > .result-box-note{
+            width: 900px;
+            height: 380px;
+            margin-top: 30px;
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #right-box > .message-box > .result-box-note > #sign-chart{
+            width: 350px;
+            height: 300px;
+            margin: 50px;
+            float: left;
+        }
+
+        #right-box > .message-box > .result-box-note > #face-chart{
+            width: 350px;
+            height: 300px;
+            margin: 50px;
+            float: left;
+        }
+
+        #right-box > .message-box > .note-box{
+            width: 900px;
+            height: 200px;
+            margin-top: 30px;
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #right-box > .message-box > .note-box > .note-select-box{
+            width: 100%;
+            height: 50px;
+        }
+
+        #right-box > .message-box > .note-box > .note-select-box > .note-block{
+            line-height: 40px;
+            font-size: 16px;
+            margin: 10px 0 0 10px;
+            float: left;
+            cursor: pointer;
+            padding: 0 15px;
+        }
+
+        #right-box > .message-box > .note-box > .note-select-box > .note-block-active{
+            line-height: 40px;
+            font-size: 16px;
+            margin: 10px 0 0 10px;
+            background: #1362FC;
+            color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            float: left;
+            cursor: pointer;
+            padding: 0 15px;
+        }
+
+        .el-divider__text{
+            background: #f1f7fe;
+        }
+
+        .el-table__row > .el-table__cell{
+            background: #f1f7fe;
+        }
+
+        .contextmenu__item{
+            display: block;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .contextmenu__item:not(:last-child){
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .menu{
+            position: absolute;;
+            background-color: #FFFFFF;
+            width: 102px;
+            font-size: 12px;
+            color: #444040;
+            border-radius: 4px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.175);
+            white-space: nowrap;
+            z-index: 1000;
+        }
+
+        .contextmenu__item:hover{
+            cursor: pointer;
+            background: #66b1ff;
+            border-color: #66b1ff;
+            color: #FFFFFF;
+        }
+
+        #face-video-box{
+            border: none;
+        }
+
+        .video-box{
+            width: 1140px;
+            height: 680px;
+            margin: 0 auto;
+            margin-top: -10px;
+        }
+
+        .video{
+            position: relative;
+            width: 1140px;
+            height: 630px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 1);
+            border-radius: 10px;
+        }
+
+        .alive-tip{
+            display: block;
+            text-align: center;
+            font-size: 20px;
+            line-height: 60px;
+            margin: 0 auto;
+        }
+
+        .alive-button{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 30px;
+            bottom: 50px;
+            border-radius: 50%;
+            z-index: 1000;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.175);
+            color: #FFFFFF;
+            line-height: 25px;
+            font-size: 20px;
+            letter-spacing: 3px;
+            text-align: center;
+            cursor: pointer;
+            background: #66b1ff;
+            transition: .3s all ease-in-out;
+        }
+
+        .alive-button:hover{
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.175);
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div id="menu-box" v-cloak>
+        <div class="logo-svg"></div>
+        <div class="menu-box">
+            <el-tooltip class="box-item" effect="dark" content="会议信息" placement="right">
+                <div :class="isMenuActive === 1 ? 'menu-block-active' : 'menu-block'" @click="isMenuActive = 1"><img src="svg/conference-menu-1.svg"></div>
+            </el-tooltip>
+            <el-tooltip class="box-item" effect="dark" content="签到情况" placement="right">
+                <div :class="isMenuActive === 2 ? 'menu-block-active' : 'menu-block'" @click="isMenuActive = 2" v-show="conferenceInfo.status !== 0 && isMaster"><img src="svg/conference-menu-2.svg"></div>
+            </el-tooltip>
+        </div>
+    </div>
+    <div id="left-box" v-cloak v-show="isMenuActive === 1">
+        <div class="user-top">
+            <div class="head-picture"><img :src="currentUser.imageUrl"></div>
+            <div class="user-info">
+                <div class="user-info-name" v-text="currentUser.userInfo.name"></div>
+                <div class="user-info-email" v-text="currentUser.userInfo.email"></div>
+            </div>
+            <div class="user-role"><el-button type="primary" style="margin-top: 14px" v-text="isMaster ? '会议主持人' : '参会人员'"></el-button></div>
+        </div>
+        <el-divider content-position="left" style="margin: 30px;width: 410px;">会议信息</el-divider>
+        <div class="conference-info-box">
+            <div class="conference-info-block">
+                <div class="conference-info-title">编号：</div>
+                <div class="conference-info-content" v-text="conferenceInfo.number"></div>
+            </div>
+            <div class="conference-info-block">
+                <div class="conference-info-title">会议：</div>
+                <div class="conference-info-content" v-text="conferenceInfo.name"></div>
+            </div>
+            <div class="conference-info-block">
+                <div class="conference-info-title">地点：</div>
+                <div class="conference-info-content" v-text="conferenceInfo.place"></div>
+            </div>
+            <div class="conference-info-block">
+                <div class="conference-info-title">时间：</div>
+                <div class="conference-info-content" v-text="conferenceInfo.time"></div>
+            </div>
+            <div class="conference-info-block">
+                <div class="conference-info-title">说明：</div>
+                <div class="conference-info-content" v-text="conferenceInfo.explain"></div>
+            </div>
+        </div>
+    </div>
+    <div id="attendees-box" v-cloak v-show="isMenuActive === 2 && conferenceInfo.status !== 0">
+        <div class="user-top">
+            <div class="user-title" @click="getAll">参与本场会议人员</div>
+            <div class="user-button">
+                <el-button-group>
+                    <el-button type="primary" @click="getSign">已签到</el-button>
+                    <el-button type="primary" @click="getNoSign">未签到</el-button>
+                </el-button-group>
+            </div>
+        </div>
+        <div class="user-box">
+            <el-table
+                    :data="attendeesTable"
+                    max-height="630"
+                    :show-header="false"
+                    tooltip-effect="dark"
+                    style="width: 100%; float: left;"
+                    @row-contextmenu="rightClick">
+                <el-table-column>
+                    <template #default="scope">
+                        <div class="attendees-head-picture"><img :src="scope.row.imageUrl"/></div>
+                        <div class="attendees-user-info" v-text="scope.row.user.userInfo.name"></div>
+                        <div class="attendees-user-info" v-text="scope.row.user.account"></div>
+                        <el-tag class="ml-2 sign-status" v-if="scope.row.arrived" type="success">已签到</el-tag>
+                        <el-tag class="ml-2 sign-status" v-if="!scope.row.arrived" type="info">未签到</el-tag>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div id="contextmenu" v-show="menuVisible" class="menu">
+                <div class="contextmenu__item" @click="signUser">签到</div>
+            </div>
+        </div>
+    </div>
+    <div id="right-box" v-cloak>
+        <div class="message-box">
+            <div class="message-top-box">
+                <div class="top-title">
+                    <div class="title-name" v-text="conferenceInfo.name"></div>
+                    <div class="title-state" v-if="conferenceInfo.status === 0" style="color: #999999">未开始 . . .</div>
+                    <div class="title-state" v-if="conferenceInfo.status === 1" style="color: #52ed97">进行中 . . .</div>
+                    <div class="title-state" v-if="conferenceInfo.status === 2" style="color: #fed178">已结束 . . .</div>
+                </div>
+                <div class="top-tool">
+                    <el-tooltip class="box-item" effect="dark" content="会议开始" placement="right">
+                        <div class="tool-button" v-show="conferenceInfo.status === 0 && isMaster" @click="startDialogVisible = true"><img src="svg/conference-tool-1.svg" /></div>
+                    </el-tooltip>
+                    <el-tooltip class="box-item" effect="dark" content="结束会议" placement="right">
+                        <div class="tool-button" v-show="conferenceInfo.status === 1 && isMaster" @click="endDialogVisible = true"><img src="svg/conference-tool-4.svg" /></div>
+                    </el-tooltip>
+                    <el-tooltip class="box-item" effect="dark" content="扫脸签到" placement="right">
+                        <div class="tool-button" v-show="conferenceInfo.status === 1 && !isMaster" @click="openMedia"><img src="svg/conference-tool-2.svg" /></div>
+                    </el-tooltip>
+                    <el-tooltip class="box-item" effect="dark" content="会议笔记" placement="left">
+                        <div class="tool-button" v-show="conferenceInfo.status === 1 && !isMaster" @click="noteDialogVisible = true"><img src="svg/conference-tool-6.svg" /></div>
+                    </el-tooltip>
+                    <el-tooltip class="box-item" effect="dark" content="取消会议" placement="left">
+                        <div class="tool-button" v-show="conferenceInfo.status === 0 && isMaster" @click="cancelDialogVisible = true"><img src="svg/conference-tool-5.svg" /></div>
+                    </el-tooltip>
+                </div>
+            </div>
+            <div class="message-main-box" v-show="conferenceInfo.status !== 2">
+                <div class="countDown-box" v-if="conferenceInfo.status === 0">
+                    <div class="countdown">
+                        <span v-text="countdownHour"></span>:<span v-text="countdownMin"></span>:<span v-text="countdownSecond"></span>
+                    </div>
+                </div>
+                <el-scrollbar height="550px" v-if="conferenceInfo.status === 1" v-loading="loading" ref="messageTable">
+                    <div id="message-main" v-if="loadMessage">
+                        <div :class="item.isSelf ? 'message-block-me' : 'message-block-other'" v-for="item in messageTable">
+                            <div class="message-sender">
+                                <div class="sender-head"><img :src="item.imageUrl" /></div>
+                                <div class="sender-info">
+                                    <div class="sender-info-name" v-text="item.sender"></div>
+                                    <div class="sender-info-time" v-text="item.time"></div>
+                                </div>
+                            </div>
+                            <div class="message-info" v-text="item.content"></div>
+                        </div>
+                    </div>
+                </el-scrollbar>
+            </div>
+            <div class="message-foot-box" v-show="conferenceInfo.status !== 2">
+                <input type="text" class="message-input" maxlength="2048" placeholder="发送消息" v-model="message.content" :disabled="conferenceInfo.status !== 1">
+                <div class="send-button" @click="sendMessage"><div class="send-button-svg"></div></div>
+            </div>
+            <div :class="haveNote ? 'result-box-note' : 'result-box'" v-show="conferenceInfo.status === 2">
+                <div id="sign-chart"></div>
+                <div id="face-chart"></div>
+            </div>
+            <div class="note-box" v-show="conferenceInfo.status === 2 && haveNote">
+                <div class="note-select-box">
+                    <div :class="index === noteIndex ? 'note-block-active' : 'note-block'" @click="noteIndex = index" v-for="(item, index) in noteTable">笔记 {{ index + 1 }}</div>
+                </div>
+                <el-scrollbar height="120px" style="margin: 20px">
+                    <div class="note-content" v-show="index === noteIndex" v-for="(item, index) in noteTable" v-text="item.content"></div>
+                </el-scrollbar>
+            </div>
+        </div>
+    </div>
+
+    <el-dialog v-cloak
+            v-model="startDialogVisible"
+            title="提示"
+            width="30%">
+        <span>确定提前开始会议吗？</span>
+        <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="startDialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="startConference">开始</el-button>
+      </span>
+        </template>
+    </el-dialog>
+
+    <el-dialog v-cloak
+            v-model="endDialogVisible"
+            title="提示"
+            width="30%">
+        <span>确定提前结束会议吗？</span>
+        <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="endDialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="endConference">结束</el-button>
+      </span>
+        </template>
+    </el-dialog>
+
+    <el-dialog v-cloak
+            v-model="cancelDialogVisible"
+            title="提示"
+            width="30%">
+        <span>确定取消该场会议吗？</span>
+        <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="cancelDialogVisible = false">返回</el-button>
+        <el-button type="primary" @click="cancelConference">确定</el-button>
+      </span>
+        </template>
+    </el-dialog>
+
+    <el-dialog v-cloak
+               v-model="noteDialogVisible"
+               title="笔记"
+               width="30%">
+        <el-input type="textarea" v-model="note" autocomplete="off"></el-input>
+        <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="noteDialogVisible = false">返回</el-button>
+        <el-button type="primary" @click="noteConference">保存</el-button>
+      </span>
+        </template>
+    </el-dialog>
+
+    <el-dialog v-cloak
+               v-model="mediaVisible"
+               :show-close="true"
+               :title="mediaTitle"
+               width="1190px"
+               top="10vh"
+               center>
+        <div class="video-box" v-cloak>
+            <fieldset id="face-video-box">
+                <video id="video" class="video" width="1140" height="630"></video>
+            </fieldset>
+            <span class="alive-tip" v-text="alive_tip"></span>
+        </div>
+    </el-dialog>
+
+    <div class="alive-button" v-cloak v-show="conferenceInfo.status === 1 && !isMaster" @click="alive_check = !alive_check"><br><span v-text="alive_check ? '关闭' : '开启'"></span><br>活检</div>
+</div>
+</body>
+<script src="./js/axios.js"></script>
+<script src="js/global-config.js"></script>
+<script src="./framework/vue/dist/vue.global.js"></script>
+<script src="./js/echarts.js"></script>
+<script src="./js/html2canvas.js"></script>
+<script src="./framework/element-plus/dist/index.full.js"></script>
+<script src="./framework/element-plus/dist/locale/zh-cn.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/numeric.js"></script>
+<script src="./js/ccv.js"></script>
+<script src="./js/clmtrackr.js"></script>
+<script src="./js/model_pca_20_svm.js"></script>
+<script src="./js/mui.min.js"></script>
+<script>
+
+    let App = {
+        data() {
+            return {
+                isMaster: null,
+                isMenuActive: 1,
+                countdownSecond: '00',
+                countdownMin: '00',
+                startCountDownInterval: null,
+                endCountDownInterval: null,
+                startDialogVisible: false,
+                endDialogVisible: false,
+                cancelDialogVisible: false,
+                noteDialogVisible: false,
+                menuVisible: false,
+                chooseUserId: '',
+                conferenceInfo: {},
+                currentUser: {
+                    imageUrl: '',
+                    status: '',
+                    userInfo: {
+                        name: '',
+                        email: ''
+                    }
+                },
+                note: '',
+                defaultHeaderPicture: './svg/default-head.svg',
+                attendeesTable: [],
+                signTable: [],
+                noSignTable: [],
+                allTable: [],
+                mediaVisible: false,
+                mediaTitle: '人脸识别中，请面向屏幕',
+                alive_tip: '将头部对准摄像头',
+                video: null,
+                videoTimeout: null,
+                alreadySign: false,
+                loadMessage: false,
+                messageTable: [],
+                ws: null,
+                message: {
+                    content: ''
+                },
+                loading: true,
+                haveNote: false,
+                noteTable: [],
+                noteIndex: 0,
+                alive_check: true,
+                last_time: 0,
+                last_nose_left: 0,
+                last_nose_top: 0,
+                last_dis_eye_norse: 0,
+                ctracker: null,
+                rafID: null
+            }
+        },
+        methods: {
+            getSign(){
+                let that = this;
+                that.signTable = that.allTable.filter(item => item.arrived);
+                that.attendeesTable = that.signTable;
+            },
+            getNoSign(){
+                let that = this;
+                that.noSignTable = that.allTable.filter(item => !item.arrived);
+                that.attendeesTable = that.noSignTable;
+            },
+            getAll(){
+                this.attendeesTable = this.allTable;
+            },
+            info(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'info'
+                });
+            },
+            warn(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'warning'
+                });
+            },
+            success(msg) {
+                this.$message({
+                    message: msg,
+                    type: 'success'
+                });
+            },
+            rightClick(row, column, event){
+                let that = this;
+                if (that.conferenceInfo.status === 1){
+                    that.menuVisible = false;
+                    that.menuVisible = true;
+                    event.preventDefault();
+                    that.chooseUser = row;
+                    that.styleMenu(document.querySelector('.menu'));
+                }
+            },
+            styleMenu(menu){
+                menu.style.left = event.clientX - 70 + 'px';
+                menu.style.top = event.clientY + 'px';
+                document.addEventListener('click', this.foo);
+            },
+            signUser(){
+                let that = this;
+                if (that.chooseUser.arrived){
+                    that.warn('该用户已签到');
+                }else {
+                    axios({
+                        method: 'PUT',
+                        url: url_conference_manual_sign + `/${that.conferenceInfo.id}/${that.chooseUser.userId}`
+                    }).then(function (res) {
+                        if (res.data.code === 0){
+                            that.chooseUser.arrived = true;
+                            that.success('手动签到成功');
+                        }else {
+                            that.warn(res.data.msg);
+                        }
+                    })
+                }
+            },
+            foo(){
+                this.menuVisible = false;
+                document.removeEventListener('click', this.foo);
+            },
+            getTimeGap(time1, time2){
+                return new Date(time1) - new Date(time2);
+            },
+            startConference() {
+                let that = this;
+                if (parseInt(that.countdownHour) === 0 && parseInt(that.countdownMin) < 10){
+                    let startTime = that.conferenceInfo.startTime;
+                    let m = new Date().getMinutes();
+                    let s = new Date().getSeconds();
+                    startTime = startTime.toString().substring(0, 14);
+                    startTime += m;
+                    startTime += ':';
+                    startTime += s;
+                    that.conferenceInfo.startTime = startTime;
+                    that.conferenceInfo.updateTime = '';
+                    that.conferenceInfo.createTime = '';
+                    axios({
+                        method: 'PUT',
+                        url: url_enterprise_conference,
+                        data: that.conferenceInfo
+                    }).then(function (res) {
+                        if (res.data.code === 0){
+                            that.success('会议已提前开始');
+                            that.conferenceInfo.status = 1;
+                            clearInterval(that.startCountDownInterval);
+                            that.startDialogVisible = false;
+                            setTimeout(function () {
+                                that.connectWebSocket();
+                            }, 200);
+                            setTimeout(function () {
+                                that.ws.send(`{"content" : "会议已提前开始"}`);
+                            }, 1000);
+                        }else {
+                            that.warn(res.data.msg);
+                        }
+                    })
+                }else {
+                    that.warn('只能在会议预定时间十分钟以内提前开始');
+                }
+            },
+            endConference(){
+                let that = this;
+                let endTime = that.conferenceInfo.startTime;
+                let m = new Date().getMinutes();
+                let s = new Date().getSeconds();
+                endTime = endTime.toString().substring(0, 14);
+                endTime += m;
+                endTime += ':';
+                endTime += s;
+                that.conferenceInfo.endTime = endTime;
+                that.conferenceInfo.state = 'finish';
+                that.conferenceInfo.updateTime = '';
+                that.conferenceInfo.createTime = '';
+                axios({
+                    method: 'PUT',
+                    url: url_enterprise_conference,
+                    data: that.conferenceInfo
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.getResult();
+                        that.conferenceInfo.status = 2;
+                        that.endDialogVisible = false;
+                        that.success('会议已结束');
+                    }else {
+                        that.warn(res.data.msg);
+                    }
+                })
+            },
+            cancelConference(){
+                let that = this;
+                that.conferenceInfo.state = 'cancel';
+                that.conferenceInfo.updateTime = '';
+                that.conferenceInfo.createTime = '';
+                axios({
+                    method: 'PUT',
+                    url: url_enterprise_conference,
+                    data: that.conferenceInfo
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.success('会议已取消');
+                        that.cancelDialogVisible = false;
+                        setTimeout(function () {
+                            window.close();
+                        }, 2000);
+                    }else {
+                        that.warn(res.data.msg);
+                    }
+                })
+            },
+            noteConference(){
+                let that = this;
+                axios({
+                    method: 'POST',
+                    url: url_conference_user_note,
+                    data: {
+                        conferenceId: that.conferenceInfo.id,
+                        content: that.note
+                    }
+                }).then(function (res) {
+                    if (res.data.code === 0){
+                        that.$notify({
+                            title: '笔记',
+                            message: that.note
+                        });
+                        that.noteDialogVisible = false;
+                        that.note = '';
+                    }else {
+                        that.warn(res.data.msg);
+                    }
+                })
+            },
+            getResult(){
+                let that = this;
+                let signCountChart = echarts.init(document.getElementById('sign-chart'));
+                let faceCountChart = echarts.init(document.getElementById('face-chart'));
+                let signOption, faceOption;
+
+                axios({
+                    method: 'GET',
+                    url: url_conference_user,
+                    params: {
+                        conferenceId: that.conferenceInfo.id
+                    }
+                }).then(function (res) {
+                    that.attendeesTable = res.data.data;
+                    that.attendeesTable.forEach(item => {
+                        item.imageUrl = item.user.userInfo.fileDocumentId ? url_file_view + item.user.userInfo.fileDocumentId : that.defaultHeaderPicture;
+                    })
+                    that.allTable = that.attendeesTable;
+
+                    let signCount = that.attendeesTable.filter(item => item.arrived).length;
+                    let noSignCount = that.attendeesTable.filter(item => !item.arrived).length;
+
+                    let operationCount = that.attendeesTable.filter(item => item.state === 'operation' && item.arrived).length;
+                    let faceCount = that.attendeesTable.filter(item => item.state === 'face' && item.arrived).length;
+
+                    signOption = {
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        legend: {
+                            top: '5%',
+                            left: 'center'
+                        },
+                        color: [
+                            '#52ed97',
+                            '#ffa570',
+                            '#fed178'
+                        ],
+                        series: [
+                            {
+                                name: '签到统计',
+                                type: 'pie',
+                                radius: ['40%', '70%'],
+                                avoidLabelOverlap: false,
+                                itemStyle: {
+                                    borderRadius: 10,
+                                    borderColor: '#fff',
+                                    borderWidth: 2
+                                },
+                                label: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    label: {
+                                        show: true,
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
+                                },
+                                labelLine: {
+                                    show: false
+                                },
+                                data: [
+                                    {value: signCount, name: '已签到'},
+                                    {value: noSignCount, name: '未签到'}
+                                ]
+                            }
+                        ]
+                    };
+
+                    faceOption = {
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        legend: {
+                            top: '5%',
+                            left: 'center'
+                        },
+                        series: [
+                            {
+                                name: '签到方式',
+                                type: 'pie',
+                                radius: ['40%', '70%'],
+                                avoidLabelOverlap: false,
+                                itemStyle: {
+                                    borderRadius: 10,
+                                    borderColor: '#fff',
+                                    borderWidth: 2
+                                },
+                                label: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    label: {
+                                        show: true,
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
+                                },
+                                labelLine: {
+                                    show: false
+                                },
+                                data: [
+                                    {value: operationCount, name: '手动签到'},
+                                    {value: faceCount, name: '扫脸签到'},
+                                    {value: noSignCount, name: '未签到'}
+                                ]
+                            }
+                        ]
+                    };
+
+                    signOption && signCountChart.setOption(signOption);
+                    faceOption && faceCountChart.setOption(faceOption);
+                })
+
+                setTimeout(function () {
+                    axios({
+                        method: 'GET',
+                        url: url_conference_user_note,
+                        params: {
+                            conferenceId: that.conferenceInfo.id,
+                            userId: that.currentUser.id
+                        }
+                    }).then(function (res) {
+                        that.noteTable = res.data.data;
+                        that.haveNote = that.noteTable.length > 0;
+                    })
+                }, 200);
+            },
+            getUserMedia(constraints, success, error) {
+                if (navigator.mediaDevices.getUserMedia) {
+                    //最新的标准API
+                    navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
+                } else if (navigator.webkitGetUserMedia) {
+                    //webkit核心浏览器
+                    navigator.webkitGetUserMedia(constraints, success, error)
+                } else if (navigator.mozGetUserMedia) {
+                    //firfox浏览器
+                    navigator.mozGetUserMedia(constraints, success, error);
+                } else if (navigator.getUserMedia) {
+                    //旧版API
+                    navigator.getUserMedia(constraints, success, error);
+                }
+            },
+            successGetMedia(stream) {
+                let that = this;
+                that.video = document.getElementById('video');
+                that.video.srcObject = stream;
+                that.video.play();
+                if (that.alive_check){
+                    that.videoTimeout = setTimeout(that.getCurrentCanvas, 500);
+                }else {
+                    this.startTrack();
+                    setInterval(function () {
+                        that.checkPositions();
+                    }, 500);
+                }
+            },
+            errorGetMedia(error) {
+                console.log(`访问用户媒体设备失败${error.name}, ${error.message}`);
+            },
+            getCurrentCanvas() {
+                let that = this;
+                that.alive_check ? that.start() : that.checkSignFace();
+            },
+            checkSignFace(){
+                let that = this;
+                window.cancelAnimationFrame(that.rafID);
+                html2canvas(document.getElementById('face-video-box'), {
+                    allowTaint: true,
+                    taintTest: false,
+                    useCORS: true,
+                }).then(canvas => {
+                    let that = this;
+                    let imageBase64 = canvas.toDataURL("image/png");
+                    let blob = this.dataURLtoBlob(imageBase64);
+                    let formData = new FormData(document.forms[0]);
+                    formData.append('image', blob, Date.now() + '.png');
+
+                    axios({
+                        method: 'PUT',
+                        url: url_conference_face_sign + `/${that.conferenceInfo.id}`,
+                        data: formData
+                    }).then(function (res) {
+                        if (res.data.code === 0){
+                            that.success('人脸签到成功');
+                            setTimeout(function () {
+                                that.mediaVisible = false;
+                            }, 1000)
+                        }else {
+                            that.warn(res.data.msg);
+                            setTimeout(function () {
+                                that.mediaVisible = false;
+                            }, 500)
+                        }
+                    }).catch(function (res) {
+                        that.warn('识别失败，请确保屏幕中有且仅有一个人脸');
+                        setTimeout(function () {
+                            that.mediaVisible = false;
+                        }, 500)
+                    });
+                })
+            },
+            start() {
+                let that = this;
+                setTimeout(() => {
+                    let audio = document.createElement('audio');
+                    let source = document.createElement('source');
+                    source.type = "audio/mp3";
+                    source.src = "mp3/alive_eye.mp3";
+                    source.autoplay = "autoplay";
+                    source.controls = "controls";
+                    audio.appendChild(source);
+                    audio.play();
+                    that.alive_eye();
+                    that.startTrack();
+                }, 500)
+            },
+            alive_eye() {
+                let that = this;
+                that.alive_tip = "请眨眼";
+                that.is_mouse_ok = false;
+                that.last_dis_mouse = 0;
+                that.last_time = 0;
+                that.is_alive_mouse = true;
+                that.is_alive_header = false
+            },
+            startTrack() {
+                let that = this;
+                that.ctracker = new clm.tracker();
+                that.ctracker.init(pModel);
+                that.ctracker.start(document.getElementById('video'));
+                that.drawLoop();
+            },
+            checkPositions(){
+                let that = this;
+                that.rafID = requestAnimationFrame(that.checkPositions);
+                let positions = that.ctracker.getCurrentPosition();
+                if (positions) {
+                    that.checkSignFace();
+                    that.alive_tip = '正在验证...';
+                }
+            },
+            drawLoop() {
+                let that = this;
+                that.rafID = requestAnimationFrame(that.drawLoop);           // 无限循环监测
+                let positions = that.ctracker.getCurrentPosition();
+                if (positions) {
+                    if (that.is_alive_mouse === true) {
+                        if (that.last_time === 0 || (new Date().getTime() - that.last_time > 500 && new Date().getTime() - that.last_time < 10000)) {
+                            let xdiff1 = positions[62][0] - positions[24][0];
+                            let ydiff1 = positions[62][1] - positions[24][1];
+
+                            // 计算出做左眼睛上眼皮中间点距离鼻尖的距离
+                            let dis_eye_norse1 = Math.pow((xdiff1 * xdiff1 + ydiff1 * ydiff1), 0.5);
+                            let xdiff2 = positions[62][0] - positions[29][0];
+                            let ydiff2 = positions[62][1] - positions[29][1];
+
+                            // 计算出做左眼睛上眼皮中间点距离鼻尖的距离
+                            let dis_eye_norse2 = Math.pow((xdiff2 * xdiff2 + ydiff2 * ydiff2), 0.5);
+
+                            // 计算出左右两个眼睛距离同一处鼻尖的距离之和
+                            let dis_eye_norse = (dis_eye_norse1 + dis_eye_norse2);
+                            if (that.last_nose_left > 0 && that.last_nose_top > 0 && Math.abs(positions[62][0] - that.last_nose_left) < 0.5 &&
+                                Math.abs(positions[62][1] - that.last_nose_top) < 0.5) {
+                                if (that.last_dis_eye_norse > 1 && (Math.abs(dis_eye_norse - that.last_dis_eye_norse) > dis_eye_norse / 60)) {
+                                    that.alive_tip = '正在验证...';
+                                    that.checkSignFace();
+                                }
+                            }
+
+                            that.last_nose_left = positions[62][0];
+                            that.last_nose_top = positions[62][1];
+                            that.last_dis_eye_norse = dis_eye_norse;
+                            that.lastTime = new Date().getTime();
+                        }
+                    }
+                }
+            },
+            dataURLtoBlob(base64Data) {
+                let byteString;
+                if (base64Data.split(',')[0].indexOf('base64') >= 0)
+                    byteString = atob(base64Data.split(',')[1]);
+                else
+                    byteString = unescape(base64Data.split(',')[1]);
+                let mimeString = base64Data.split(',')[0].split(':')[1].split('.')[0];
+                let ia = new Uint8Array(byteString.length);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                return new Blob([ia], {type: mimeString});
+            },
+            openMedia(){
+                let that = this;
+
+                if (that.alreadySign === true){
+                    that.success('你已经完成签到');
+                }else {
+                    // 开启摄像头
+                    that.mediaVisible = true;
+                    if (navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) {
+                        //调用用户媒体设备, 访问摄像头
+                        that.getUserMedia({
+                            video: {
+                                width: 1140,
+                                height: 630
+                            }
+                        }, that.successGetMedia, that.errorGetMedia);
+                    } else {
+                        alert('不支持访问用户媒体');
+                    }
+                }
+            },
+            connectWebSocket(){
+                let that = this;
+                that.ws = new WebSocket(url_web_socket + `/${that.conferenceInfo.number}/${that.currentUser.id}`);
+
+                that.ws.onopen = function () {
+                    console.log("与服务器建立连接成功！")
+                };
+
+                that.ws.onmessage = function (evt) {
+                    let received_msg = JSON.parse(evt.data);
+                    let message = {};
+                    if (parseInt(received_msg.publisherUserId) === parseInt(received_msg.receiverUserId)){
+                        message.isSelf = true;
+                    }else {
+                        message.isSelf = false;
+                    }
+                    message.content = received_msg.content;
+
+                    let date = new Date(received_msg.createTime);
+                    let Y = date.getFullYear() + '-';
+                    let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                    let D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
+                    let h = date.getHours() + ':';
+                    let m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+                    let s = date.getSeconds();
+                    message.time = Y + M + D + h + m + s;
+                    axios({
+                        method: 'GET',
+                        url: url_user + `/${received_msg.publisherUserId}`
+                    }).then(function (res) {
+                        let user = res.data.data;
+                        message.sender = user.userInfo.name;
+                        message.imageUrl = user.userInfo.fileDocumentId ? url_file_view + user.userInfo.fileDocumentId : that.defaultHeaderPicture;
+                    })
+                    setTimeout(function () {
+                        that.messageTable.push(message);
+                        that.messageTable = that.messageTable.sort((a, b) => new Date(a.time) - new Date(b.time));
+                    }, 200);
+
+                    if (that.loading){
+                        setTimeout(function () {
+                            that.loading = false;
+                            that.$refs.messageTable.scrollTo({top: 100000});
+                            that.loadMessage = true;
+                        }, 1000);
+                    }
+                };
+
+                that.ws.onclose = function () {
+                    console.log("连接已关闭...");
+                };
+            },
+            sendMessage(){
+                let that = this;
+                that.ws.send(`{"content" : "${that.message.content}"}`);
+                that.message.content = '';
+            }
+        },
+        computed:{
+            visibleChange(){
+                return this.mediaVisible;
+            }
+        },
+        watch:{
+            visibleChange: function (val) {
+                if (val === false){
+                    this.video.srcObject = null;
+                    clearInterval(this.videoTimeout);
+                    window.location.reload();
+                }
+            }
+        },
+        mounted: function () {
+            let that = this;
+            if (localStorage.getItem('CMS_TOKEN') === null || localStorage.getItem('CMS_TOKEN').toString().length <= 0){
+                setTimeout(function () {
+                    // window.location.href = './login.html';
+                }, 1000)
+                that.warn('请先登录');
+            }
+            axios({
+                method: 'GET',
+                url: url_enterprise_conference + `/${localStorage.getItem('conferenceId')}`
+            }).then(function (res) {
+                that.conferenceInfo = res.data.data;
+                let startTime = that.conferenceInfo.startTime;
+                let endTime = that.conferenceInfo.endTime;
+                that.conferenceInfo.time = `${startTime.substring(0, 11)} / ${startTime.substring(11, 16)} - ${endTime.substring(11, 16)}`;
+
+                axios({
+                    method: 'GET',
+                    url: url_user_me
+                }).then(function (res) {
+                    let user = res.data.data;
+                    that.isMaster = that.conferenceInfo.userId === user.id;
+                    that.currentUser = user;
+                    if (user.userInfo.fileDocumentId){
+                        that.currentUser.imageUrl = url_file_view + user.userInfo.fileDocumentId;
+                    }else {
+                        that.currentUser.imageUrl = that.defaultHeaderPicture;
+                    }
+
+                    if (!that.isMaster){
+                        axios({
+                            method: 'GET',
+                            url: url_conference_user,
+                            params: {
+                                userId: user.id,
+                                conferenceId: that.conferenceInfo.id
+                            }
+                        }).then(function (res) {
+                            that.alreadySign = res.data.data[0].arrived;
+                        })
+                    }
+                }).catch(function () {
+                    // window.location.href = './login.html';
+                })
+
+                if (new Date(startTime) > new Date()){
+                    that.conferenceInfo.status = 0;
+                    let dateDiff = new Date(that.conferenceInfo.startTime) - new Date();
+                    let tempHour = Math.floor(dateDiff / (3600 * 1000)) + '';
+                    let tempMin = Math.floor(dateDiff % (3600 * 1000) / (60 * 1000)) + '';
+                    let tempSecond = Math.floor(dateDiff % (60 * 1000) / 1000) + '';
+
+                    that.countdownHour = parseInt(tempHour) < 10 ? '0' + parseInt(tempHour) : parseInt(tempHour);
+                    that.countdownMin = parseInt(tempMin) < 10 ? '0' + parseInt(tempMin) : parseInt(tempMin);
+                    that.countdownSecond = parseInt(tempSecond) < 10 ? '0' + parseInt(tempSecond) : parseInt(tempSecond);
+
+                    that.startCountDownInterval = setInterval(function () {
+                        let h = parseInt(that.countdownHour), m = parseInt(that.countdownMin),
+                            s = parseInt(that.countdownSecond);
+                        if (s > 0) that.countdownSecond = s-- <= 10 ? '0' + s : s;
+                        else if (m > 0) {
+                            that.countdownMin = m-- <= 10 ? '0' + m : m;
+                            that.countdownSecond = 59;
+                        } else if (h > 0) {
+                            that.countdownHour = h-- <= 10 ? '0' + h : h;
+                            that.countdownMin = 59;
+                            that.countdownSecond = 59;
+                        } else {
+                            clearInterval(that.startCountDownInterval);
+                            that.success('会议已开始');
+                            that.conferenceInfo.status = 1;
+                            setTimeout(function () {
+                                that.connectWebSocket();
+                            }, 200);
+                            setTimeout(function () {
+                                that.ws.send(`{"content" : "会议已开始"}`);
+                            }, 1000);
+                        }
+                    }, 1000);
+                } else
+                    if (new Date(endTime) > new Date()){
+                        that.conferenceInfo.status = 1;
+                        setTimeout(function () {
+                            that.connectWebSocket();
+                        }, 200);
+                    } else {
+                        that.conferenceInfo.status = 2;
+                        that.getResult();
+                        return;
+                    }
+
+                axios({
+                    method: 'GET',
+                    url: url_conference_user,
+                    params: {
+                        conferenceId: that.conferenceInfo.id
+                    }
+                }).then(function (res) {
+                    that.attendeesTable = res.data.data;
+                    that.attendeesTable.forEach(item => {
+                        item.imageUrl = item.user.userInfo.fileDocumentId ? url_file_view + item.user.userInfo.fileDocumentId : that.defaultHeaderPicture;
+                    })
+                    that.allTable = that.attendeesTable;
+                })
+            })
+
+            that.endCountDownInterval = setInterval(function () {
+                if (parseInt(that.getTimeGap(that.conferenceInfo.endTime, new Date()) / 1000) === (5 * 60)){
+                    that.info('会议还有五分钟结束！');
+                    clearInterval(that.endCountDownInterval);
+                }
+            }, 1000);
+        }
+    }
+
+    let app = Vue.createApp(App);
+    app.use(ElementPlus, {
+        locale: ElementPlusLocaleZhCn,
+    });
+    app.mount("#app");
+</script>
+</html>
